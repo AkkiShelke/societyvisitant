@@ -84,7 +84,7 @@ else{
 
    
 // Security Login Route
-// http://localhost:port/api/authenticate
+// http://localhost:port/https://visitant.herokuapp.com/api/authenticate
 // security_router.post('/authenticatesociety', (req, res, next) =>
 // {
 //     Security.findOne({ email: req.body.email }).select('_id    email password').exec(function(err, result)

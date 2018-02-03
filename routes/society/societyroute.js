@@ -82,7 +82,7 @@ society_router.post('/addsociety',(req, res, next)=>
 
    
 // Society Login Route
-// http://localhost:port/api/authenticate
+// http://localhost:port/https://visitant.herokuapp.com/api/authenticate
 society_router.post('/authenticatesocietyadmin', (req, res, next) =>
 {
     Society.findOne({ email: req.body.email }).select('_id email password').exec(function(err, result)

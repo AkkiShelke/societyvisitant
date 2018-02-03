@@ -110,7 +110,7 @@ var AddChairmanComponent = (function () {
     }
     AddChairmanComponent.prototype.getChairmanData = function () {
         var _this = this;
-        this.http.get('api/chairmanlistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('https://visitant.herokuapp.com/api/chairmanlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.chairman = data;
             console.log(_this.chairman);
             _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
@@ -131,7 +131,7 @@ var AddChairmanComponent = (function () {
             }
             else {
                 //Register Chairman
-                _this.http.post('api/addchairman', result).subscribe(function (data) {
+                _this.http.post('https://visitant.herokuapp.com/api/addchairman', result).subscribe(function (data) {
                     _this.response = data;
                     if (_this.response.success == true) {
                         _this.toasterService.pop('success', _this.response.message);
@@ -240,7 +240,7 @@ var TestDialogComponent = (function () {
     });
     TestDialogComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.http.get('api/managerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('https://visitant.herokuapp.com/api/managerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.manager = data;
             console.log(_this.manager);
         });

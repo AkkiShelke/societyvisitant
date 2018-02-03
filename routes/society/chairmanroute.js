@@ -97,7 +97,7 @@ else{
 
    
 // Chairman Login Route
-// http://localhost:port/api/authenticate
+// http://localhost:port/https://visitant.herokuapp.com/api/authenticate
 // chairman_router.post('/authenticatesociety', (req, res, next) =>
 // {
 //     Chairman.findOne({ email: req.body.email }).select('_id    email password').exec(function(err, result)

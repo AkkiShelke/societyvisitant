@@ -129,7 +129,7 @@ var AddAddressComponent = (function () {
         var country = {
             country_name: this.country_name
         };
-        this.http.post('api/addcountry', country).subscribe(function (data) {
+        this.http.post('https://visitant.herokuapp.com/api/addcountry', country).subscribe(function (data) {
             _this.response = data;
             if (_this.response.success == true) {
                 _this.toasterService.pop('success', _this.response.message);
@@ -142,7 +142,7 @@ var AddAddressComponent = (function () {
     };
     AddAddressComponent.prototype.GetCountry = function () {
         var _this = this;
-        this.http.get('api/country').subscribe(function (data) {
+        this.http.get('https://visitant.herokuapp.com/api/country').subscribe(function (data) {
             _this.countrylist = data;
             console.log(data);
         });
@@ -154,7 +154,7 @@ var AddAddressComponent = (function () {
             country_id: this.country_id,
             state_name: this.state_name
         };
-        this.http.post('api/addstate', state).subscribe(function (data) {
+        this.http.post('https://visitant.herokuapp.com/api/addstate', state).subscribe(function (data) {
             _this.response = data;
             if (_this.response.success == true) {
                 _this.toasterService.pop('success', _this.response.message);
@@ -167,7 +167,7 @@ var AddAddressComponent = (function () {
     };
     AddAddressComponent.prototype.GetState = function () {
         var _this = this;
-        this.http.get('api/state').subscribe(function (data) {
+        this.http.get('https://visitant.herokuapp.com/api/state').subscribe(function (data) {
             _this.statelist = data;
             console.log(data);
         });
@@ -180,7 +180,7 @@ var AddAddressComponent = (function () {
             city_name: this.city_name
         };
         console.log(city);
-        this.http.post('api/addcity', city).subscribe(function (data) {
+        this.http.post('https://visitant.herokuapp.com/api/addcity', city).subscribe(function (data) {
             _this.response = data;
             if (_this.response.success == true) {
                 _this.toasterService.pop('success', _this.response.message);
@@ -193,7 +193,7 @@ var AddAddressComponent = (function () {
     };
     AddAddressComponent.prototype.GetCity = function () {
         var _this = this;
-        this.http.get('api/city').subscribe(function (data) {
+        this.http.get('https://visitant.herokuapp.com/api/city').subscribe(function (data) {
             _this.citylist = data;
             console.log(_this.citylist);
         });
@@ -205,7 +205,7 @@ var AddAddressComponent = (function () {
             city_id: this.city_id,
             location_name: this.location_name
         };
-        this.http.post('api/addlocation', location).subscribe(function (data) {
+        this.http.post('https://visitant.herokuapp.com/api/addlocation', location).subscribe(function (data) {
             _this.response = data;
             if (_this.response.success == true) {
                 _this.toasterService.pop('success', _this.response.message);
@@ -218,7 +218,7 @@ var AddAddressComponent = (function () {
     };
     AddAddressComponent.prototype.GetLocation = function () {
         var _this = this;
-        this.http.get('api/location').subscribe(function (data) {
+        this.http.get('https://visitant.herokuapp.com/api/location').subscribe(function (data) {
             _this.locationlist = data;
             console.log(data);
         });
@@ -231,7 +231,7 @@ var AddAddressComponent = (function () {
             pincode: this.pincode
         };
         console.log(PINCODE);
-        this.http.post('api/addpincode', PINCODE).subscribe(function (data) {
+        this.http.post('https://visitant.herokuapp.com/api/addpincode', PINCODE).subscribe(function (data) {
             _this.response = data;
             if (_this.response.success == true) {
                 _this.toasterService.pop('success', _this.response.message);

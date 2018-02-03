@@ -110,7 +110,7 @@ var AddManagerComponent = (function () {
     }
     AddManagerComponent.prototype.getManagerData = function () {
         var _this = this;
-        this.http.get('api/managerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('https://visitant.herokuapp.com/api/managerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.manager = data;
             console.log(_this.manager);
             _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
@@ -131,7 +131,7 @@ var AddManagerComponent = (function () {
             }
             else {
                 //Register Block
-                _this.http.post('api/addmanager', result).subscribe(function (data) {
+                _this.http.post('https://visitant.herokuapp.com/api/addmanager', result).subscribe(function (data) {
                     _this.response = data;
                     if (_this.response.success == true) {
                         _this.toasterService.pop('success', _this.response.message);
@@ -212,7 +212,7 @@ var TestDialogComponent = (function () {
         this.data = data;
         this.societyadmin = JSON.parse(localStorage['societyadmin']);
         this.superadmin = JSON.parse(localStorage['superadmin']);
-        this.http.get('api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('https://visitant.herokuapp.com/api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.block = data;
         });
         this.firstFormGroup = this._formBuilder.group({
@@ -226,7 +226,7 @@ var TestDialogComponent = (function () {
     }
     TestDialogComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.http.get('api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('https://visitant.herokuapp.com/api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.block = data;
             console.log(_this.block);
         });
