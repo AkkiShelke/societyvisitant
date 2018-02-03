@@ -100,7 +100,8 @@ var DashboardComponent = (function () {
     }
     DashboardComponent.prototype.getFlatownerData = function () {
         var _this = this;
-        this.http.get('api/flatownerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('https://visitant.herokuapp.com/api/societylist').subscribe(function (data) {
+            // this.http.get<FlatDetails[]>('https://visitant.herokuapp.com/api/flatownerlistdetails/' + this.societyadmin.id).subscribe(data=> {
             _this.flatdetails = data;
             console.log(_this.flatdetails);
             _this.dataSource = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["r" /* MatTableDataSource */](_this.flatdetails);
