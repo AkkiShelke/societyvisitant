@@ -103,6 +103,7 @@ var LoginComponent = (function () {
             password: this.password
         };
         console.log(societyadmin);
+        localStorage.setItem('isLoggedin', 'true');
         // // Authenticate societyadmin
         this.http.post('https://visitant.herokuapp.com/api/authenticatesocietyadmin', societyadmin).subscribe(function (data) {
             _this.response = data;
