@@ -27,7 +27,7 @@ var LoginRoutingModule = (function () {
     function LoginRoutingModule() {
     }
     LoginRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]]
         })
@@ -42,7 +42,7 @@ var LoginRoutingModule = (function () {
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"login-page\" [@routerTransition]>\n    <div class=\"row justify-content-md-center\">\n        <div class=\"col-md-4\">\n            <img src=\"assets/images/admin.png\" width=\"150px\" class=\"user-avatar\" />\n            <h1>Society Admin Login</h1>\n            <form role=\"form\">\n                <div class=\"form-content\">\n                    <div class=\"form-group\">\n                        <input type=\"text\" ng-model=\"name\" class=\"form-control input-underline input-lg\" id=\"\" placeholder=\"Email\">\n                    </div>\n\n                    <div class=\"form-group\">\n                        <input type=\"password\" class=\"form-control input-underline input-lg\" id=\"\" placeholder=\"Password\">\n                    </div>\n                </div>\n                <a class=\"btn rounded-btn\" [routerLink]=\"['/dashboard']\" (click)=\"onLoggedin()\"> Log in </a>\n                &nbsp;\n                <!-- <a class=\"btn rounded-btn\" [routerLink]=\"['/signup']\">Register</a> -->\n            </form>\n        </div>\n    </div>\n</div>\n"
+module.exports = "<toaster-container></toaster-container>\n\n<div class=\"login-page\" [@routerTransition]>\n    <div class=\"row justify-content-md-center\">\n        <div class=\"col-md-4\">\n            <img src=\"assets/images/admin.png\" width=\"150px\" class=\"user-avatar\" />\n                        <h1>Society Admin Login</h1>\n\n\n\n            <form role=\"form\" method=\"post\" (submit)=\"onAuthenticateSubmit()\" #loginForm=\"ngForm\">\n                <div class=\"form-content\">\n                    <div class=\"form-group\">\n                        <input type=\"text\" class=\"form-control input-underline input-lg\" id=\"\" placeholder=\"Email\"\n                        required \n                        [(ngModel)]=\"email\" name=\"email\"\n                        pattern=\"^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$\" \n                        #email123=\"ngModel\">\n                    </div>\n                        <div [hidden]=\"email123.valid || email123.pristine\"\n                          class=\"alert alert-danger\">\n                       <div [hidden]=\"!email123.hasError('required')\">Email is required</div>\n                       <div [hidden]=\"!email123.hasError('pattern')\">Email format should be <small><b>joe@abc.com</b></small></div>\n                     </div>\t\n                    \n\n                    <div class=\"form-group\">\n                        <input type=\"password\" [(ngModel)]=\"password\" class=\"form-control input-underline input-lg\" placeholder=\"Password\"\n                        name=\"password\" id=\"password\" required #password123=\"ngModel\">\n                    </div>\n                    <div [hidden]=\"password123.valid || password123.pristine\"\n                    class=\"alert alert-danger\">\n                 <div [hidden]=\"!password123.hasError('required')\">Password is required</div>\n               </div>\n                </div>\n    \t\n                <button class=\"btn rounded-btn\" type=\"submit\" [disabled]=\"!loginForm.form.valid\" > Log in </button>\n                &nbsp;\n               <!-- <a class=\"btn rounded-btn\" [routerLink]=\"['/signup']\">Register</a> -->\n\n            </form>\n        </div>\n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -72,6 +72,9 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_animations__ = __webpack_require__("../../../../../src/app/router.animations.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular5_toaster__ = __webpack_require__("../../../../angular5-toaster/dist/bundles/angular5-toaster.umd.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular5_toaster___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angular5_toaster__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -84,24 +87,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var LoginComponent = (function () {
-    function LoginComponent(router) {
+    function LoginComponent(http, toasterService, router) {
+        this.http = http;
         this.router = router;
+        this.toasterService = toasterService;
     }
     LoginComponent.prototype.ngOnInit = function () { };
-    LoginComponent.prototype.onLoggedin = function () {
-        localStorage.setItem('isLoggedin', 'true');
+    LoginComponent.prototype.onAuthenticateSubmit = function () {
+        var _this = this;
+        var societyadmin = {
+            email: this.email,
+            password: this.password
+        };
+        console.log(societyadmin);
+        // // Authenticate societyadmin
+        this.http.post('api/authenticatesocietyadmin', societyadmin).subscribe(function (data) {
+            _this.response = data;
+            if (_this.response.success == true) {
+                _this.toasterService.pop('success', _this.response.message);
+                localStorage.setItem('isLoggedin', 'true');
+                localStorage.setItem('societyadmin', JSON.stringify(_this.response.societyadmin));
+                setTimeout(function () {
+                    _this.router.navigate(['/dashboard']);
+                }, 3000);
+            }
+            else {
+                _this.toasterService.pop('error', _this.response.message);
+                localStorage.setItem('isLoggedin', '');
+            }
+        });
     };
     LoginComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-login',
             template: __webpack_require__("../../../../../src/app/login/login.component.html"),
             styles: [__webpack_require__("../../../../../src/app/login/login.component.scss")],
             animations: [Object(__WEBPACK_IMPORTED_MODULE_2__router_animations__["a" /* routerTransition */])()]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */], typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular5_toaster__["ToasterService"]) === "function" && _a || Object, __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]])
     ], LoginComponent);
     return LoginComponent;
+    var _a;
 }());
 
 
@@ -116,8 +145,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginModule", function() { return LoginModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/esm5/common.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_routing_module__ = __webpack_require__("../../../../../src/app/login/login-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_routing_module__ = __webpack_require__("../../../../../src/app/login/login-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular5_toaster__ = __webpack_require__("../../../../angular5-toaster/dist/bundles/angular5-toaster.umd.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular5_toaster___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angular5_toaster__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -128,13 +160,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 var LoginModule = (function () {
     function LoginModule() {
     }
     LoginModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */], __WEBPACK_IMPORTED_MODULE_2__login_routing_module__["a" /* LoginRoutingModule */]],
-            declarations: [__WEBPACK_IMPORTED_MODULE_3__login_component__["a" /* LoginComponent */]]
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"], __WEBPACK_IMPORTED_MODULE_3__login_routing_module__["a" /* LoginRoutingModule */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* FormsModule */], __WEBPACK_IMPORTED_MODULE_5_angular5_toaster__["ToasterModule"]
+            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_4__login_component__["a" /* LoginComponent */]]
         })
     ], LoginModule);
     return LoginModule;

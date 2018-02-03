@@ -27,7 +27,7 @@ var ChangePasswordRoutingModule = (function () {
     function ChangePasswordRoutingModule() {
     }
     ChangePasswordRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [__WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* RouterModule */]]
         })
@@ -88,7 +88,7 @@ var ChangePasswordComponent = (function () {
     ChangePasswordComponent.prototype.ngOnInit = function () {
     };
     ChangePasswordComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-change-password',
             template: __webpack_require__("../../../../../src/app/layout/change-password/change-password.component.html"),
             styles: [__webpack_require__("../../../../../src/app/layout/change-password/change-password.component.scss")],
@@ -129,9 +129,9 @@ var ChangePasswordModule = (function () {
     function ChangePasswordModule() {
     }
     ChangePasswordModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
                 __WEBPACK_IMPORTED_MODULE_4__change_password_routing_module__["a" /* ChangePasswordRoutingModule */], __WEBPACK_IMPORTED_MODULE_2__shared__["b" /* PageHeaderModule */]
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_3__change_password_component__["a" /* ChangePasswordComponent */]]

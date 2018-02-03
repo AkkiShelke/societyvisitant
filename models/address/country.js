@@ -14,5 +14,5 @@ const CountrySchema = Schema({
  
 
 
-const Contry = module.exports = mongoose.model('contry', CountrySchema);
+const Contry = module.exports = mongoose.model('country', CountrySchema);
 

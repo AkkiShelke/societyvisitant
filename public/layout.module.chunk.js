@@ -71,9 +71,10 @@ var HeaderComponent = (function () {
     };
     HeaderComponent.prototype.onLoggedout = function () {
         localStorage.removeItem('isLoggedin');
+        localStorage.clear();
     };
     HeaderComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-header',
             template: __webpack_require__("../../../../../src/app/layout/components/header/header.component.html"),
             styles: [__webpack_require__("../../../../../src/app/layout/components/header/header.component.scss")]
@@ -90,7 +91,7 @@ var HeaderComponent = (function () {
 /***/ "../../../../../src/app/layout/components/sidebar/sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"sidebar\" [ngClass]=\"{sidebarPushRight: isActive}\">\n    <div class=\"list-group\">\n        <a routerLink=\"/dashboard\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-dashboard\"></i>&nbsp;Dashboard\n        </a>\n        <!-- <a routerLink=\"/address\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-map-marker\"></i>&nbsp;Add Address Details\n        </a> -->\n        <a routerLink=\"/profile\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-user\"></i>&nbsp;Profile\n                </a>\n        <a routerLink=\"/blocklist\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-th-large\"></i>&nbsp;Block List\n        </a>\n        <a routerLink=\"/managerlist\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-black-tie\"></i>&nbsp;Manager List\n        </a>\n        <a routerLink=\"/chairmanlist\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-user-circle-o\"></i>&nbsp;Chairman List\n        </a>\n        <a routerLink=\"/flatlist\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-home\"></i>&nbsp;FLat List\n        </a>\n        <a routerLink=\"/securitylist\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-shield\"></i>&nbsp;Security List\n        </a>\n        <a routerLink=\"/visitorlist\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-street-view\"></i>&nbsp;Visitor List\n        </a>\n    </div>\n</nav>\n"
+module.exports = "<nav class=\"sidebar\" [ngClass]=\"{sidebarPushRight: isActive}\">\n    <div class=\"list-group\">\n        <a routerLink=\"/dashboard\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-dashboard\"></i>&nbsp;Dashboard\n        </a>\n\n\n                <a routerLink=\"/blocklist\" matTooltip=\"Select Society to See Block List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n                    <i class=\"fa fa-fw fa-th-large\"></i>&nbsp;Block List\n                </a>\n      \n   \n        <a routerLink=\"/managerlist\" matTooltip=\"Select Society to See Manager List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-black-tie\"></i>&nbsp;Manager List\n        </a>\n        <a routerLink=\"/chairmanlist\" matTooltip=\"Select Society to See Chairman List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-user-circle-o\"></i>&nbsp;Chairman List\n        </a>\n        <a routerLink=\"/flatlist\" matTooltip=\"Select Society to See FLat List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-home\"></i>&nbsp;FLat List\n        </a>\n        <a routerLink=\"/securitylist\" matTooltip=\"Select Society to See Security List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-shield\"></i>&nbsp;Security List\n        </a>\n        <a routerLink=\"/visitorlist\" matTooltip=\"Select Society to See Visitor List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-street-view\"></i>&nbsp;Visitor List\n        </a>\n    </div>\n</nav>\n"
 
 /***/ }),
 
@@ -145,6 +146,9 @@ var SidebarComponent = (function () {
             }
         });
     }
+    SidebarComponent.prototype.refresh = function () {
+        console.log("hi");
+    };
     SidebarComponent.prototype.eventCalled = function () {
         this.isActive = !this.isActive;
     };
@@ -172,7 +176,7 @@ var SidebarComponent = (function () {
         localStorage.removeItem('isLoggedin');
     };
     SidebarComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-sidebar',
             template: __webpack_require__("../../../../../src/app/layout/components/sidebar/sidebar.component.html"),
             styles: [__webpack_require__("../../../../../src/app/layout/components/sidebar/sidebar.component.scss")]
@@ -208,23 +212,19 @@ var routes = [
         path: '',
         component: __WEBPACK_IMPORTED_MODULE_2__layout_component__["a" /* LayoutComponent */],
         children: [
-            { path: '', redirectTo: 'society_details' },
-            { path: 'dashboard', loadChildren: './society-details/society-details.module#SocietyDetailsModule' },
-            { path: 'society_details', loadChildren: './society-details/society-details.module#SocietyDetailsModule' },
-            { path: 'profile', loadChildren: './profile/profile.module#ProfileModule' },
-            { path: 'societylist', loadChildren: './register-society/register-society.module#RegisterSocietyModule' },
-            { path: 'blocklist', loadChildren: './add-block/add-block.module#AddBlockModule' },
-            { path: 'managerlist', loadChildren: './add-manager/add-manager.module#AddManagerModule' },
-            { path: 'chairmanlist', loadChildren: './add-chairman/add-chairman.module#AddChairmanModule' },
+            { path: '', redirectTo: 'dashboard' },
+            { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+            { path: 'addblock', loadChildren: './add-block/add-block.module#AddBlockModule' },
+            { path: 'addmanager', loadChildren: './add-manager/add-manager.module#AddManagerModule' },
+            { path: 'addchairman', loadChildren: './add-chairman/add-chairman.module#AddChairmanModule' },
             { path: 'addflatowner', loadChildren: './add-flat-owner/add-flat-owner.module#AddFlatOwnerModule' },
-            { path: 'securitylist', loadChildren: './add-security/add-security.module#AddSecurityModule' },
-            // { path: 'societylist', loadChildren: './society-list/society-list.module#SocietyListModule' },
-            // { path: 'blocklist', loadChildren: './block-list/block-list.module#BlockListModule' },
-            // { path: 'managerlist', loadChildren: './manager-list/manager-list.module#ManagerListModule' },
-            // { path: 'chairmanlist', loadChildren: './chairman-list/chairman-list.module#ChairmanListModule' },
+            { path: 'addsecurity', loadChildren: './add-security/add-security.module#AddSecurityModule' },
+            { path: 'blocklist', loadChildren: './block-list/block-list.module#BlockListModule' },
+            { path: 'managerlist', loadChildren: './manager-list/manager-list.module#ManagerListModule' },
+            { path: 'chairmanlist', loadChildren: './chairman-list/chairman-list.module#ChairmanListModule' },
             { path: 'flatlist', loadChildren: './flat-list/flat-list.module#FlatListModule' },
+            { path: 'securitylist', loadChildren: './security-list/security-list.module#SecurityListModule' },
             { path: 'visitorlist', loadChildren: './visitor-list/visitor-list.module#VisitorListModule' },
-            // { path: 'securitylist', loadChildren: './security-list/security-list.module#SecurityListModule' },
             { path: 'addflatmember', loadChildren: './add-flat-member/add-flat-member.module#AddFlatMemberModule' },
             { path: 'address', loadChildren: './add-address/add-address.module#AddAddressModule' },
             { path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordModule' },
@@ -235,7 +235,7 @@ var LayoutRoutingModule = (function () {
     function LayoutRoutingModule() {
     }
     LayoutRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]]
         })
@@ -293,7 +293,7 @@ var LayoutComponent = (function () {
     }
     LayoutComponent.prototype.ngOnInit = function () { };
     LayoutComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-layout',
             template: __webpack_require__("../../../../../src/app/layout/layout.component.html"),
             styles: [__webpack_require__("../../../../../src/app/layout/layout.component.scss")]
@@ -324,6 +324,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_hammerjs__ = __webpack_require__("../../../../hammerjs/hammer.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_hammerjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_hammerjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -340,18 +341,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var LayoutModule = (function () {
     function LayoutModule() {
     }
     LayoutModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
                 __WEBPACK_IMPORTED_MODULE_9__angular_material__["i" /* MatInputModule */],
                 __WEBPACK_IMPORTED_MODULE_9__angular_material__["b" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_7__angular_forms__["e" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_7__angular_forms__["d" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__layout_routing_module__["a" /* LayoutRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_10__angular_common_http__["b" /* HttpClientModule */],
+                __WEBPACK_IMPORTED_MODULE_9__angular_material__["t" /* MatTooltipModule */]
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_4__layout_component__["a" /* LayoutComponent */], __WEBPACK_IMPORTED_MODULE_5__components_sidebar_sidebar_component__["a" /* SidebarComponent */], __WEBPACK_IMPORTED_MODULE_6__components_header_header_component__["a" /* HeaderComponent */]]
         })

@@ -26,7 +26,7 @@ var ServerErrorRoutingModule = (function () {
     function ServerErrorRoutingModule() {
     }
     ServerErrorRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* RouterModule */]]
         })
@@ -85,7 +85,7 @@ var ServerErrorComponent = (function () {
     ServerErrorComponent.prototype.ngOnInit = function () {
     };
     ServerErrorComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-server-error',
             template: __webpack_require__("../../../../../src/app/server-error/server-error.component.html"),
             styles: [__webpack_require__("../../../../../src/app/server-error/server-error.component.scss")]
@@ -123,9 +123,9 @@ var ServerErrorModule = (function () {
     function ServerErrorModule() {
     }
     ServerErrorModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["K" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
                 __WEBPACK_IMPORTED_MODULE_2__server_error_routing_module__["a" /* ServerErrorRoutingModule */]
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_3__server_error_component__["a" /* ServerErrorComponent */]]

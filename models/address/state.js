@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 
 const StateSchema = Schema({
-    country_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'contry' },
+    country_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'country' },
     state_name:{
       type:String,
       required: true ,

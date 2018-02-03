@@ -4,18 +4,20 @@ var Schema = mongoose.Schema;
 
 //design database schema of vclinix
 
-const WingSchema = Schema({
+const BlockSchema = Schema({
+
+    Superadmin_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'superadmin' },
     Society_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'society' },
 
-    wing_name: { 
+    block_name: { 
         type:String,
         required: true ,
      },
-     wing_no_of_flats:{
+     no_of_flats:{
         type:Number
 
      }
       });
  
-const Wing = module.exports = mongoose.model('wing', WingSchema);
+const Block = module.exports = mongoose.model('block', BlockSchema);
 

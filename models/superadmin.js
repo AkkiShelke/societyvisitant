@@ -1,11 +1,12 @@
 //importing modules
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var bcrypt = require('bcrypt-nodejs');
 
 //design database schema of socity
 
 const SuperadminSchema = Schema({
-    superadmin_name: { 
+    superadmin_email: { 
         type:String,
         required: true ,
         unique:true
@@ -22,7 +23,7 @@ SuperadminSchema.pre('save', function(next) {
     var superadmin = this;
     var SALT_FACTOR = 5;
  
-    if (!recruiter.isModified('password')) return next();
+    if (!superadmin.isModified('password')) return next();
  
     console.log(superadmin.password) // Check password update
  
@@ -41,7 +42,8 @@ SuperadminSchema.pre('save', function(next) {
 
 //For authentication we compare the password using bcrypt.compareSync
 SuperadminSchema.methods.comparePassword = function(password)
-{
+{    
+
      return bcrypt.compareSync(password, this.password);
  };
 
