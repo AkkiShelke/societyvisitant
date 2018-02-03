@@ -104,7 +104,7 @@ var LoginComponent = (function () {
         };
         console.log(societyadmin);
         // // Authenticate societyadmin
-        this.http.post('api/authenticatesocietyadmin', societyadmin).subscribe(function (data) {
+        this.http.post('https://visitant.herokuapp.com/api/authenticatesocietyadmin', societyadmin).subscribe(function (data) {
             _this.response = data;
             if (_this.response.success == true) {
                 _this.toasterService.pop('success', _this.response.message);
