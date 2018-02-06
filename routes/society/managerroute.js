@@ -96,7 +96,7 @@ Manager.findOne({ email: req.body.email , Society_id:  req.body.society_id}, fun
 
    
 // Manager Login Route
-// http://localhost:port/https://visitant.herokuapp.com/api/authenticate
+// http://localhost:port/api/authenticate
 // manager_router.post('/authenticatesociety', (req, res, next) =>
 // {
 //     Manager.findOne({ email: req.body.email }).select('_id    email password').exec(function(err, result)

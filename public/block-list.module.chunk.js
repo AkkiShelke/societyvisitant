@@ -105,7 +105,7 @@ var BlockListComponent = (function () {
     }
     BlockListComponent.prototype.getBlockData = function () {
         var _this = this;
-        this.http.get('https://visitant.herokuapp.com/api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.block = data;
             console.log(_this.block);
             _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);

@@ -105,7 +105,7 @@ var ChairmanListComponent = (function () {
     }
     ChairmanListComponent.prototype.getChairmanData = function () {
         var _this = this;
-        this.http.get('https://visitant.herokuapp.com/api/chairmanlistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('api/chairmanlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.chairman = data;
             console.log(_this.chairman);
             _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);

@@ -105,7 +105,7 @@ var SecurityListComponent = (function () {
     }
     SecurityListComponent.prototype.getSecurityData = function () {
         var _this = this;
-        this.http.get('https://visitant.herokuapp.com/api/securitylistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('api/securitylistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.security = data;
             console.log(_this.security);
             _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);

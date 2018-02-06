@@ -108,7 +108,7 @@ var ManagerListComponent = (function () {
     }
     ManagerListComponent.prototype.getManagerData = function () {
         var _this = this;
-        this.http.get('https://visitant.herokuapp.com/api/managerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('api/managerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.manager = data;
             console.log(_this.manager);
             _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);

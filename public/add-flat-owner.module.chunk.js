@@ -105,7 +105,7 @@ var AddFlatOwnerComponent = (function () {
     }
     AddFlatOwnerComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.http.get('https://visitant.herokuapp.com/api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.block = data;
             console.log(_this.block);
         });
@@ -241,14 +241,14 @@ var AddFlatOwnerComponent = (function () {
     };
     AddFlatOwnerComponent.prototype.getManager = function (block_id) {
         var _this = this;
-        this.http.get('https://visitant.herokuapp.com/api/managerlistbyblock/' + block_id).subscribe(function (data) {
+        this.http.get('api/managerlistbyblock/' + block_id).subscribe(function (data) {
             _this.manager = data;
             console.log(_this.manager);
         });
     };
     AddFlatOwnerComponent.prototype.getChairman = function (manager_id) {
         var _this = this;
-        this.http.get('https://visitant.herokuapp.com/api/chairmanlistbymanager/' + manager_id).subscribe(function (data) {
+        this.http.get('api/chairmanlistbymanager/' + manager_id).subscribe(function (data) {
             _this.chairman = data;
             console.log(_this.chairman);
         });
@@ -268,7 +268,7 @@ var AddFlatOwnerComponent = (function () {
             flat_no: this.flatno,
         };
         console.log(flat_details);
-        this.http.post('https://visitant.herokuapp.com/api/checkflat', flat_details).subscribe(function (data) {
+        this.http.post('api/checkflat', flat_details).subscribe(function (data) {
             _this.flatresponse = data;
             console.log(_this.flatresponse);
             if (_this.flatresponse.success == true) {
@@ -290,7 +290,7 @@ var AddFlatOwnerComponent = (function () {
             flat_status: this.flat_status
         };
         console.log(flat_details);
-        this.http.post('https://visitant.herokuapp.com/api/addflat', flat_details).subscribe(function (data) {
+        this.http.post('api/addflat', flat_details).subscribe(function (data) {
             _this.flatresponse = data;
             console.log(_this.flatresponse);
             if (_this.flatresponse.success == true) {
@@ -305,7 +305,7 @@ var AddFlatOwnerComponent = (function () {
                     flatowner_password: _this.flatowner_confirm_password
                 };
                 console.log(flatowner_details);
-                _this.http.post('https://visitant.herokuapp.com/api/addflatowner', flatowner_details).subscribe(function (data) {
+                _this.http.post('api/addflatowner', flatowner_details).subscribe(function (data) {
                     _this.flatownerresponse = data;
                     console.log(_this.flatownerresponse);
                     if (_this.flatownerresponse.success == true) {
@@ -321,7 +321,7 @@ var AddFlatOwnerComponent = (function () {
                             tenant_password: _this.tenant_confirm_password
                         };
                         console.log(tenant_details);
-                        _this.http.post('https://visitant.herokuapp.com/api/addtenant', tenant_details).subscribe(function (data) {
+                        _this.http.post('api/addtenant', tenant_details).subscribe(function (data) {
                             _this.tenantresponse = data;
                             console.log(_this.tenantresponse);
                             if (_this.tenantresponse.success == true) {
@@ -338,7 +338,7 @@ var AddFlatOwnerComponent = (function () {
                                         flatmember_contact: _this.row[i].contact
                                     };
                                     console.log(member_details);
-                                    _this.http.post('https://visitant.herokuapp.com/api/addflatmember', member_details).subscribe(function (data) {
+                                    _this.http.post('api/addflatmember', member_details).subscribe(function (data) {
                                         _this.memberresponse = data;
                                         if (_this.memberresponse.success == true) {
                                             _this.toasterService.pop('success', "Flat Details enter Successfully");

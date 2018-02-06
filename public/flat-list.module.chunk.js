@@ -101,7 +101,7 @@ var FlatListComponent = (function () {
     }
     FlatListComponent.prototype.getFlatownerData = function () {
         var _this = this;
-        this.http.get('https://visitant.herokuapp.com/api/flatownerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('api/flatownerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.flatdetails = data;
             console.log(_this.flatdetails);
             _this.dataSource = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["r" /* MatTableDataSource */](data);
@@ -117,7 +117,7 @@ var FlatListComponent = (function () {
             status: flat
         };
         console.log(flat_details);
-        this.http.put('https://visitant.herokuapp.com/api/updateflatownerstatus/' + id, flat_details).subscribe(function (data) {
+        this.http.put('api/updateflatownerstatus/' + id, flat_details).subscribe(function (data) {
             console.log(data);
         });
         this.getFlatownerData();
