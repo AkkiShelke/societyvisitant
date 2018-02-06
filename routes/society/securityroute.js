@@ -25,6 +25,16 @@ security_router.get('/securitylist', (req, res, next)=>
     });
 });
 
+
+security_router.get('/security/:security_id', (req, res, next)=>
+{ 
+    Security.findById({_id: req.params.security_id},function(err, result)
+    {
+        res.json(result);
+    });
+});
+
+
 // Get the Security relational data
 security_router.get('/securitylistdetails/:society_id', (req, res, next)=>
 {
@@ -275,6 +285,35 @@ else{
 //     });
 // });
 
+
+
+//Update name and contact
+security_router.put('/updatesecurity/:security_id',(req, res, next)=>
+{      
+    Security.findByIdAndUpdate(req.params.security_id,
+    {  
+        $set: 
+        { 
+            security_name: req.body.security_name,
+            contact: req.body.contact
+
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating Security Details");
+        }
+        else
+        {
+            res.json({success: true ,message: 'Security Details are updated!'}) ;
+        }
+    });
+});
 
 //Update Status
 security_router.put('/updatesecuritystatus/:manager_id',(req, res, next)=>

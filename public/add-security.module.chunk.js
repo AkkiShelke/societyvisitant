@@ -42,7 +42,7 @@ var AddSecurityRoutingModule = (function () {
 /***/ "../../../../../src/app/layout/add-security/add-security.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<toaster-container></toaster-container>\n<div [@routerTransition] class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-xl-12\">\n        <ol class=\"breadcrumb\">\n            <li class=\"breadcrumb-item\">\n                <i class=\"fa fa-dashboard\"></i> <a href=\"Javascript:void(0)\" [routerLink]=\"['/dashboard']\">Dashboard</a>\n            </li>\n\n            <li class=\"breadcrumb-item active\"><i class=\"fa fa-list-ol\"></i> Security List</li>\n        </ol>\n    </div>\n</div>\n\n<div class=\"example-header\">\n  <mat-form-field>\n    <input  matTooltip=\"Search Security Details!\" matTooltipPosition=\"above\" style=\"width: 50%;\" matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Search\">\n  </mat-form-field>\n  <div class=\"pull-right\">\n      <button class=\" btn btn-danger\" matTooltip=\"Send Message!\" matTooltipPosition=\"above\"><i class=\"fa fa-paper-plane\"></i></button>\n  <button class=\" btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"openDialog()\"  matTooltip=\"Register Security!\" matTooltipPosition=\"above\" ><i class=\"fa fa-plus\"></i> Add Security</button>\n</div>\n</div>\n\n<div class=\"example-container mat-elevation-z8\">\n\n  <mat-table [dataSource]=\"dataSource\" matSort>\n\n    <!-- Checkbox Column -->\n    <ng-container matColumnDef=\"select\">\n        <mat-header-cell *matHeaderCellDef>\n          <mat-checkbox matTooltip=\"Select All Rows!\" matTooltipPosition=\"above\"  (change)=\"$event ? masterToggle() : null\"\n                        [checked]=\"selection.hasValue() && isAllSelected()\"\n                        [indeterminate]=\"selection.hasValue() && !isAllSelected()\">\n          </mat-checkbox>\n        </mat-header-cell>\n        <mat-cell *matCellDef=\"let row\">\n          <mat-checkbox matTooltip=\"Select This Row!\" matTooltipPosition=\"above\"  (click)=\"$event.stopPropagation()\"\n                        (change)=\"$event ? selection.toggle(row) : null\"\n                        [checked]=\"selection.isSelected(row)\">\n          </mat-checkbox>\n        </mat-cell>\n      </ng-container>\n\n    <!-- ID Column -->\n    <!-- <ng-container matColumnDef=\"id\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> ID </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.id}} </mat-cell>\n    </ng-container> -->\n\n    <!-- Block Column -->\n    <ng-container matColumnDef=\"block\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Manager </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.Manager_id.manager_name}} </mat-cell>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.security_name}} </mat-cell>\n    </ng-container>\n\n    <!-- Email Column -->\n    <ng-container matColumnDef=\"email\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.email\"> {{row.email}} </mat-cell>\n    </ng-container>\n\n\n\n      <!-- Contact Column -->\n    <ng-container matColumnDef=\"contact\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Contact </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.contact\"> {{row.contact}} </mat-cell>\n    </ng-container>\n\n      <!-- Details Column -->\n      <!-- <ng-container matColumnDef=\"details\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Details </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.details\"><button routerLink=\"/society_details\" class=\"btn btn-primary buttoncolor\" style=\"color:white;\"><i  class=\"fa fa-eye\"></i> View</button>\n      </mat-cell>\n      </ng-container> -->\n\n    <mat-header-row class=\"headertext\" *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\n    <mat-row *matRowDef=\"let row; columns: displayedColumns;\">\n    </mat-row>\n  </mat-table>\n\n  <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator>\n</div>\n</div>\n"
+module.exports = "<toaster-container></toaster-container>\n<div [@routerTransition] class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-xl-12\">\n        <ol class=\"breadcrumb\">\n            <li class=\"breadcrumb-item\">\n                <i class=\"fa fa-dashboard\"></i> <a href=\"Javascript:void(0)\" [routerLink]=\"['/dashboard']\">Dashboard</a>\n            </li>\n\n            <li class=\"breadcrumb-item active\"><i class=\"fa fa-list-ol\"></i> Security List</li>\n        </ol>\n    </div>\n</div>\n\n<div class=\"example-header\">\n  <mat-form-field>\n    <input  matTooltip=\"Search Security Details!\" matTooltipPosition=\"above\" style=\"width: 50%;\" matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Search\">\n  </mat-form-field>\n  <div class=\"pull-right\">\n      <button class=\" btn btn-danger\" matTooltip=\"Send Message!\" matTooltipPosition=\"above\"><i class=\"fa fa-paper-plane\"></i></button>\n  <button class=\" btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"openDialog()\"  matTooltip=\"Register Security!\" matTooltipPosition=\"above\" ><i class=\"fa fa-plus\"></i> Add Security</button>\n</div>\n</div>\n\n<div class=\"example-container mat-elevation-z8\">\n\n  <mat-table [dataSource]=\"dataSource\" matSort>\n\n    <!-- Checkbox Column -->\n    <ng-container matColumnDef=\"select\">\n        <mat-header-cell *matHeaderCellDef>\n          <mat-checkbox matTooltip=\"Select All Rows!\" matTooltipPosition=\"above\"  (change)=\"$event ? masterToggle() : null\"\n                        [checked]=\"selection.hasValue() && isAllSelected()\"\n                        [indeterminate]=\"selection.hasValue() && !isAllSelected()\">\n          </mat-checkbox>\n        </mat-header-cell>\n        <mat-cell *matCellDef=\"let row\">\n          <mat-checkbox matTooltip=\"Select This Row!\" matTooltipPosition=\"above\"  (click)=\"$event.stopPropagation()\"\n                        (change)=\"$event ? selection.toggle(row) : null\"\n                        [checked]=\"selection.isSelected(row)\">\n          </mat-checkbox>\n        </mat-cell>\n      </ng-container>\n\n    <!-- ID Column -->\n    <!-- <ng-container matColumnDef=\"id\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> ID </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.id}} </mat-cell>\n    </ng-container> -->\n\n    <!-- Block Column -->\n    <ng-container matColumnDef=\"block\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Manager </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.Manager_id.manager_name}} </mat-cell>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.security_name}} </mat-cell>\n    </ng-container>\n\n    <!-- Email Column -->\n    <ng-container matColumnDef=\"email\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.email\"> {{row.email}} </mat-cell>\n    </ng-container>\n\n\n\n      <!-- Contact Column -->\n    <ng-container matColumnDef=\"contact\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Contact </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.contact\"> {{row.contact}} </mat-cell>\n    </ng-container>\n\n    <!-- Actions Column -->\n    <ng-container matColumnDef=\"actions\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.details\"><button class=\"btn btn-parimary\" (click)=\"openEditDialog(row._id)\"><i class=\"fa fa-pencil\"></i> Edit</button>\n      </mat-cell>\n      </ng-container>\n\n    <mat-header-row class=\"headertext\" *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\n    <mat-row *matRowDef=\"let row; columns: displayedColumns;\">\n    </mat-row>\n  </mat-table>\n\n  <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -69,7 +69,8 @@ module.exports = module.exports.toString();
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddSecurityComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return TestDialogComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return TestDialogComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return EditDialogComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_animations__ = __webpack_require__("../../../../../src/app/router.animations.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
@@ -103,7 +104,7 @@ var AddSecurityComponent = (function () {
         this.dialog = dialog;
         this._formBuilder = _formBuilder;
         this.societyadmin = JSON.parse(localStorage['societyadmin']);
-        this.displayedColumns = ['select', 'block', 'name', 'email', 'contact'];
+        this.displayedColumns = ['select', 'block', 'name', 'email', 'contact', 'actions'];
         this.selection = new __WEBPACK_IMPORTED_MODULE_4__angular_cdk_collections__["a" /* SelectionModel */](true, []);
         this.toasterService = toasterService;
         this.getSecurityData();
@@ -141,6 +142,24 @@ var AddSecurityComponent = (function () {
                         _this.toasterService.pop('error', _this.response.message);
                     }
                 });
+            }
+        });
+    };
+    AddSecurityComponent.prototype.openEditDialog = function (security_id) {
+        var _this = this;
+        console.log(security_id);
+        var dialogRef = this.dialog.open(EditDialogComponent, {
+            height: '360px',
+            width: '260px',
+            data: { security_id: security_id },
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            console.log('The dialog was closed');
+            console.log(result);
+            _this.getSecurityData();
+            if (result == null || result == '') {
+            }
+            else {
             }
         });
     };
@@ -280,6 +299,87 @@ var TestDialogComponent = (function () {
     return TestDialogComponent;
 }());
 
+//  Edit Dialog Box Component
+var EditDialogComponent = (function () {
+    function EditDialogComponent(http, _formBuilder, dialogRef, data, toasterService) {
+        this.http = http;
+        this._formBuilder = _formBuilder;
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.societyadmin = JSON.parse(localStorage['societyadmin']);
+        this.toasterService = toasterService;
+        this.firstFormGroup = this._formBuilder.group({
+            nameCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
+            contactCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
+        });
+    }
+    EditDialogComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.http.get('api/security/' + this.data.security_id).subscribe(function (data) {
+            _this.security = data;
+            _this.security_name = _this.security.security_name;
+            _this.contact = _this.security.contact;
+            console.log(_this.security);
+        });
+    };
+    Object.defineProperty(EditDialogComponent.prototype, "nameCtrl", {
+        get: function () { return this.firstFormGroup.get('nameCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EditDialogComponent.prototype, "contactCtrl", {
+        get: function () { return this.firstFormGroup.get('contactCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    //Only String (Name)
+    EditDialogComponent.prototype.StringPress = function (event) {
+        var pattern = /[a-z\+\A-Z\+\-\ ]/;
+        var inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+            event.preventDefault();
+        }
+    };
+    //Contact Validation
+    EditDialogComponent.prototype.NumPress = function (event) {
+        var pattern = /[0-9\+\-\ ]/;
+        var inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+            event.preventDefault();
+        }
+    };
+    EditDialogComponent.prototype.onSubmitClick = function () {
+        var _this = this;
+        console.log(this.security_name, this.contact);
+        var update_data = {
+            security_name: this.security_name,
+            contact: this.contact
+        };
+        console.log(update_data);
+        this.http.put('api/updatesecurity/' + this.security._id, update_data).subscribe(function (data) {
+            _this.response = data;
+            if (_this.response.success == true) {
+                _this.toasterService.pop('success', _this.response.message);
+            }
+            else {
+                _this.toasterService.pop('error', _this.response.message);
+            }
+        });
+        this.dialogRef.close();
+    };
+    EditDialogComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: "\n  <div matDialogTitle>Edit Security Details</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Update out your Details</ng-template>\n        <mat-form-field>\n          <input matInput [(ngModel)]=\"security_name\" placeholder=\"Security Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>    \n    </form>\n    <br>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Update</button>\n\n  </mat-dialog-actions>",
+        }),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
+    ], EditDialogComponent);
+    return EditDialogComponent;
+    var _a;
+}());
+
 
 
 /***/ }),
@@ -341,8 +441,8 @@ var AddSecurityModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_5__angular_material__["t" /* MatTooltipModule */],
                 __WEBPACK_IMPORTED_MODULE_8_angular5_toaster__["ToasterModule"]
             ],
-            entryComponents: [__WEBPACK_IMPORTED_MODULE_2__add_security_component__["b" /* TestDialogComponent */]],
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__add_security_component__["a" /* AddSecurityComponent */], __WEBPACK_IMPORTED_MODULE_2__add_security_component__["b" /* TestDialogComponent */]]
+            entryComponents: [__WEBPACK_IMPORTED_MODULE_2__add_security_component__["c" /* TestDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__add_security_component__["b" /* EditDialogComponent */]],
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__add_security_component__["a" /* AddSecurityComponent */], __WEBPACK_IMPORTED_MODULE_2__add_security_component__["c" /* TestDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__add_security_component__["b" /* EditDialogComponent */]]
         })
     ], AddSecurityModule);
     return AddSecurityModule;

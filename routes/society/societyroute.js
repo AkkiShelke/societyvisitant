@@ -85,7 +85,7 @@ society_router.post('/addsociety',(req, res, next)=>
 // http://localhost:port/api/authenticate
 society_router.post('/authenticatesocietyadmin', (req, res, next) =>
 {
-    Society.findOne({ email: req.body.email }).select('_id email password').exec(function(err, result)
+    Society.findOne({ email: req.body.email }).select('_id    email password').exec(function(err, result)
     {  
        
       

@@ -25,6 +25,16 @@ chairman_router.get('/chairmanlist', (req, res, next)=>
     });
 });
 
+
+chairman_router.get('/chairman/:chairman_id', (req, res, next)=>
+{ 
+    Chairman.findById({_id: req.params.chairman_id},function(err, result)
+    {
+        res.json(result);
+    });
+});
+
+
 // Get the Chairman relational data
 chairman_router.get('/chairmanlistdetails/:society_id', (req, res, next)=>
 {
@@ -287,6 +297,34 @@ else{
 
 //     });
 // });
+
+//Update name and contact
+chairman_router.put('/updatechairman/:chairman_id',(req, res, next)=>
+{      
+    Chairman.findByIdAndUpdate(req.params.chairman_id,
+    {  
+        $set: 
+        { 
+            chairman_name: req.body.chairman_name,
+            contact: req.body.contact
+
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating Chairman Details");
+        }
+        else
+        {
+            res.json({success: true ,message: 'Chairman Details are updated!'}) ;
+        }
+    });
+});
 
 
 //Update Status

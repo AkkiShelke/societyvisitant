@@ -25,6 +25,14 @@ manager_router.get('/managerlist', (req, res, next)=>
     });
 });
 
+manager_router.get('/manager/:manager_id', (req, res, next)=>
+{ 
+    Manager.findById({_id: req.params.manager_id},function(err, result)
+    {
+        res.json(result);
+    });
+});
+
 // Get the Manager relational data
 manager_router.get('/managerlistdetails/:society_id', (req, res, next)=>
 {
@@ -286,6 +294,35 @@ Manager.findOne({ email: req.body.email , Society_id:  req.body.society_id}, fun
 
 //     });
 // });
+
+
+//Update name and contact
+manager_router.put('/updatemanager/:manager_id',(req, res, next)=>
+{      
+    Manager.findByIdAndUpdate(req.params.manager_id,
+    {  
+        $set: 
+        { 
+            manager_name: req.body.manager_name,
+            contact: req.body.contact
+
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating Manager Details");
+        }
+        else
+        {
+            res.json({success: true ,message: 'Manager Details are updated!'}) ;
+        }
+    });
+});
 
 
 //Update Status
