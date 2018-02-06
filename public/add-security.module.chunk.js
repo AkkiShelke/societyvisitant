@@ -194,7 +194,6 @@ var TestDialogComponent = (function () {
         this.dialogRef = dialogRef;
         this.data = data;
         this.societyadmin = JSON.parse(localStorage['societyadmin']);
-        this.superadmin = JSON.parse(localStorage['superadmin']);
         this.firstFormGroup = this._formBuilder.group({
             managerCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
             nameCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
@@ -260,7 +259,6 @@ var TestDialogComponent = (function () {
     TestDialogComponent.prototype.onSubmitClick = function () {
         console.log(this.manager_id);
         var security = {
-            superadmin_id: this.superadmin.id,
             society_id: this.societyadmin.id,
             manager_id: this.manager_id,
             security_name: this.security_name,

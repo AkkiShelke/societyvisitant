@@ -209,7 +209,6 @@ var TestDialogComponent = (function () {
         this.dialogRef = dialogRef;
         this.data = data;
         this.societyadmin = JSON.parse(localStorage['societyadmin']);
-        this.superadmin = JSON.parse(localStorage['superadmin']);
         this.firstFormGroup = this._formBuilder.group({
             nameCtrl: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].minLength(2), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].maxLength(12)]],
             flatCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
@@ -245,7 +244,6 @@ var TestDialogComponent = (function () {
     };
     TestDialogComponent.prototype.onSubmitClick = function () {
         var block = {
-            superadmin: this.superadmin.id,
             society_id: this.societyadmin.id,
             block_name: this.block_name,
             no_of_flats: this.no_of_flats,

@@ -96,7 +96,6 @@ var AddFlatOwnerComponent = (function () {
         this._cfr = _cfr;
         // Initializtion
         this.row = [{}];
-        this.superadmin = JSON.parse(localStorage['superadmin']);
         this.societyadmin = JSON.parse(localStorage['societyadmin']);
         this.align = 'start';
         this.flat_status = true;
@@ -282,7 +281,6 @@ var AddFlatOwnerComponent = (function () {
     AddFlatOwnerComponent.prototype.registerflatowner = function () {
         var _this = this;
         var flat_details = {
-            superadmin: this.superadmin.id,
             society_id: this.societyadmin.id,
             chairman_id: this.chairman_id,
             flat_no: this.flatno,
@@ -296,7 +294,6 @@ var AddFlatOwnerComponent = (function () {
             if (_this.flatresponse.success == true) {
                 _this.toasterService.pop('success', _this.flatresponse.message);
                 var flatowner_details = {
-                    superadmin: _this.superadmin.id,
                     society_id: _this.societyadmin.id,
                     flat_id: _this.flatresponse.result._id,
                     flatowner_name: _this.flatowner_name,
@@ -311,7 +308,6 @@ var AddFlatOwnerComponent = (function () {
                     if (_this.flatownerresponse.success == true) {
                         _this.toasterService.pop('success', _this.flatownerresponse.message);
                         var tenant_details = {
-                            superadmin: _this.superadmin.id,
                             society_id: _this.societyadmin.id,
                             flat_id: _this.flatresponse.result._id,
                             flatowner_id: _this.flatownerresponse.result._id,
@@ -329,7 +325,6 @@ var AddFlatOwnerComponent = (function () {
                                 for (var i = 0; _this.row.length > i; i++) {
                                     console.log(_this.row[i]);
                                     var member_details = {
-                                        superadmin: _this.superadmin.id,
                                         society_id: _this.societyadmin.id,
                                         flatowner_id: _this.flatownerresponse.result._id,
                                         tenant_id: _this.tenantresponse.result._id,

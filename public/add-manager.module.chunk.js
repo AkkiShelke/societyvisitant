@@ -211,7 +211,6 @@ var TestDialogComponent = (function () {
         this.dialogRef = dialogRef;
         this.data = data;
         this.societyadmin = JSON.parse(localStorage['societyadmin']);
-        this.superadmin = JSON.parse(localStorage['superadmin']);
         this.http.get('api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.block = data;
         });
@@ -280,7 +279,6 @@ var TestDialogComponent = (function () {
     TestDialogComponent.prototype.onSubmitClick = function () {
         console.log(this.block_id);
         var manager = {
-            superadmin_id: this.superadmin.id,
             society_id: this.societyadmin.id,
             block_id: this.block_id,
             manager_name: this.manager_name,
