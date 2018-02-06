@@ -18,7 +18,7 @@ const tenantroute = require('./routes/society/tenantroute');
 const flatmemberroute = require('./routes/society/flatmemberroute');
 
 //connect to mongodb
-mongoose.connect('mongodb://akshay:akshay@ds119028.mlab.com:19028/visitant');
+mongoose.connect('mongodb://cybercode:cybercode@ds119028.mlab.com:19028/visitant');
 
 //on connection 
 mongoose.connection.on('connected', ()=>{
