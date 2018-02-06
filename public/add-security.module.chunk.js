@@ -110,7 +110,7 @@ var AddSecurityComponent = (function () {
     }
     AddSecurityComponent.prototype.getSecurityData = function () {
         var _this = this;
-        this.http.get('api/securitylistdetails/' + this.societyadmin._id).subscribe(function (data) {
+        this.http.get('api/securitylistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.security = data;
             console.log(_this.security);
             _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
@@ -235,7 +235,7 @@ var TestDialogComponent = (function () {
     });
     TestDialogComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.http.get('api/managerlistdetails/' + this.societyadmin._id).subscribe(function (data) {
+        this.http.get('api/managerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.manager = data;
             console.log(_this.manager);
         });
@@ -259,7 +259,7 @@ var TestDialogComponent = (function () {
     TestDialogComponent.prototype.onSubmitClick = function () {
         console.log(this.manager_id);
         var security = {
-            society_id: this.societyadmin._id,
+            society_id: this.societyadmin.id,
             manager_id: this.manager_id,
             security_name: this.security_name,
             email: this.security_email,

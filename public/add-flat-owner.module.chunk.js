@@ -105,7 +105,7 @@ var AddFlatOwnerComponent = (function () {
     }
     AddFlatOwnerComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.http.get('api/blocklistdetails/' + this.societyadmin._id).subscribe(function (data) {
+        this.http.get('api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.block = data;
             console.log(_this.block);
         });
@@ -295,7 +295,7 @@ var AddFlatOwnerComponent = (function () {
     AddFlatOwnerComponent.prototype.registerflatowner = function () {
         var _this = this;
         var flat_details = {
-            society_id: this.societyadmin._id,
+            society_id: this.societyadmin.id,
             chairman_id: this.chairman_id,
             flat_no: this.flatno,
             floor_no: this.floorno,
@@ -308,7 +308,7 @@ var AddFlatOwnerComponent = (function () {
             if (_this.flatresponse.success == true) {
                 _this.toasterService.pop('success', _this.flatresponse.message);
                 var flatowner_details = {
-                    society_id: _this.societyadmin._id,
+                    society_id: _this.societyadmin.id,
                     flat_id: _this.flatresponse.result._id,
                     flatowner_name: _this.flatowner_name,
                     flatowner_email: _this.flatowner_email,
@@ -323,7 +323,7 @@ var AddFlatOwnerComponent = (function () {
                         _this.toasterService.pop('success', _this.flatownerresponse.message);
                         if (_this.tenant_status = true) {
                             var tenant_details = {
-                                society_id: _this.societyadmin._id,
+                                society_id: _this.societyadmin.id,
                                 flat_id: _this.flatresponse.result._id,
                                 flatowner_id: _this.flatownerresponse.result._id,
                                 tenant_name: _this.tenant_name,
@@ -340,7 +340,7 @@ var AddFlatOwnerComponent = (function () {
                                     for (var i = 0; _this.row.length > i; i++) {
                                         console.log(_this.row[i]);
                                         var member_details = {
-                                            society_id: _this.societyadmin._id,
+                                            society_id: _this.societyadmin.id,
                                             flatowner_id: _this.flatownerresponse.result._id,
                                             tenant_id: _this.tenantresponse.result._id,
                                             flatmember_name: _this.row[i].name,
@@ -369,7 +369,7 @@ var AddFlatOwnerComponent = (function () {
                             for (var i = 0; _this.row.length > i; i++) {
                                 console.log(_this.row[i]);
                                 var member_details = {
-                                    society_id: _this.societyadmin._id,
+                                    society_id: _this.societyadmin.id,
                                     flatowner_id: _this.flatownerresponse.result._id,
                                     flatmember_name: _this.row[i].name,
                                     flatmember_email: _this.row[i].email,
