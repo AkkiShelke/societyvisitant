@@ -54,7 +54,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".example-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  min-width: 300px; }\n\n.example-header {\n  min-height: 64px;\n  padding: 8px 24px 0; }\n\n.mat-form-field {\n  font-size: 12px;\n  width: 50%; }\n\n.mat-table {\n  overflow: auto;\n  max-height: 500px; }\n\n.headertext {\n  font-size: large;\n  font-size: 12px;\n  font-style: bold;\n  color: black; }\n\n.mat-column-select {\n  overflow: visible; }\n\n.mat-cell {\n  font-size: 11px; }\n", ""]);
+exports.push([module.i, ".mat-dialog-content {\n  background-color: lightblue; }\n  .mat-dialog-content form {\n    padding: 1% 2%; }\n  .example-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  min-width: 300px; }\n  .example-header {\n  min-height: 64px;\n  padding: 8px 24px 0; }\n  .mat-form-field {\n  font-size: 14px;\n  width: 35%; }\n  .mat-table {\n  overflow: auto;\n  max-height: 500px; }\n  .headertext {\n  font-size: large;\n  font-style: bold;\n  color: black;\n  font-size: 12px; }\n  .mat-cell {\n  font-size: 11px; }\n", ""]);
 
 // exports
 
