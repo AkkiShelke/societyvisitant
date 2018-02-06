@@ -7,6 +7,15 @@ var mongoose = require('mongoose');
 var app =express();
 
 const superadminroute = require('./routes/superadminroute');
+const societyroute = require('./routes/society/societyroute');
+const blockroute = require('./routes/society/blockroute');
+const managerroute = require('./routes/society/managerroute');
+const chairmanroute = require('./routes/society/chairmanroute');
+const securityroute = require('./routes/society/securityroute');
+const flatroute = require('./routes/society/flatroute');
+const flatownerroute = require('./routes/society/flatownerroute');
+const tenantroute = require('./routes/society/tenantroute');
+const flatmemberroute = require('./routes/society/flatmemberroute');
 
 //connect to mongodb
 mongoose.connect('mongodb://akshay:akshay@ds119028.mlab.com:19028/visitant');
@@ -25,6 +34,7 @@ mongoose.connection.on('error',(err)=>{
 
 //port no
 const port = process.env.PORT || 8080;
+
 //adding middleware
 app.use(cors());
 
@@ -37,6 +47,15 @@ app.use(bodyparser.json());
 //routes
 
 app.use('/api', superadminroute);
+app.use('/api', societyroute);
+app.use('/api', blockroute);
+app.use('/api', managerroute);
+app.use('/api', chairmanroute);
+app.use('/api', securityroute);
+app.use('/api', flatroute);
+app.use('/api', flatownerroute);
+app.use('/api', tenantroute);
+app.use('/api', flatmemberroute);
 
 
 
@@ -48,3 +67,4 @@ app.get('*', (req, res) => {
       console.log('Server started at port:',+port);
   
   });
+  
