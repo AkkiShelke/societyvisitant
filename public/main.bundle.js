@@ -68,6 +68,10 @@ var map = {
 		"common",
 		"flat-list.module"
 	],
+	"./flatowner-details/flatowner-details.module": [
+		"../../../../../src/app/layout/flatowner-details/flatowner-details.module.ts",
+		"flatowner-details.module"
+	],
 	"./layout/layout.module": [
 		"../../../../../src/app/layout/layout.module.ts",
 		"common",

@@ -228,6 +228,7 @@ var routes = [
             { path: 'addflatmember', loadChildren: './add-flat-member/add-flat-member.module#AddFlatMemberModule' },
             { path: 'address', loadChildren: './add-address/add-address.module#AddAddressModule' },
             { path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordModule' },
+            { path: 'flatowner_details', loadChildren: './flatowner-details/flatowner-details.module#FlatownerDetailsModule' },
         ]
     }
 ];
