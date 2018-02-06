@@ -8,6 +8,7 @@ var app =express();
 
 const superadminroute = require('./routes/superadminroute');
 
+
 //connect to mongodb
 mongoose.connect('mongodb://akshay:akshay@ds119028.mlab.com:19028/visitant');
 
