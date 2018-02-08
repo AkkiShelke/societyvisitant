@@ -19,7 +19,7 @@ var bcrypt = require('bcrypt-nodejs');
 //rerieving  Chairman Details
 chairman_router.get('/chairmanlist', (req, res, next)=>
 { 
-    Chairman.find(function(err, result)
+    Chairman.find().sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -28,7 +28,7 @@ chairman_router.get('/chairmanlist', (req, res, next)=>
 
 chairman_router.get('/chairman/:chairman_id', (req, res, next)=>
 { 
-    Chairman.findById({_id: req.params.chairman_id},function(err, result)
+    Chairman.findById({_id: req.params.chairman_id}).sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -39,7 +39,7 @@ chairman_router.get('/chairman/:chairman_id', (req, res, next)=>
 chairman_router.get('/chairmanlistdetails/:society_id', (req, res, next)=>
 {
 
-    Chairman.find({Society_id: req.params.society_id}).select('_id Manager_id chairman_name  email contact').exec(function(err, result)
+    Chairman.find({Society_id: req.params.society_id}).select('_id Manager_id chairman_name  email contact').sort({_id: -1}).exec(function(err, result)
 {
     Chairman.populate( result, {path:'Manager_id'},function(err, result){
     res.json(result);
@@ -52,7 +52,7 @@ chairman_router.get('/chairmanlistdetails/:society_id', (req, res, next)=>
 chairman_router.get('/chairmanlistbymanager/:manager_id', (req, res, next)=>
 {
 
-    Chairman.find({Manager_id: req.params.manager_id}).select('_id Manager_id chairman_name  email contact').exec(function(err, result)
+    Chairman.find({Manager_id: req.params.manager_id}).select('_id Manager_id chairman_name  email contact').sort({_id: -1}).exec(function(err, result)
 {
     
     res.json(result);

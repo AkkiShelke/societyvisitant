@@ -41,6 +41,7 @@ const TenantSchema = Schema({
         if (!tenant.isModified('password')) return next();
      
         console.log(tenant.password) // Check password update
+        
      
         bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
            if (err) return next(err);

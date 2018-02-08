@@ -5,6 +5,9 @@ var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
 var Flatowner = require('../../models/society/flatowner');
+var Tenant = require('../../models/society/tenant');
+var Flatmember = require('../../models/society/flatmember');
+
 var secret = 'Akshay';
 var bcrypt = require('bcrypt-nodejs');
 
@@ -18,16 +21,16 @@ var bcrypt = require('bcrypt-nodejs');
 //rerieving  Flat Details
 flatowner_router.get('/flatownerlist', (req, res, next)=>
 { 
-    Flatowner.find(function(err, result)
+    Flatowner.find().sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
 });
 
 //rerieving  Flat Detailsby ID
-flatowner_router.get('/flatowner/:flatowner_id', (req, res, next)=>
+flatowner_router.get('/flatowner/:flat_id', (req, res, next)=>
 { 
-    Flatowner.findOne({_id: req.params.flatowner_id},function(err, result)
+    Flatowner.findOne({Flat_id: req.params.flat_id}).sort({_id: -1}).exec(function(err, result)
     {
         Flatowner.populate( result, {path:'Flat_id'},function(err, result){
 
@@ -40,7 +43,7 @@ flatowner_router.get('/flatowner/:flatowner_id', (req, res, next)=>
 flatowner_router.get('/flatownerlistdetails/:society_id', (req, res, next)=>
 {
 
-    Flatowner.find({Society_id: req.params.society_id},function(err, result)
+    Flatowner.find({Society_id: req.params.society_id, flatowner_status: true}).sort({_id: -1}).exec(function(err, result)
 {
     Flatowner.populate( result, {path:'Flat_id', populate:[
         { path: 'Chairman_id' , populate:[{ path: 'Manager_id' ,  populate:[{path:'Block_id'}]}] }
@@ -69,9 +72,22 @@ flatowner_router.post('/checkflatowner',(req, res, next)=>
 //add Flat 
 flatowner_router.post('/addflatowner',(req, res, next)=>
 {
-    Flatowner.findOne({ email: req.body.flatowner_email , Flat_id:  req.body.flat_id}, function(err, result){
+    Flatowner.findOne({Flat_id: req.body.flat_id, flatowner_status: true}).update({"$set": {"flatowner_status": false}}).exec(function(err, result){
 
-        if(!result){
+        if(result._id){
+            console.log("1st:-");
+            console.log(result);
+            Tenant.find({Flatowner_id: result._id}).update({"$set": {"tenant_status": false}}).exec(function(err, result){
+                if(result._id){
+                    console.log("2nd:-");
+                    console.log(result);
+                    Flatmember.find({Flatowner_id: result._id}).update({"$set": {"flatmember_status": false}}).exec(function(err, result){
+                    });
+                    Flatmember.find({Tenant_id: result._id}).update({"$set": {"flatmember_status": false}}).exec(function(err, result){
+                    });
+                }
+            });
+        }
              //logic for add Flat Details
     let newFlatowner = new Flatowner(
         {   Superadmin_id: req.body.superadmin_id,
@@ -101,10 +117,6 @@ flatowner_router.post('/addflatowner',(req, res, next)=>
                     res.json({success: true, message: 'Flatowner is added successfully!', result});
                 }
             });
-        }
-        }
-        else{
-            res.json({success: false, message: 'Flatowner is exist!'});
         }
     });
    

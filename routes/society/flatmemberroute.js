@@ -1,3 +1,4 @@
+
 //importing modules
 const express = require('express');
 const flatmember_router = express.Router();
@@ -18,7 +19,7 @@ var bcrypt = require('bcrypt-nodejs');
 //rerieving  Flatmember Details
 flatmember_router.get('/flatmemberlist', (req, res, next)=>
 { 
-    Flatmember.find(function(err, result)
+    Flatmember.find().sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -28,7 +29,7 @@ flatmember_router.get('/flatmemberlist', (req, res, next)=>
 
 flatmember_router.get('/memberlistbytenant/:tenant_id', (req, res, next)=>
 {  
-    Flatmember.find({Tenant_id: req.params.tenant_id },function(err, result)
+    Flatmember.find({Tenant_id: req.params.tenant_id }).sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -38,7 +39,7 @@ flatmember_router.get('/memberlistbytenant/:tenant_id', (req, res, next)=>
 //rerieving  Flatmember Details by tenant id
 flatmember_router.get('/memberlistbyflatowner/:flatowner_id', (req, res, next)=>
 {  
-    Flatmember.find({Flatowner_id: req.params.flatowner_id },function(err, result)
+    Flatmember.find({Flatowner_id: req.params.flatowner_id, Tenant_id: null || undefined }).sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -48,7 +49,7 @@ flatmember_router.get('/memberlistbyflatowner/:flatowner_id', (req, res, next)=>
 flatmember_router.get('/flatmemberlistdetails/:society_id', (req, res, next)=>
 {
 
-    Flatmember.find({Society_id: req.params.society_id},function(err, result)
+    Flatmember.find({Society_id: req.params.society_id}).sort({_id: -1}).exec(function(err, result)
 {
    
     res.json(result);
@@ -56,11 +57,11 @@ flatmember_router.get('/flatmemberlistdetails/:society_id', (req, res, next)=>
 });
 });
 
+
 //add Flatmember 
 flatmember_router.post('/addflatmember',(req, res, next)=>
 {
     Flatmember.findOne({ email: req.body.flatmember_email , Flatowner_id:  req.body.flatowner_id, Tenant_id: req.body.tenant_id}, function(err, result){
-console.log(req.body)
         if(!result){
              //logic for add Flat Details
     let newFlatmember = new Flatmember(
@@ -127,6 +128,40 @@ flatmember_router.put('/updateflatmember/:flatmember_id',(req, res, next)=>
     });
 });
 
+//Update Status
+flatmember_router.put('/updateflatmemberstatus/:flatmember_id',(req, res, next)=>
+{      
+    Flatmember.findByIdAndUpdate(req.params.flatmember_id,
+                {  
+                    $set: 
+                    { 
+                        flatmember_status: req.body.status
+                    }
+                },
+                {
+                    new: true
+                },
+                function(err, result)
+                {
+                    if(err)
+                    {
+                        res.json({success: false, message:"Error updating status in Flat Member list"});
+                    }
+                    else
+                    {
+                        if(req.body.status == false){
+                            res.json({success: true, message:"Flat Member Status is Inactive"});
+
+                        }
+                        else{
+                            res.json({success: true, message:"Flat Member Status is Active"});
+
+                        }
+                    }
+                });
+  
+ 
+});
 
 //delete Flatmember Details
 flatmember_router.delete('/deleteflatmember/:flatmember_id',(req, res, next)=>

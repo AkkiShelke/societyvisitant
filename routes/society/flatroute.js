@@ -28,7 +28,7 @@ flat_router.get('/flatlist', (req, res, next)=>
 flat_router.get('/flatlistdetails/:society_id', (req, res, next)=>
 {
 
-    Flat.find({Society_id: req.params.society_id},function(err, result)
+    Flat.find({Society_id: req.params.society_id}).sort({_id: -1}).exec(function(err, result)
 {
    
     res.json(result);
@@ -39,7 +39,7 @@ flat_router.get('/flatlistdetails/:society_id', (req, res, next)=>
 //Check Flat 
 flat_router.post('/checkflat',(req, res, next)=>
 {
-    Flat.findOne({ flat_no: req.body.flat_no , Chairman_id:  req.body.chairman_id}, function(err, result){
+    Flat.findOne({ flat_no: req.body.flat_no , Chairman_id:  req.body.chairman_id}).sort({_id: -1}).exec( function(err, result){
         if(!result){
             res.json({success: true, });
 

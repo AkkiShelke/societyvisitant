@@ -19,7 +19,7 @@ var bcrypt = require('bcrypt-nodejs');
 //rerieving  Society Details
 society_router.get('/societylist', (req, res, next)=>
 { 
-    Society.find(function(err, result)
+    Society.find().sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -29,7 +29,7 @@ society_router.get('/societylist', (req, res, next)=>
 society_router.get('/societylistdetails', (req, res, next)=>
 {
 
-Society.find().select('_id society_name society_reg email contact status address Pincode_id').exec(function(err, result)
+Society.find().select('_id society_name society_reg email contact status address Pincode_id').sort({_id: -1}).exec(function(err, result)
 {
     Society.populate( result, {path:'Pincode_id', populate:[
         { path: 'country_id' },

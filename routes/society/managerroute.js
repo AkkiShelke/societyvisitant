@@ -19,7 +19,7 @@ var bcrypt = require('bcrypt-nodejs');
 //rerieving  Manager Details
 manager_router.get('/managerlist', (req, res, next)=>
 { 
-    Manager.find(function(err, result)
+    Manager.find().sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -27,7 +27,7 @@ manager_router.get('/managerlist', (req, res, next)=>
 
 manager_router.get('/manager/:manager_id', (req, res, next)=>
 { 
-    Manager.findById({_id: req.params.manager_id},function(err, result)
+    Manager.findById({_id: req.params.manager_id}).sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -37,7 +37,7 @@ manager_router.get('/manager/:manager_id', (req, res, next)=>
 manager_router.get('/managerlistdetails/:society_id', (req, res, next)=>
 {
 
-    Manager.find({Society_id: req.params.society_id}).select('_id Block_id manager_name  email contact').exec(function(err, result)
+    Manager.find({Society_id: req.params.society_id}).select('_id Block_id manager_name  email contact').sort({_id: -1}).exec(function(err, result)
 {
     Manager.populate( result, {path:'Block_id'},function(err, result){
     res.json(result);
@@ -50,7 +50,7 @@ manager_router.get('/managerlistdetails/:society_id', (req, res, next)=>
 manager_router.get('/managerlistbyblock/:block_id', (req, res, next)=>
 {
 
-    Manager.find({Block_id: req.params.block_id}).select('_id Block_id manager_name  email contact').exec(function(err, result)
+    Manager.find({Block_id: req.params.block_id}).select('_id Block_id manager_name  email contact').sort({_id: -1}).exec(function(err, result)
 {
     res.json(result);
 

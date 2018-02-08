@@ -320,7 +320,6 @@ var AddFlatOwnerComponent = (function () {
                         if (_this.tenant_status = true) {
                             var tenant_details = {
                                 society_id: _this.societyadmin.id,
-                                flat_id: _this.flatresponse.result._id,
                                 flatowner_id: _this.flatownerresponse.result._id,
                                 tenant_name: _this.tenant_name,
                                 tenant_email: _this.tenant_email,
@@ -337,7 +336,6 @@ var AddFlatOwnerComponent = (function () {
                                         console.log(_this.row[i]);
                                         var member_details = {
                                             society_id: _this.societyadmin.id,
-                                            flatowner_id: _this.flatownerresponse.result._id,
                                             tenant_id: _this.tenantresponse.result._id,
                                             flatmember_name: _this.row[i].name,
                                             flatmember_email: _this.row[i].email,

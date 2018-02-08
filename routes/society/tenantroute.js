@@ -18,7 +18,7 @@ var bcrypt = require('bcrypt-nodejs');
 //rerieving  Tenant Details
 tenant_router.get('/tenantlist', (req, res, next)=>
 { 
-    Tenant.find(function(err, result)
+    Tenant.find().sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -28,7 +28,7 @@ tenant_router.get('/tenantlist', (req, res, next)=>
 tenant_router.get('/tenantlistdetails/:society_id', (req, res, next)=>
 {
 
-    Tenant.find({Society_id: req.params.society_id},function(err, result)
+    Tenant.find({Society_id: req.params.society_id}).sort({_id: -1}).exec(function(err, result)
 {
    
     res.json(result);
@@ -40,7 +40,7 @@ tenant_router.get('/tenantlistdetails/:society_id', (req, res, next)=>
 tenant_router.get('/tanentlistbyflatowner/:flatowner_id', (req, res, next)=>
 {
 
-    Tenant.find({Flatowner_id: req.params.flatowner_id},function(err, result)
+    Tenant.find({Flatowner_id: req.params.flatowner_id}).sort({_id: -1}).exec(function(err, result)
     {
    
     res.json(result);
@@ -48,14 +48,31 @@ tenant_router.get('/tanentlistbyflatowner/:flatowner_id', (req, res, next)=>
     });
 });
 
-// Get the Active Tenant relational data by Flatowner
+// Get the Inctive Tenant relational data by Flatowner
 tenant_router.get('/activetanentbyflatowner/:flatowner_id', (req, res, next)=>
 {
 
     Tenant.findOne({Flatowner_id: req.params.flatowner_id, tenant_status: true },function(err, result)
     {
-   
+  
     res.json(result);
+
+    });
+});
+
+// Get the Inctive Tenant relational data by Flatowner
+tenant_router.get('/inactivetanentbyflatowner/:flatowner_id', (req, res, next)=>
+{
+    Tenant.find({Flatowner_id: req.params.flatowner_id, tenant_status: true }).sort({_id: -1}).exec(function(err, result)
+    {
+        if(result.length >0){
+            res.json({success: false, result});
+
+        }
+        else{
+            res.json({success: true , result});
+
+        }
 
     });
 });
@@ -91,7 +108,7 @@ tenant_router.post('/addtenant',(req, res, next)=>
             {
                 if(err)
                 {
-                    res.json({success: false, message: ' Tenant Email is exist ' + err});
+                    res.json({success: false, message: ' Tenant Email is exist '});
                 }
                 else
                 { 
@@ -136,29 +153,67 @@ tenant_router.put('/updatetenant/:tenant_id',(req, res, next)=>
 });
 
 //Update Status
-tenant_router.put('/updatetenantstatus/:tenant_id',(req, res, next)=>
+tenant_router.put('/updatetenantstatus/:flatowner_id',(req, res, next)=>
 {      
-    Tenant.findByIdAndUpdate(req.params.tenant_id,
-    {  
-        $set: 
-        { 
-            tenant_status: req.body.status
-        }
-    },
+    Tenant.find({Flatowner_id: req.params.flatowner_id, tenant_status: true },function(err, result)
     {
-        new: true
-    },
-    function(err, result)
-    {
-        if(err)
-        {
-            res.send("Error updating status in Tenant list");
+        if( result.length == 0) {
+            Tenant.findByIdAndUpdate(req.body.tenant_id,
+                {  
+                    $set: 
+                    { 
+                        tenant_status: req.body.status
+                    }
+                },
+                {
+                    new: true
+                },
+                function(err, result)
+                {
+                    if(err)
+                    {
+                        res.json({success: false, message:"Error updating status in Tenant list"});
+                    }
+                    else
+                    {
+                        res.json({success: true, message:"Tenant Status is Active"});
+                    }
+                });
         }
-        else
-        {
-            res.json(result);
+        
+        else{
+            if(req.body.status == false){
+                Tenant.findByIdAndUpdate(req.body.tenant_id,
+                    {  
+                        $set: 
+                        { 
+                            tenant_status: req.body.status
+                        }
+                    },
+                    {
+                        new: true
+                    },
+                    function(err, result)
+                    {
+                        if(err)
+                        {
+                            res.json({success: false, message:"Error updating status in Tenant list"});
+                        }
+                        else
+                        {
+                            res.json({success: true, message:"Tenant Status is Inactive"});
+                        }
+                    });
+
+            }else{
+                res.json({success: false ,message: 'Inactive other Tenant to Active this Tenant', result});
+
+            }
+
         }
+
     });
+ 
 });
 
 //delete Flatowner Details

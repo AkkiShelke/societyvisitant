@@ -27,7 +27,7 @@ const FlatmemberSchema = Schema({
         type:Number,
         unique: true
      },
-     faltmember_status:{
+     flatmember_status:{
         type: Boolean,
         default: true
      }

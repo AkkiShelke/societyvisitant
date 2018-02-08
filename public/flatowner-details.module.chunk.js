@@ -42,7 +42,7 @@ var FlatownerDetailsRoutingModule = (function () {
 /***/ "../../../../../src/app/layout/flatowner-details/flatowner-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<toaster-container></toaster-container>\n\n<div [@routerTransition] class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-xl-12\">\n            <ol class=\"breadcrumb\">\n                <li class=\"breadcrumb-item\">\n                    <i class=\"fa fa-dashboard\"></i> <a href=\"Javascript:void(0)\" [routerLink]=\"['/dashboard']\">Dashboard</a>\n                </li>\n    \n                <li class=\"breadcrumb-item active\"><i class=\"fa fa-list-ol\"></i> Flat Details</li>\n            </ol>\n        </div>\n    </div>\n<div class=\" row\">\n\n  <div class=\"col-md-12\">\n    <mat-card class=\"example-card\">\n        <div class=\"pull-right\"><button class=\" btn btn-warning buttoncolor \" (click)=\"openFlatOwnerEditDialog();\"  style=\"color:white;\" mat-button><i class=\"fa fa-edit \" ></i> Edit</button>\n          <button class=\" btn btn-warning buttoncolor\"  style=\"color:white;\" mat-button><i class=\"fa fa-plus \" ></i> Flat Owner</button>\n          <button *ngIf=\"!tenantexists\" class=\" btn btn-warning buttoncolor\"  style=\"color:white;\" mat-button><i class=\"fa fa-plus \" ></i> Tenant</button>\n          <button *ngIf=\"!memberexists\" class=\" btn btn-warning buttoncolor\"  style=\"color:white;\" mat-button><i class=\"fa fa-plus \" ></i> Member</button>\n\n\n        </div> \n      <mat-card-header>\n        <div mat-card-avatar class=\"example-header-image\"></div>\n        <mat-card-title>Flat Details        \n        </mat-card-title>\n        <mat-card-subtitle>Flatowner details</mat-card-subtitle>\n       \n\n      </mat-card-header>\n      <mat-card-content>\n        <div class=\"row\">\n          <div class=\"col-md-1\">\n\n          </div>\n          <div class=\"col-md-5\">\n              <label>Flat NO: </label> {{flatownerdetails.Flat_id.flat_no}}<br>\n              <label>Flat-Owner Name: </label> {{flatownerdetails.flatowner_name}}<br>\n              <label>Contact:</label> {{flatownerdetails.contact}}<br>\n            </div>\n            <div class=\"col-md-5\">\n                <label>Floor NO: </label> {{flatownerdetails.Flat_id.floor_no}}<br>\n                <label>Email Id:</label> {{flatownerdetails.email}}<br>\n              </div>\n        </div>\n\n          \n\n      </mat-card-content>\n\n      \n    </mat-card>\n  </div>\n</div>\n<br>\n<div class=\"row\">\n\n\n\n\n      <div class=\"col-md-6\" *ngIf=\"tenantexists\">\n          <mat-card class=\"example-card\">\n              <button class=\" btn btn-warning buttoncolor pull-right\"  style=\"color:white;\" mat-button><i class=\"fa fa-plus \" ></i>  Tenant</button>\n\n          <mat-card-header>\n\n              <div mat-card-avatar class=\"example-header-image\"></div>\n              <mat-card-title>Tenant Details        \n                </mat-card-title>\n                </mat-card-header>\n                </mat-card>\n                  <div class=\"example-container mat-elevation-z8\">\n  \n                      <mat-table [dataSource]=\"tenant_dataSource\" matSort>\n                              <!-- Checkbox Column -->\n                      <ng-container matColumnDef=\"select\" >\n                          <mat-header-cell *matHeaderCellDef >\n                            <mat-checkbox matTooltip=\"Select All Rows!\" matTooltipPosition=\"above\"  (change)=\"$event ? tenant_masterToggle() : null\"\n                                          [checked]=\"tenant_selection.hasValue() && tenant_isAllSelected()\"\n                                          [indeterminate]=\"tenant_selection.hasValue() && !tenant_isAllSelected()\">\n                            </mat-checkbox>\n                          </mat-header-cell>\n                          <mat-cell *matCellDef=\"let row\">\n                            <mat-checkbox matTooltip=\"Select This Row!\" matTooltipPosition=\"above\"  (click)=\"$event.stopPropagation()\"\n                                          (change)=\"$event ? tenant_selection.toggle(row) : null\"\n                                          [checked]=\"tenant_selection.isSelected(row)\">\n                            </mat-checkbox>\n                          </mat-cell>\n                        </ng-container>\n                    \n\n                    \n                        <!-- Name Column -->\n                        <ng-container matColumnDef=\"name\">\n                          <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n                          <mat-cell *matCellDef=\"let row\"> {{row.tenant_name}} </mat-cell>\n                        </ng-container>\n                    \n                          <!-- Email Column -->\n                          <ng-container matColumnDef=\"email\">\n                          <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>\n                          <mat-cell *matCellDef=\"let row\" [style.color]=\"row.email\"> {{row.email}} </mat-cell>\n                          </ng-container>\n                  \n                          <!-- Contact Column -->\n                        <ng-container matColumnDef=\"contact\">\n                          <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Contact </mat-header-cell>\n                          <mat-cell *matCellDef=\"let row\" [style.color]=\"row.contact\"> {{row.contact}} </mat-cell>\n                        </ng-container>\n\n                        <!-- Status Column -->\n  \n                        <ng-container matColumnDef=\"tenant_status\">\n                            <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Status </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\" >\n                              \n                                              \n                                <mat-slide-toggle checked={{row.tenant_status}} (click)=\"changeStatus(row.tenant_status,row._id)\" color=\"primary\" matTooltip=\"change the status!\" matTooltipPosition=\"above\"></mat-slide-toggle>\n                            \n                            </mat-cell>\n                            </ng-container>\n                  \n                          <!-- Actions Column -->\n                          <ng-container matColumnDef=\"actions\">\n                          <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>\n                          <mat-cell *matCellDef=\"let row\" [style.color]=\"row.details\"><button class=\"btn btn-parimary\" (click)=\"openTenantEditDialog(row)\"><i class=\"fa fa-pencil\"></i> Edit</button>\n                          </mat-cell>\n                          </ng-container>\n                    \n                        <mat-header-row class=\"headertext\" *matHeaderRowDef=\"tenant_displayedColumns\"></mat-header-row>\n                        <mat-row *matRowDef=\"let row; columns: tenant_displayedColumns;\">\n                        </mat-row>\n                      </mat-table>\n                    \n                      <!-- <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator> -->\n                    </div>\n\n        </div>\n        <div class=\"col-md-6\" *ngIf=\"memberexists\">\n            <mat-card class=\"example-card\">\n                <button class=\" btn btn-warning buttoncolor pull-right\"  style=\"color:white;\" mat-button><i class=\"fa fa-plus \" ></i>  Menber</button>\n  \n            <mat-card-header>\n  \n                <div mat-card-avatar class=\"example-header-image\"></div>\n                <mat-card-title>Member Details        \n                  </mat-card-title>\n                  </mat-card-header>\n                  </mat-card>\n                    <div class=\"example-container mat-elevation-z8\">\n    \n                        <mat-table [dataSource]=\"member_dataSource\" matSort>\n                                <!-- Checkbox Column -->\n                        <ng-container matColumnDef=\"select\" >\n                            <mat-header-cell *matHeaderCellDef >\n                              <mat-checkbox matTooltip=\"Select All Rows!\" matTooltipPosition=\"above\"  (change)=\"$event ? member_masterToggle() : null\"\n                                            [checked]=\"member_selection.hasValue() && member_isAllSelected()\"\n                                            [indeterminate]=\"member_selection.hasValue() && !member_isAllSelected()\">\n                              </mat-checkbox>\n                            </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\">\n                              <mat-checkbox matTooltip=\"Select This Row!\" matTooltipPosition=\"above\"  (click)=\"$event.stopPropagation()\"\n                                            (change)=\"$event ? member_selection.toggle(row) : null\"\n                                            [checked]=\"member_selection.isSelected(row)\">\n                              </mat-checkbox>\n                            </mat-cell>\n                          </ng-container>\n                      \n  \n                      \n                          <!-- Name Column -->\n                          <ng-container matColumnDef=\"name\">\n                            <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\"> {{row.flatmember_name}} </mat-cell>\n                          </ng-container>\n                      \n                            <!-- Email Column -->\n                            <ng-container matColumnDef=\"email\">\n                            <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\" [style.color]=\"row.email\"> {{row.email}} </mat-cell>\n                            </ng-container>\n                    \n                            <!-- Contact Column -->\n                          <ng-container matColumnDef=\"contact\">\n                            <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Contact </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\" [style.color]=\"row.contact\"> {{row.contact}} </mat-cell>\n                          </ng-container>\n  \n                          <!-- Status Column -->\n    \n                          <ng-container matColumnDef=\"member_status\">\n                              <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Status </mat-header-cell>\n                              <mat-cell *matCellDef=\"let row\" >\n                                \n                                                \n                                  <mat-slide-toggle checked={{row.flatmember_status}} (click)=\"changeStatus(row.flatmember_status,row._id)\" color=\"primary\" matTooltip=\"change the status!\" matTooltipPosition=\"above\"></mat-slide-toggle>\n                              \n                              </mat-cell>\n                              </ng-container>\n                    \n                            <!-- Actions Column -->\n                            <ng-container matColumnDef=\"actions\">\n                            <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\" [style.color]=\"row.details\"><button class=\"btn btn-parimary\" (click)=\"openMemberEditDialog(row)\"><i class=\"fa fa-pencil\"></i> Edit</button>\n                            </mat-cell>\n                            </ng-container>\n                      \n                          <mat-header-row class=\"headertext\" *matHeaderRowDef=\"member_displayedColumns\"></mat-header-row>\n                          <mat-row *matRowDef=\"let row; columns: member_displayedColumns;\">\n                          </mat-row>\n                        </mat-table>\n                      \n                        <!-- <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator> -->\n                      </div>\n  \n          </div>\n\n\n\n</div>"
+module.exports = "<toaster-container></toaster-container>\n\n<div [@routerTransition] class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-xl-12\">\n            <ol class=\"breadcrumb\">\n                <li class=\"breadcrumb-item\">\n                    <i class=\"fa fa-dashboard\"></i> <a href=\"Javascript:void(0)\" [routerLink]=\"['/dashboard']\">Dashboard</a>\n                </li>\n    \n                <li class=\"breadcrumb-item active\"><i class=\"fa fa-list-ol\"></i> Flat Details</li>\n            </ol>\n        </div>\n    </div>\n<div class=\" row\">\n\n  <div class=\"col-md-12\">\n    <mat-card class=\"example-card\">\n        <div class=\"pull-right\"><button class=\" btn btn-warning buttoncolor \" (click)=\"openFlatOwnerEditDialog();\"  style=\"color:white;\" mat-button><i class=\"fa fa-edit \" ></i> Edit</button>\n          <button class=\" btn btn-success buttoncolor\" (click)=\"openNewFlatownerDialog()\" style=\"color:white;\" mat-button><i class=\"fa fa-plus \" ></i> Flat Owner</button>\n          <button *ngIf=\"!tenantexists\" class=\" btn btn-success buttoncolor\" (click)=\"openNewTenantDialog()\" style=\"color:white;\" mat-button><i class=\"fa fa-plus \" ></i> Tenant</button>\n          <button *ngIf=\"!memberexists\" class=\" btn btn-success buttoncolor\" (click)=\"openNewMemberDialog()\" style=\"color:white;\" mat-button><i class=\"fa fa-plus \" ></i> Member</button>\n\n\n        </div> \n      <mat-card-header>\n        <div mat-card-avatar class=\"example-header-image\"></div>\n        <mat-card-title>Flat Details        \n        </mat-card-title>\n        <mat-card-subtitle>Flatowner details</mat-card-subtitle>\n       \n\n      </mat-card-header>\n      <mat-card-content>\n        <div class=\"row\">\n          <div class=\"col-md-1\">\n\n          </div>\n          <div class=\"col-md-5\">\n              <label>Flat NO: </label> {{flat_no}}<br>\n              <label>Flat-Owner Name: </label> {{flatowner_name}}<br>\n              <label>Contact:</label> {{flatowner_contact}}<br>\n            </div>\n            <div class=\"col-md-5\">\n                <label>Floor NO: </label> {{floor_no}}<br>\n                <label>Email Id:</label> {{flatowner_email}}<br>\n              </div>\n        </div>\n\n          \n\n      </mat-card-content>\n\n      \n    </mat-card>\n  </div>\n</div>\n<br>\n<div class=\"row\">\n\n\n \n\n      <div class=\"col-md-6\" *ngIf=\"tenantexists\">\n          <mat-card class=\"example-card\">\n              <button class=\" btn btn-success buttoncolor pull-right\" [disabled]=\"!activeNewTenant\" matTooltip=\"Disable All Tenant to Add Tenant!\" matTooltipPosition=\"above\" (click)=\"openNewTenantDialog()\"  style=\"color:white;\" mat-button><i class=\"fa fa-plus \" ></i>  Tenant</button>\n\n          <mat-card-header>\n\n              <div mat-card-avatar class=\"example-header-image\"></div>\n              <mat-card-title>Tenant Details        \n                </mat-card-title>\n                </mat-card-header>\n                </mat-card>\n                  <div class=\"example-container mat-elevation-z8\">\n  \n                      <mat-table [dataSource]=\"tenant_dataSource\" matSort>\n                              <!-- Checkbox Column -->\n                      <ng-container matColumnDef=\"select\" >\n                          <mat-header-cell *matHeaderCellDef >\n                            <mat-checkbox matTooltip=\"Select All Rows!\" matTooltipPosition=\"above\"  (change)=\"$event ? tenant_masterToggle() : null\"\n                                          [checked]=\"tenant_selection.hasValue() && tenant_isAllSelected()\"\n                                          [indeterminate]=\"tenant_selection.hasValue() && !tenant_isAllSelected()\">\n                            </mat-checkbox>\n                          </mat-header-cell>\n                          <mat-cell *matCellDef=\"let row\">\n                            <mat-checkbox matTooltip=\"Select This Row!\" matTooltipPosition=\"above\"  (click)=\"$event.stopPropagation()\"\n                                          (change)=\"$event ? tenant_selection.toggle(row) : null\"\n                                          [checked]=\"tenant_selection.isSelected(row)\">\n                            </mat-checkbox>\n                          </mat-cell>\n                        </ng-container>\n                    \n\n                    \n                        <!-- Name Column -->\n                        <ng-container matColumnDef=\"name\">\n                          <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n                          <mat-cell *matCellDef=\"let row\"> {{row.tenant_name}} </mat-cell>\n                        </ng-container>\n                    \n                          <!-- Email Column -->\n                          <ng-container matColumnDef=\"email\">\n                          <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>\n                          <mat-cell *matCellDef=\"let row\" [style.color]=\"row.email\"> {{row.email}} </mat-cell>\n                          </ng-container>\n                  \n                          <!-- Contact Column -->\n                        <ng-container matColumnDef=\"contact\">\n                          <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Contact </mat-header-cell>\n                          <mat-cell *matCellDef=\"let row\" [style.color]=\"row.contact\"> {{row.contact}} </mat-cell>\n                        </ng-container>\n\n                        <!-- Status Column -->\n  \n                        <ng-container matColumnDef=\"tenant_status\">\n                            <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Status </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\" >\n                              \n                                              \n                                <mat-slide-toggle checked={{row.tenant_status}} (click)=\"changeTenantStatus(row.tenant_status,row._id)\" color=\"primary\" matTooltip=\"change the status!\" matTooltipPosition=\"above\"></mat-slide-toggle>\n                            \n                            </mat-cell>\n                            </ng-container>\n                  \n                          <!-- Actions Column -->\n                          <ng-container matColumnDef=\"actions\">\n                          <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>\n                          <mat-cell *matCellDef=\"let row\" [style.color]=\"row.details\"><button class=\"btn btn-parimary\" (click)=\"openTenantEditDialog(row)\"><i class=\"fa fa-pencil\"></i> Edit</button>\n                          </mat-cell>\n                          </ng-container>\n                    \n                        <mat-header-row class=\"headertext\" *matHeaderRowDef=\"tenant_displayedColumns\"></mat-header-row>\n                        <mat-row *matRowDef=\"let row; columns: tenant_displayedColumns;\">\n                        </mat-row>\n                      </mat-table>\n                    \n                      <!-- <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator> -->\n                    </div>\n\n        </div>\n        <div class=\"col-md-6\" *ngIf=\"memberexists\">\n            <mat-card class=\"example-card\">\n                <button class=\" btn btn-success buttoncolor pull-right\" (click)=\"openNewMemberDialog()\" style=\"color:white;\" mat-button><i class=\"fa fa-plus \" ></i>  Member</button>\n  \n            <mat-card-header>\n  \n                <div mat-card-avatar class=\"example-header-image\"></div>\n                <mat-card-title>Member Details        \n                  </mat-card-title>\n                  </mat-card-header>\n                  </mat-card>\n                    <div class=\"example-container mat-elevation-z8\">\n    \n                        <mat-table [dataSource]=\"member_dataSource\" matSort>\n                                <!-- Checkbox Column -->\n                        <ng-container matColumnDef=\"select\" >\n                            <mat-header-cell *matHeaderCellDef >\n                              <mat-checkbox matTooltip=\"Select All Rows!\" matTooltipPosition=\"above\"  (change)=\"$event ? member_masterToggle() : null\"\n                                            [checked]=\"member_selection.hasValue() && member_isAllSelected()\"\n                                            [indeterminate]=\"member_selection.hasValue() && !member_isAllSelected()\">\n                              </mat-checkbox>\n                            </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\">\n                              <mat-checkbox matTooltip=\"Select This Row!\" matTooltipPosition=\"above\"  (click)=\"$event.stopPropagation()\"\n                                            (change)=\"$event ? member_selection.toggle(row) : null\"\n                                            [checked]=\"member_selection.isSelected(row)\">\n                              </mat-checkbox>\n                            </mat-cell>\n                          </ng-container>\n                      \n  \n                      \n                          <!-- Name Column -->\n                          <ng-container matColumnDef=\"name\">\n                            <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\"> {{row.flatmember_name}} </mat-cell>\n                          </ng-container>\n                      \n                            <!-- Email Column -->\n                            <ng-container matColumnDef=\"email\">\n                            <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\" [style.color]=\"row.email\"> {{row.email}} </mat-cell>\n                            </ng-container>\n                    \n                            <!-- Contact Column -->\n                          <ng-container matColumnDef=\"contact\">\n                            <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Contact </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\" [style.color]=\"row.contact\"> {{row.contact}} </mat-cell>\n                          </ng-container>\n  \n                          <!-- Status Column -->\n    \n                          <ng-container matColumnDef=\"member_status\">\n                              <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Status </mat-header-cell>\n                              <mat-cell *matCellDef=\"let row\" >\n                                \n                                                \n                                  <mat-slide-toggle checked={{row.flatmember_status}} (click)=\"changeMemberStatus(row.flatmember_status,row._id)\" color=\"primary\" matTooltip=\"change the status!\" matTooltipPosition=\"above\"></mat-slide-toggle>\n                              \n                              </mat-cell>\n                              </ng-container>\n                    \n                            <!-- Actions Column -->\n                            <ng-container matColumnDef=\"actions\">\n                            <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>\n                            <mat-cell *matCellDef=\"let row\" [style.color]=\"row.details\"><button class=\"btn btn-parimary\" (click)=\"openMemberEditDialog(row)\"><i class=\"fa fa-pencil\"></i> Edit</button>\n                            </mat-cell>\n                            </ng-container>\n                      \n                          <mat-header-row class=\"headertext\" *matHeaderRowDef=\"member_displayedColumns\"></mat-header-row>\n                          <mat-row *matRowDef=\"let row; columns: member_displayedColumns;\">\n                          </mat-row>\n                        </mat-table>\n                      \n                        <!-- <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator> -->\n                      </div>\n  \n          </div>\n\n\n\n</div>"
 
 /***/ }),
 
@@ -71,8 +71,11 @@ module.exports = module.exports.toString();
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FlatownerDetailsComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FlatownerEditDialogComponent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return TenantEditDialogComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return TenantEditDialogComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return MemberEditDialogComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return NewFlatOwnerDialogComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return NewTenantDialogComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return NewMemberDialogComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_animations__ = __webpack_require__("../../../../../src/app/router.animations.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
@@ -113,14 +116,32 @@ var FlatownerDetailsComponent = (function () {
         //Member table
         this.member_displayedColumns = ['select', 'name', 'email', 'contact', 'member_status', 'actions'];
         this.member_selection = new __WEBPACK_IMPORTED_MODULE_4__angular_cdk_collections__["a" /* SelectionModel */](true, []);
+        this.activeNewTenant = false;
         this.tenantexists = false;
         this.memberexists = false;
+        this.flatmember_owner_id = this.flatowner._id;
         this.getFlatownerData();
         this.toasterService = toasterService;
-        this.getTenantData();
-        this.getFlatmemberData();
+        this.checkInactivetenant();
     }
     FlatownerDetailsComponent.prototype.ngOnInit = function () {
+    };
+    FlatownerDetailsComponent.prototype.getFlatownerData = function () {
+        var _this = this;
+        this.http.get('api/flatowner/' + this.flatowner.Flat_id._id).subscribe(function (data) {
+            if (data) {
+                _this.flatownerdetails = data;
+                console.log(_this.flatownerdetails);
+                localStorage.setItem('flatowner', JSON.stringify(_this.flatownerdetails));
+                _this.flat_no = _this.flatownerdetails.Flat_id.flat_no;
+                _this.floor_no = _this.flatownerdetails.Flat_id.floor_no;
+                _this.flatowner_name = _this.flatownerdetails.flatowner_name;
+                _this.flatowner_email = _this.flatownerdetails.email;
+                _this.flatowner_contact = _this.flatownerdetails.contact;
+                _this.getTenantData();
+                _this.getFlatmemberData();
+            }
+        });
     };
     FlatownerDetailsComponent.prototype.getTenantData = function () {
         var _this = this;
@@ -135,32 +156,104 @@ var FlatownerDetailsComponent = (function () {
             }
         });
     };
-    FlatownerDetailsComponent.prototype.changeStatus = function (tenant, id) {
+    FlatownerDetailsComponent.prototype.checkInactivetenant = function () {
+        var _this = this;
+        this.http.get('api/inactivetanentbyflatowner/' + this.flatowner._id).subscribe(function (data) {
+            var response = data;
+            if (response.success == true) {
+                _this.activeNewTenant = true;
+            }
+            else {
+                _this.activeNewTenant = false;
+            }
+            console.log(_this.activeNewTenant);
+        });
+    };
+    FlatownerDetailsComponent.prototype.checkInactiveMember = function () {
+        var _this = this;
+        this.http.get('api/inactivetanentbyflatowner/' + this.flatowner._id).subscribe(function (data) {
+            var response = data;
+            if (response.success == true) {
+                _this.activeNewTenant = true;
+            }
+            else {
+                _this.activeNewTenant = false;
+            }
+            console.log(_this.activeNewTenant);
+        });
+    };
+    FlatownerDetailsComponent.prototype.changeTenantStatus = function (tenant, id) {
+        var _this = this;
         tenant = !tenant;
         var tenant_details = {
+            tenant_id: id,
             status: tenant
         };
         console.log(tenant_details);
-        this.http.put('api/updatetenantstatus/' + id, tenant_details).subscribe(function (data) {
+        this.http.put('api/updatetenantstatus/' + this.flatowner._id, tenant_details).subscribe(function (data) {
+            var response = data;
+            if (response.success == true) {
+                _this.toasterService.pop('success', response.message);
+            }
+            else {
+                _this.toasterService.pop('error', response.message);
+            }
+        });
+        this.http.get('api/inactivetanentbyflatowner/' + this.flatowner._id).subscribe(function (data) {
+            var response = data;
             console.log(data);
+            if (response.success == true) {
+                _this.activeNewTenant = true;
+                _this.toasterService.pop('Info', " Now Flat Owner Will handle Account");
+            }
+            else {
+                _this.activeNewTenant = false;
+            }
         });
         this.getTenantData();
+        this.getFlatmemberData();
+    };
+    FlatownerDetailsComponent.prototype.changeMemberStatus = function (member, id) {
+        var _this = this;
+        console.log(member, id);
+        member = !member;
+        var member_details = {
+            status: member
+        };
+        console.log(member_details);
+        this.http.put('api/updateflatmemberstatus/' + id, member_details).subscribe(function (data) {
+            var response = data;
+            console.log(data);
+            if (response.success == true) {
+                _this.activeNewTenant = true;
+                _this.toasterService.pop('success', response.message);
+            }
+            else {
+                _this.toasterService.pop('error', response.message);
+            }
+        });
+        this.getFlatmemberData();
     };
     FlatownerDetailsComponent.prototype.getFlatmemberData = function () {
         var _this = this;
+        console.log("flat member method is get called");
         this.http.get('api/activetanentbyflatowner/' + this.flatowner._id).subscribe(function (data) {
-            _this.active_tenant = data;
-            if (_this.tenant.length > 0) {
+            console.log(data);
+            if (data) {
+                _this.active_tenant = data;
                 _this.tenant_id = _this.active_tenant._id;
+                _this.flatmember_owner_id = _this.active_tenant._id;
                 console.log(_this.active_tenant);
                 _this.http.get('api/memberlistbytenant/' + _this.tenant_id).subscribe(function (data) {
                     _this.member = data;
-                    console.log(_this.member);
                     if (_this.member.length > 0) {
                         _this.memberexists = true;
                         _this.member_dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
                         _this.member_dataSource.paginator = _this.paginator;
                         _this.member_dataSource.sort = _this.sort;
+                    }
+                    else {
+                        _this.memberexists = false;
                     }
                 });
             }
@@ -168,11 +261,13 @@ var FlatownerDetailsComponent = (function () {
                 _this.http.get('api/memberlistbyflatowner/' + _this.flatowner._id).subscribe(function (data) {
                     _this.member = data;
                     if (_this.member.length > 0) {
-                        console.log(_this.member);
                         _this.memberexists = true;
                         _this.member_dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
                         _this.member_dataSource.paginator = _this.paginator;
                         _this.member_dataSource.sort = _this.sort;
+                    }
+                    else {
+                        _this.memberexists = false;
                     }
                 });
             }
@@ -216,6 +311,103 @@ var FlatownerDetailsComponent = (function () {
             this.member_selection.clear() :
             this.member_dataSource.data.forEach(function (row) { return _this.member_selection.select(row); });
     };
+    //Add new Fllat Owner data Dialog box
+    FlatownerDetailsComponent.prototype.openNewFlatownerDialog = function () {
+        var _this = this;
+        var flat_id = this.flatowner.Flat_id._id;
+        console.log(flat_id);
+        var dialogRef = this.dialog.open(NewFlatOwnerDialogComponent, {
+            height: '340px',
+            width: '630px',
+            data: { flat_id: flat_id }
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            console.log('The dialog was closed');
+            console.log(result);
+            if (result == null || result == '') {
+            }
+            else {
+                //Register Block
+                _this.http.post('api/addflatowner', result).subscribe(function (data) {
+                    _this.response = data;
+                    if (_this.response.success == true) {
+                        _this.toasterService.pop('success', _this.response.message);
+                        _this.getFlatownerData();
+                        _this.getTenantData();
+                        _this.getFlatmemberData();
+                    }
+                    else {
+                        _this.toasterService.pop('error', _this.response.message);
+                    }
+                });
+                _this.checkInactivetenant();
+            }
+        });
+    };
+    //Add new data Dialog box
+    FlatownerDetailsComponent.prototype.openNewTenantDialog = function () {
+        var _this = this;
+        var flatowner_id = this.flatowner._id;
+        var dialogRef = this.dialog.open(NewTenantDialogComponent, {
+            height: '340px',
+            width: '630px',
+            data: { flatowner_id: flatowner_id }
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            console.log('The dialog was closed');
+            console.log(result);
+            if (result == null || result == '') {
+            }
+            else {
+                //Register Block
+                _this.http.post('api/addtenant', result).subscribe(function (data) {
+                    _this.response = data;
+                    if (_this.response.success == true) {
+                        _this.toasterService.pop('success', _this.response.message);
+                        _this.getTenantData();
+                        _this.getFlatmemberData();
+                    }
+                    else {
+                        _this.toasterService.pop('error', _this.response.message);
+                    }
+                });
+                _this.checkInactivetenant();
+            }
+        });
+    };
+    //Add new FlatMember data Dialog box
+    FlatownerDetailsComponent.prototype.openNewMemberDialog = function () {
+        var _this = this;
+        var parent_id = this.flatmember_owner_id;
+        var tenantisexitsts = this.tenantexists;
+        console.log(parent_id, tenantisexitsts);
+        var dialogRef = this.dialog.open(NewMemberDialogComponent, {
+            height: '250px',
+            width: '630px',
+            data: { parent_id: parent_id, tenantisexitsts: tenantisexitsts }
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            console.log('The dialog was closed');
+            console.log(result);
+            if (result == null || result == '') {
+            }
+            else {
+                //Register Block
+                _this.http.post('api/addflatmember', result).subscribe(function (data) {
+                    _this.response = data;
+                    if (_this.response.success == true) {
+                        _this.toasterService.pop('success', _this.response.message);
+                        _this.getFlatmemberData();
+                    }
+                    else {
+                        _this.toasterService.pop('error', _this.response.message);
+                    }
+                });
+                _this.checkInactivetenant();
+            }
+        });
+    };
+    // Edit Dialog Box
     FlatownerDetailsComponent.prototype.openFlatOwnerEditDialog = function () {
         var _this = this;
         var flatowner_id = this.flatowner._id;
@@ -263,13 +455,6 @@ var FlatownerDetailsComponent = (function () {
             }
             else {
             }
-        });
-    };
-    FlatownerDetailsComponent.prototype.getFlatownerData = function () {
-        var _this = this;
-        this.http.get('api/flatowner/' + this.flatowner._id).subscribe(function (data) {
-            _this.flatownerdetails = data;
-            console.log(_this.flatownerdetails);
         });
     };
     __decorate([
@@ -524,6 +709,253 @@ var MemberEditDialogComponent = (function () {
     var _a;
 }());
 
+// Add new Flat Owner Dialog Box Component
+var NewFlatOwnerDialogComponent = (function () {
+    function NewFlatOwnerDialogComponent(http, _formBuilder, dialogRef, data) {
+        this.http = http;
+        this._formBuilder = _formBuilder;
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.societyadmin = JSON.parse(localStorage['societyadmin']);
+        this.firstFormGroup = this._formBuilder.group({
+            nameCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
+            emailCtrl: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].email]],
+            contactCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
+            passwordCtrl: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].minLength(6), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].maxLength(12)]],
+            confirmpasswordCtrl: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].pattern]]
+        });
+    }
+    NewFlatOwnerDialogComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(NewFlatOwnerDialogComponent.prototype, "nameCtrl", {
+        get: function () { return this.firstFormGroup.get('nameCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewFlatOwnerDialogComponent.prototype, "emailCtrl", {
+        get: function () { return this.firstFormGroup.get('emailCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewFlatOwnerDialogComponent.prototype, "contactCtrl", {
+        get: function () { return this.firstFormGroup.get('contactCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewFlatOwnerDialogComponent.prototype, "passwordCtrl", {
+        get: function () { return this.firstFormGroup.get('passwordCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewFlatOwnerDialogComponent.prototype, "confirmpasswordCtrl", {
+        get: function () { return this.firstFormGroup.get('confirmpasswordCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    //Only String (Name)
+    NewFlatOwnerDialogComponent.prototype.StringPress = function (event) {
+        var pattern = /[a-z\+\A-Z\+\-\ ]/;
+        var inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+            event.preventDefault();
+        }
+    };
+    //Contact Validation
+    NewFlatOwnerDialogComponent.prototype.NumPress = function (event) {
+        var pattern = /[0-9\+\-\ ]/;
+        var inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+            event.preventDefault();
+        }
+    };
+    NewFlatOwnerDialogComponent.prototype.onSubmitClick = function () {
+        console.log(this.data.flat_id);
+        var flatownerdata = {
+            society_id: this.societyadmin.id,
+            flat_id: this.data.flat_id,
+            flatowner_name: this.flatowner_name,
+            flatowner_email: this.email,
+            flatowner_contact: this.contact,
+            flatowner_password: this.confirm_password
+        };
+        this.dialogRef.close(flatownerdata);
+    };
+    NewFlatOwnerDialogComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: "\n  <div matDialogTitle>Flat Owner Registration</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n       \n        <mat-form-field>\n          <input matInput [(ngModel)]=\"flatowner_name\" placeholder=\"Flat Owner Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>\n\n        <mat-form-field>\n            <input matInput [(ngModel)]=\"email\" placeholder=\"Email\" formControlName=\"emailCtrl\" required>\n            <div *ngIf=\"emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)\" class=\"text-danger\">\n            <div *ngIf=\"emailCtrl.errors.required\"><small>Required</small></div>\n    <div *ngIf=\"(emailCtrl.dirty)\" class=\"text-danger\">        \n    <div *ngIf=\"emailCtrl.errors.email\"><small>Invalid</small></div>\n    </div>\n    </div>\n\n            </mat-form-field>\n             \n    <mat-form-field>\n        <input matInput type=\"password\" [(ngModel)]=\"password\"  #passwordinput placeholder=\"Password\" formControlName=\"passwordCtrl\" required>\n        <mat-hint align=\"end\">{{passwordinput.value?.length || 0}}/[Min 6 -Max 12]</mat-hint>\n        <div *ngIf=\"passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"passwordCtrl.errors.required\"><small>Required</small></div>\n        <div *ngIf=\"passwordCtrl.errors.minlength\"><small>At least 6 characters long</small></div>\n        <div *ngIf=\"passwordCtrl.errors.maxlength\"><small>Must not exceed 12 characters</small></div>\n      </div>   \n    </mat-form-field>\n\n    <mat-form-field>\n        <input matInput type=\"password\" name=\"confirm_password\" [(ngModel)]=\"confirm_password\" pattern={{this.password}} #confirmpasswrdinput placeholder=\"Confirm Password\" formControlName=\"confirmpasswordCtrl\" minlength=\"6\" maxlength=\"12\" required>\n        <mat-hint align=\"end\">{{confirmpasswrdinput.value?.length || 0}}</mat-hint>\n        <div *ngIf=\"confirmpasswordCtrl.invalid && (confirmpasswordCtrl.dirty || confirmpasswordCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"confirmpasswordCtrl.errors.required\"><small>Re-Enter the Password</small></div>\n        <div *ngIf=\"confirmpasswordCtrl.errors.pattern\"><small>Password is not match</small></div>\n      </div>  \n        </mat-form-field>\n\n    </form>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Submit</button>\n\n  </mat-dialog-actions>",
+        }),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object])
+    ], NewFlatOwnerDialogComponent);
+    return NewFlatOwnerDialogComponent;
+}());
+
+// Add new Tenant Dialog Box Component
+var NewTenantDialogComponent = (function () {
+    function NewTenantDialogComponent(http, _formBuilder, dialogRef, data) {
+        this.http = http;
+        this._formBuilder = _formBuilder;
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.societyadmin = JSON.parse(localStorage['societyadmin']);
+        this.firstFormGroup = this._formBuilder.group({
+            nameCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
+            emailCtrl: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].email]],
+            contactCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
+            passwordCtrl: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].minLength(6), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].maxLength(12)]],
+            confirmpasswordCtrl: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].pattern]]
+        });
+    }
+    NewTenantDialogComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(NewTenantDialogComponent.prototype, "nameCtrl", {
+        get: function () { return this.firstFormGroup.get('nameCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewTenantDialogComponent.prototype, "emailCtrl", {
+        get: function () { return this.firstFormGroup.get('emailCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewTenantDialogComponent.prototype, "contactCtrl", {
+        get: function () { return this.firstFormGroup.get('contactCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewTenantDialogComponent.prototype, "passwordCtrl", {
+        get: function () { return this.firstFormGroup.get('passwordCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewTenantDialogComponent.prototype, "confirmpasswordCtrl", {
+        get: function () { return this.firstFormGroup.get('confirmpasswordCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    //Only String (Name)
+    NewTenantDialogComponent.prototype.StringPress = function (event) {
+        var pattern = /[a-z\+\A-Z\+\-\ ]/;
+        var inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+            event.preventDefault();
+        }
+    };
+    //Contact Validation
+    NewTenantDialogComponent.prototype.NumPress = function (event) {
+        var pattern = /[0-9\+\-\ ]/;
+        var inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+            event.preventDefault();
+        }
+    };
+    NewTenantDialogComponent.prototype.onSubmitClick = function () {
+        console.log(this.data.flatowner_id);
+        var tenant = {
+            society_id: this.societyadmin.id,
+            flatowner_id: this.data.flatowner_id,
+            tenant_name: this.tenant_name,
+            tenant_email: this.email,
+            tenant_contact: this.contact,
+            tenant_password: this.confirm_password
+        };
+        this.dialogRef.close(tenant);
+    };
+    NewTenantDialogComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: "\n  <div matDialogTitle>Tenant Registration</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n       \n        <mat-form-field>\n          <input matInput [(ngModel)]=\"tenant_name\" placeholder=\"Tenant Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>\n\n        <mat-form-field>\n            <input matInput [(ngModel)]=\"email\" placeholder=\"Email\" formControlName=\"emailCtrl\" required>\n            <div *ngIf=\"emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)\" class=\"text-danger\">\n            <div *ngIf=\"emailCtrl.errors.required\"><small>Required</small></div>\n    <div *ngIf=\"(emailCtrl.dirty)\" class=\"text-danger\">        \n    <div *ngIf=\"emailCtrl.errors.email\"><small>Invalid</small></div>\n    </div>\n    </div>\n\n            </mat-form-field>\n             \n    <mat-form-field>\n        <input matInput type=\"password\" [(ngModel)]=\"password\"  #passwordinput placeholder=\"Password\" formControlName=\"passwordCtrl\" required>\n        <mat-hint align=\"end\">{{passwordinput.value?.length || 0}}/[Min 6 -Max 12]</mat-hint>\n        <div *ngIf=\"passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"passwordCtrl.errors.required\"><small>Required</small></div>\n        <div *ngIf=\"passwordCtrl.errors.minlength\"><small>At least 6 characters long</small></div>\n        <div *ngIf=\"passwordCtrl.errors.maxlength\"><small>Must not exceed 12 characters</small></div>\n      </div>   \n    </mat-form-field>\n\n    <mat-form-field>\n        <input matInput type=\"password\" name=\"confirm_password\" [(ngModel)]=\"confirm_password\" pattern={{this.password}} #confirmpasswrdinput placeholder=\"Confirm Password\" formControlName=\"confirmpasswordCtrl\" minlength=\"6\" maxlength=\"12\" required>\n        <mat-hint align=\"end\">{{confirmpasswrdinput.value?.length || 0}}</mat-hint>\n        <div *ngIf=\"confirmpasswordCtrl.invalid && (confirmpasswordCtrl.dirty || confirmpasswordCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"confirmpasswordCtrl.errors.required\"><small>Re-Enter the Password</small></div>\n        <div *ngIf=\"confirmpasswordCtrl.errors.pattern\"><small>Password is not match</small></div>\n      </div>  \n        </mat-form-field>\n\n    </form>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Submit</button>\n\n  </mat-dialog-actions>",
+        }),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object])
+    ], NewTenantDialogComponent);
+    return NewTenantDialogComponent;
+}());
+
+// Add new Member Dialog Box Component
+var NewMemberDialogComponent = (function () {
+    function NewMemberDialogComponent(http, _formBuilder, dialogRef, data) {
+        this.http = http;
+        this._formBuilder = _formBuilder;
+        this.dialogRef = dialogRef;
+        this.data = data;
+        this.societyadmin = JSON.parse(localStorage['societyadmin']);
+        this.firstFormGroup = this._formBuilder.group({
+            nameCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
+            emailCtrl: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].email]],
+            contactCtrl: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["j" /* Validators */].required],
+        });
+    }
+    NewMemberDialogComponent.prototype.ngOnInit = function () {
+    };
+    Object.defineProperty(NewMemberDialogComponent.prototype, "nameCtrl", {
+        get: function () { return this.firstFormGroup.get('nameCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewMemberDialogComponent.prototype, "emailCtrl", {
+        get: function () { return this.firstFormGroup.get('emailCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NewMemberDialogComponent.prototype, "contactCtrl", {
+        get: function () { return this.firstFormGroup.get('contactCtrl'); },
+        enumerable: true,
+        configurable: true
+    });
+    //Only String (Name)
+    NewMemberDialogComponent.prototype.StringPress = function (event) {
+        var pattern = /[a-z\+\A-Z\+\-\ ]/;
+        var inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+            event.preventDefault();
+        }
+    };
+    //Contact Validation
+    NewMemberDialogComponent.prototype.NumPress = function (event) {
+        var pattern = /[0-9\+\-\ ]/;
+        var inputChar = String.fromCharCode(event.charCode);
+        if (event.keyCode != 8 && !pattern.test(inputChar)) {
+            event.preventDefault();
+        }
+    };
+    NewMemberDialogComponent.prototype.onSubmitClick = function () {
+        if (this.data.tenantisexitsts == true) {
+            var flatmemberbytenant = {
+                society_id: this.societyadmin.id,
+                tenant_id: this.data.parent_id,
+                flatmember_name: this.flatmember_name,
+                flatmember_email: this.email,
+                flatmember_contact: this.contact,
+            };
+            this.dialogRef.close(flatmemberbytenant);
+        }
+        else if (this.data.tenantisexitsts == false) {
+            var flatmemberbtflatowner = {
+                society_id: this.societyadmin.id,
+                flatowner_id: this.data.parent_id,
+                flatmember_name: this.flatmember_name,
+                flatmember_email: this.email,
+                flatmember_contact: this.contact,
+            };
+            this.dialogRef.close(flatmemberbtflatowner);
+        }
+    };
+    NewMemberDialogComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: "\n  <div matDialogTitle>Flat Member Registration</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n       \n        <mat-form-field>\n          <input matInput [(ngModel)]=\"flatmember_name\" placeholder=\"Flat Member Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>\n\n        <mat-form-field>\n            <input matInput [(ngModel)]=\"email\" placeholder=\"Email\" formControlName=\"emailCtrl\" required>\n            <div *ngIf=\"emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)\" class=\"text-danger\">\n            <div *ngIf=\"emailCtrl.errors.required\"><small>Required</small></div>\n    <div *ngIf=\"(emailCtrl.dirty)\" class=\"text-danger\">        \n    <div *ngIf=\"emailCtrl.errors.email\"><small>Invalid</small></div>\n    </div>\n    </div>\n\n            </mat-form-field>\n             \n\n    </form>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Submit</button>\n\n  </mat-dialog-actions>",
+        }),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object])
+    ], NewMemberDialogComponent);
+    return NewMemberDialogComponent;
+}());
+
 
 
 /***/ }),
@@ -580,8 +1012,10 @@ var FlatownerDetailsModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_5_angular5_toaster__["ToasterModule"],
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["n" /* MatSlideToggleModule */]
             ],
-            entryComponents: [__WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["b" /* FlatownerEditDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["d" /* TenantEditDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["c" /* MemberEditDialogComponent */]],
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["a" /* FlatownerDetailsComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["b" /* FlatownerEditDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["d" /* TenantEditDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["c" /* MemberEditDialogComponent */]]
+            entryComponents: [__WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["b" /* FlatownerEditDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["g" /* TenantEditDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["c" /* MemberEditDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["d" /* NewFlatOwnerDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["f" /* NewTenantDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["e" /* NewMemberDialogComponent */]],
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["a" /* FlatownerDetailsComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["b" /* FlatownerEditDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["g" /* TenantEditDialogComponent */],
+                __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["c" /* MemberEditDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["d" /* NewFlatOwnerDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["f" /* NewTenantDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["e" /* NewMemberDialogComponent */]]
         })
     ], FlatownerDetailsModule);
     return FlatownerDetailsModule;

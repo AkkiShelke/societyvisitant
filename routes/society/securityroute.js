@@ -19,7 +19,7 @@ var bcrypt = require('bcrypt-nodejs');
 //rerieving  Security Details
 security_router.get('/securitylist', (req, res, next)=>
 { 
-    Security.find(function(err, result)
+    Security.find().sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -28,7 +28,7 @@ security_router.get('/securitylist', (req, res, next)=>
 
 security_router.get('/security/:security_id', (req, res, next)=>
 { 
-    Security.findById({_id: req.params.security_id},function(err, result)
+    Security.findById({_id: req.params.security_id}).sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -39,7 +39,7 @@ security_router.get('/security/:security_id', (req, res, next)=>
 security_router.get('/securitylistdetails/:society_id', (req, res, next)=>
 {
 
-    Security.find({Society_id: req.params.society_id}).select('_id Manager_id security_name  email contact').exec(function(err, result)
+    Security.find({Society_id: req.params.society_id}).select('_id Manager_id security_name  email contact').sort({_id: -1}).exec(function(err, result)
 {
     Security.populate( result, {path:'Manager_id'},function(err, result){
     res.json(result);

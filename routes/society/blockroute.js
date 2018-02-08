@@ -18,7 +18,7 @@ var bcrypt = require('bcrypt-nodejs');
 //rerieving  Block Details
 block_router.get('/blocklist', (req, res, next)=>
 { 
-    Block.find(function(err, result)
+    Block.find().sort({_id: -1}).exec(function(err, result)
     {
         res.json(result);
     });
@@ -28,7 +28,7 @@ block_router.get('/blocklist', (req, res, next)=>
 block_router.get('/blocklistdetails/:society_id', (req, res, next)=>
 {
 
-    Block.find({Society_id: req.params.society_id},function(err, result)
+    Block.find({Society_id: req.params.society_id}).sort({_id: -1}).exec(function(err, result)
 {
    
     res.json(result);
