@@ -22,9 +22,7 @@ const TenantSchema = Schema({
         unique:true
      },
      contact:{
-        type:Number,
-        unique: true
-     },
+        type:Number     },
      password:{
         type:String,
         required: true 

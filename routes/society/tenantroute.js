@@ -36,6 +36,29 @@ tenant_router.get('/tenantlistdetails/:society_id', (req, res, next)=>
 });
 });
 
+// Get the Tenant relational data by Flatowner
+tenant_router.get('/tanentlistbyflatowner/:flatowner_id', (req, res, next)=>
+{
+
+    Tenant.find({Flatowner_id: req.params.flatowner_id},function(err, result)
+    {
+   
+    res.json(result);
+
+    });
+});
+
+// Get the Active Tenant relational data by Flatowner
+tenant_router.get('/activetanentbyflatowner/:flatowner_id', (req, res, next)=>
+{
+
+    Tenant.findOne({Flatowner_id: req.params.flatowner_id, tenant_status: true },function(err, result)
+    {
+   
+    res.json(result);
+
+    });
+});
 
 //add Flat 
 tenant_router.post('/addtenant',(req, res, next)=>
@@ -52,7 +75,9 @@ tenant_router.post('/addtenant',(req, res, next)=>
              tenant_name: req.body.tenant_name,
              email: req.body.tenant_email,
              contact: req.body.tenant_contact,            
-             password: req.body.tenant_password
+             password: req.body.tenant_password,
+             tenant_status: true
+
           
         });
         if( req.body.tenant_name == null || req.body.tenant_name == '' || req.body.tenant_email == null || req.body.tenant_email == ''
@@ -66,7 +91,7 @@ tenant_router.post('/addtenant',(req, res, next)=>
             {
                 if(err)
                 {
-                    res.json({success: false, message: ' Tenant Email is exist ' + req.body.tenant_email});
+                    res.json({success: false, message: ' Tenant Email is exist ' + err});
                 }
                 else
                 { 
@@ -83,6 +108,58 @@ tenant_router.post('/addtenant',(req, res, next)=>
 });
 
 
+//Update details
+tenant_router.put('/updatetenant/:tenant_id',(req, res, next)=>
+{      
+    Tenant.findByIdAndUpdate(req.params.tenant_id,
+    {  
+        $set: 
+        { 
+            tenant_name: req.body.tenant_name,
+            contact: req.body.contact
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating Details in Tenant list");
+        }
+        else
+        {
+            res.json({success: true,message:"Tenant Details Are updated"});
+        }
+    });
+});
+
+//Update Status
+tenant_router.put('/updatetenantstatus/:tenant_id',(req, res, next)=>
+{      
+    Tenant.findByIdAndUpdate(req.params.tenant_id,
+    {  
+        $set: 
+        { 
+            tenant_status: req.body.status
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating status in Tenant list");
+        }
+        else
+        {
+            res.json(result);
+        }
+    });
+});
 
 //delete Flatowner Details
 tenant_router.delete('/deletetenant/:tenant_id',(req, res, next)=>

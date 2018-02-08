@@ -70,6 +70,7 @@ var map = {
 	],
 	"./flatowner-details/flatowner-details.module": [
 		"../../../../../src/app/layout/flatowner-details/flatowner-details.module.ts",
+		"common",
 		"flatowner-details.module"
 	],
 	"./layout/layout.module": [

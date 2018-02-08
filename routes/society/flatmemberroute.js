@@ -24,6 +24,26 @@ flatmember_router.get('/flatmemberlist', (req, res, next)=>
     });
 });
 
+//rerieving  Flatmember Details by tenant id
+
+flatmember_router.get('/memberlistbytenant/:tenant_id', (req, res, next)=>
+{  
+    Flatmember.find({Tenant_id: req.params.tenant_id },function(err, result)
+    {
+        res.json(result);
+    });
+});
+
+
+//rerieving  Flatmember Details by tenant id
+flatmember_router.get('/memberlistbyflatowner/:flatowner_id', (req, res, next)=>
+{  
+    Flatmember.find({Flatowner_id: req.params.flatowner_id },function(err, result)
+    {
+        res.json(result);
+    });
+});
+
 // Get the Flatmember relational data
 flatmember_router.get('/flatmemberlistdetails/:society_id', (req, res, next)=>
 {
@@ -35,7 +55,6 @@ flatmember_router.get('/flatmemberlistdetails/:society_id', (req, res, next)=>
 
 });
 });
-
 
 //add Flatmember 
 flatmember_router.post('/addflatmember',(req, res, next)=>
@@ -81,6 +100,32 @@ console.log(req.body)
    
 });
 
+//Update details
+flatmember_router.put('/updateflatmember/:flatmember_id',(req, res, next)=>
+{      
+    Flatmember.findByIdAndUpdate(req.params.flatmember_id,
+    {  
+        $set: 
+        { 
+            flatmember_name: req.body.flatmember_name,
+            contact: req.body.contact
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating Details in Flat Member list");
+        }
+        else
+        {
+            res.json({success: true,message:"Flat Member Details Are updated"});
+        }
+    });
+});
 
 
 //delete Flatmember Details

@@ -24,6 +24,18 @@ flatowner_router.get('/flatownerlist', (req, res, next)=>
     });
 });
 
+//rerieving  Flat Detailsby ID
+flatowner_router.get('/flatowner/:flatowner_id', (req, res, next)=>
+{ 
+    Flatowner.findOne({_id: req.params.flatowner_id},function(err, result)
+    {
+        Flatowner.populate( result, {path:'Flat_id'},function(err, result){
+
+        res.json(result);
+        });
+    });
+});
+
 // Get the Flat relational data
 flatowner_router.get('/flatownerlistdetails/:society_id', (req, res, next)=>
 {
@@ -98,10 +110,37 @@ flatowner_router.post('/addflatowner',(req, res, next)=>
    
 });
 
-//Update Status
-flatowner_router.put('/updateflatownerstatus/:society_id',(req, res, next)=>
+//Update details
+flatowner_router.put('/updateflatowner/:flatowner_id',(req, res, next)=>
 {      
-    Flatowner.findByIdAndUpdate(req.params.society_id,
+    Flatowner.findByIdAndUpdate(req.params.flatowner_id,
+    {  
+        $set: 
+        { 
+            flatowner_name: req.body.flatowner_name,
+            contact: req.body.contact
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating Details in FlatOwner list");
+        }
+        else
+        {
+            res.json({success: true,message:"Flat Owner Details Are updated"});
+        }
+    });
+});
+
+//Update Status
+flatowner_router.put('/updateflatownerstatus/:flatowner_id',(req, res, next)=>
+{      
+    Flatowner.findByIdAndUpdate(req.params.flatowner_id,
     {  
         $set: 
         { 
