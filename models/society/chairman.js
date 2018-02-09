@@ -27,6 +27,9 @@ const ChairmanSchema = Schema({
      password:{
         type:String,
         required: true 
+     },
+     chairman_status:{
+        type: Boolean, default: true 
      }
     });
           //on save function the password is get encrypted

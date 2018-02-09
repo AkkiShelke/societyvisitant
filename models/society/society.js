@@ -27,7 +27,7 @@ const SocietySchema = Schema({
         type:Number,
         unique: true
      },
-     status:{
+     society_status:{
         type: Boolean, default: false 
      },
      password:{

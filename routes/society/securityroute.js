@@ -341,6 +341,39 @@ security_router.put('/updatesecuritystatus/:manager_id',(req, res, next)=>
     });
 });
 
+//Update Status
+security_router.put('/updatesecuritystatus/:security_id',(req, res, next)=>
+{      
+    Security.findByIdAndUpdate(req.params.security_id,
+        {  
+                    $set: 
+                    { 
+                        security_status: req.body.status
+                    }
+                },
+                {
+                    new: true
+                },
+                function(err, result)
+                {
+                    if(err)
+                    {
+                        res.json({success: false, message:"Error updating status in  Security list"});
+                    }
+                    else
+                    {
+                        if(req.body.status == false){
+                            res.json({success: true, message:"Security Status is Inactive"});
+
+                        }
+                        else{
+                            res.json({success: true, message:"Security Status is Active"});
+
+                        }
+                    }
+                });
+});
+
 
 //delete Security Details
 security_router.delete('/deletesecurity/:security_id',(req, res, next)=>

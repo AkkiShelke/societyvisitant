@@ -111,6 +111,12 @@ var LoginComponent = (function () {
                 _this.toasterService.pop('success', _this.response.message);
                 localStorage.setItem('isLoggedin', 'true');
                 localStorage.setItem('societyadmin', JSON.stringify(_this.response.societyadmin));
+                if (_this.response.manager) {
+                    localStorage.setItem('manager', JSON.stringify(_this.response.manager));
+                }
+                if (_this.response.chairman) {
+                    localStorage.setItem('chairman', JSON.stringify(_this.response.chairman));
+                }
                 setTimeout(function () {
                     _this.router.navigate(['/dashboard']);
                 }, 3000);

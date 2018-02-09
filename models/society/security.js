@@ -27,6 +27,9 @@ const SecuritySchema = Schema({
      password:{
         type:String,
         required: true 
+     },
+     security_status:{
+        type: Boolean, default: true 
      }
     });
  

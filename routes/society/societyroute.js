@@ -6,6 +6,9 @@ var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var passport = require('passport');
 var Society = require('../../models/society/society');
+var Manager = require('../../models/society/manager');
+var Chairman = require('../../models/society/chairman');
+
 var secret = 'Akshay';
 var bcrypt = require('bcrypt-nodejs');
 
@@ -29,7 +32,7 @@ society_router.get('/societylist', (req, res, next)=>
 society_router.get('/societylistdetails', (req, res, next)=>
 {
 
-Society.find().select('_id society_name society_reg email contact status address Pincode_id').sort({_id: -1}).exec(function(err, result)
+Society.find().select('_id society_name society_reg email contact society_status address Pincode_id').sort({_id: -1}).exec(function(err, result)
 {
     Society.populate( result, {path:'Pincode_id', populate:[
         { path: 'country_id' },
@@ -85,19 +88,16 @@ society_router.post('/addsociety',(req, res, next)=>
 // http://localhost:port/api/authenticate
 society_router.post('/authenticatesocietyadmin', (req, res, next) =>
 {
-    Society.findOne({ email: req.body.email }).select('_id    email password').exec(function(err, result)
+    Society.findOne({ email: req.body.email,  }).select('_id society_name society_status  email password').exec(function(err, result)
     {  
-       
-      
         if(err)
         { 
             throw err;
         }
-        if(!result)
-        {
-            res.json({ success: false, message: 'Please enter valid Email ID' });
-        } 
-        else if(result)
+
+       if(result){
+
+        if(result.society_status == true)
         {
             if(req.body.password)
             {               
@@ -105,7 +105,7 @@ society_router.post('/authenticatesocietyadmin', (req, res, next) =>
                 var validPassword = result.comparePassword(req.body.password);
                 if(!validPassword)
                 {
-                    res.json({ success: false, message: 'Please enter valid Password' });
+                    res.json({ success: false, message: 'Please enter valid Society Password' });
                 }
                 else
                 {   
@@ -120,20 +120,199 @@ society_router.post('/authenticatesocietyadmin', (req, res, next) =>
                         token: 'JWT '+token,
                         societyadmin:{
                             id: result._id,
+                            society_name: result.society_name,
                             email: result.email,
-                            message: 'Authenticated'
+                            message: 'SocietyAdmin'
                            
                         },
                                                                        
                     });        
-                
                  }
             }
             else 
             {
-                res.json({ success: false, message: 'No password provided' });
+                res.json({ success: false, message: 'No Society password provided' });
             }
         
+        }else{
+            res.json({ success: false, message: 'Please Activate Your Society Account By Cybercode' });
+
+        }
+       }
+       else{
+        Manager.findOne({ email: req.body.email,  }).select('_id manager_name manager_status Society_id  email password').exec(function(err, result)
+        {
+            if(err)
+            { 
+                throw err;
+            }
+    
+          if(result){
+    
+            if(result.manager_status == true)
+            {
+                if(req.body.password)
+                {               
+    
+                    var validPassword = result.comparePassword(req.body.password);
+                    if(!validPassword)
+                    {
+                        res.json({ success: false, message: 'Please enter valid Manager Password' });
+                    }
+                    else
+                    {   
+                        // res.json({ success: true, message: 'authenticate'});
+                        //Create the token for Superadmin-details
+                        const token = jwt.sign(result.toJSON(), secret, {
+                            expiresIn: 604800 // 1 week
+                          });
+                          
+                          
+                            res.json({ success: true, message: 'Manager Login successfully  ',
+                            token: 'JWT '+token,
+                            societyadmin:{
+                                id:result.Society_id
+                            },
+                            manager:{
+                                id: result._id,
+                                email: result.email,
+                                manager_name: result.manager_name,
+                                message: 'Manager'
+                               
+                            },
+                                                                           
+                        });        
+                       
+                     }
+                }
+                else 
+                {
+                    res.json({ success: false, message: 'No Society password provided' });
+                }
+            
+            }else{
+                res.json({ success: false, message: 'Please Activate Your Manager Account!' });
+
+            }
+           }
+           else{
+            Chairman.findOne({ email: req.body.email,  }).select('_id chairman_name chairman_status Society_id email password').exec(function(err, result)
+            {
+                if(err)
+                { 
+                    throw err;
+                }
+        
+              if(result){
+        
+                if(result.chairman_status == true)
+                {
+                    if(req.body.password)
+                    {               
+        
+                        var validPassword = result.comparePassword(req.body.password);
+                        if(!validPassword)
+                        {
+                            res.json({ success: false, message: 'Please enter valid Chairman Password' });
+                        }
+                        else
+                        {   
+                            // res.json({ success: true, message: 'authenticate'});
+                            //Create the token for Superadmin-details
+                            const token = jwt.sign(result.toJSON(), secret, {
+                                expiresIn: 604800 // 1 week
+                              });
+                              
+                              
+                                res.json({ success: true, message: 'Chairman Login successfully  ',
+                                token: 'JWT '+token,
+                                societyadmin:{
+                                    id:result.Society_id
+                                },
+                                chairman:{
+                                    id: result._id,
+                                    email: result.email,
+                                    chairman_name: result.chairman_name,
+                                    message: 'Chairman'
+                                   
+                                },
+                                                                               
+                            });        
+                           
+                         }
+                    }
+                    else 
+                    {
+                        res.json({ success: false, message: 'No Chairman password provided' });
+                    }
+                
+                }else{
+                    res.json({ success: false, message: 'Please Activate Your Chairman Account!' });
+    
+                }
+               }
+               else{
+                res.json({ success: false, message: 'Please Provide Correct Email id!' });
+
+               }
+              
+             
+        
+            
+        });
+           }
+          
+         
+    
+        
+    });
+
+       }
+      
+     
+        
+
+    });
+
+   
+});
+
+
+// chech Society current password
+society_router.post('/checksocietycurrentpassword/:society_id', (req, res, next) =>
+{
+    Society.findById(req.params.society_id).select('password').exec(function(err, result)
+    {  
+       
+      
+        if(err)
+        { 
+            throw err;
+        }
+        if(!result)
+        {
+            res.json({ success: false, message: 'Please enter valid current password' });
+        } 
+        else if(result)
+        {
+            if(req.body.password)
+            {
+                var validPassword = result.comparePassword(req.body.password);
+               if(validPassword){
+                res.json({ success: true, message: 'Current password is correct'});
+
+               }
+               else{
+                res.json({ success: false, message: 'Please enter valid current Password' });
+
+               }
+
+            }
+            else
+            {   
+                res.json({ success: false, message: 'No current password provided' });
+          
+             }
         }
         
 
@@ -143,109 +322,65 @@ society_router.post('/authenticatesocietyadmin', (req, res, next) =>
 });
 
 
-// chech Superadmin current password
-// society_router.post('/societyadmincheckcurrentpassword/:society_id', (req, res, next) =>
-// {
-//     Society.findById(req.params.society_id).select('password').exec(function(err, result)
-//     {  
-       
-      
-//         if(err)
-//         { 
-//             throw err;
-//         }
-//         if(!result)
-//         {
-//             res.json({ success: false, message: 'Please enter valid current password' });
-//         } 
-//         else if(result)
-//         {
-//             if(req.body.password)
-//             {
-//                 var validPassword = result.comparePassword(req.body.password);
-//                if(validPassword){
-//                 res.json({ success: true, message: 'Current password is correct'});
-
-//                }
-//                else{
-//                 res.json({ success: false, message: 'Please enter valid current Password' });
-
-//                }
-
-//             }
-//             else
-//             {   
-//                 res.json({ success: false, message: 'No current password provided' });
-          
-//              }
-//         }
-        
-
-//     });
-
-    
-// });
-
-
 // change Society current password
-// society_router.put('/societyadminchangecurrentpassword/:society_id',(req, res, next)=>
-// { 
+society_router.put('/changesocietycurrentpassword/:society_id',(req, res, next)=>
+{ 
     
-//     Society.findById(req.params.society_id).select('password').exec(function(err, result)
-//     {  
+    Society.findById(req.params.society_id).select('password').exec(function(err, result)
+    {  
        
-//         console.log(req.body.id);
-//         console.log(result);
-//         if(err)
-//         { 
-//             throw err;
-//         }
-//         if(!result)
-//         {
-//             res.json({ success: false, message: 'Please enter valid current password' });
-//         } 
-//         else if(result)
-//         {                    
+        console.log(req.body.id);
+        console.log(result);
+        if(err)
+        { 
+            throw err;
+        }
+        if(!result)
+        {
+            res.json({ success: false, message: 'Please enter valid current password' });
+        } 
+        else if(result)
+        {                    
 
-//             if(req.body.password)
-//             {
-//                 var validPassword = result.comparePassword(req.body.password);
-//                if(validPassword){
-//                     if(err) throw err;
-//                     if(req.body.newpassword == null || req.body.newpassword == '')
-//                     {
-//                         res.json({ success: false, message: 'Password not provided'});
+            if(req.body.password)
+            {
+                var validPassword = result.comparePassword(req.body.password);
+               if(validPassword){
+                    if(err) throw err;
+                    if(req.body.newpassword == null || req.body.newpassword == '')
+                    {
+                        res.json({ success: false, message: 'Password not provided'});
             
-//                     } else
-//                         {
-//                         result.password = req.body.newpassword;
+                    } else
+                        {
+                        result.password = req.body.newpassword;
                 
-//                         result.save(function(err){
-//                             if(err){
-//                                 res.json({ success: false, message: err });
-//                             }else{
-//                                 res.json({ success: true, message: 'Password has been reset!' });
+                        result.save(function(err){
+                            if(err){
+                                res.json({ success: false, message: err });
+                            }else{
+                                res.json({ success: true, message: 'Password has been reset!' });
                 
-//                             }
-//                         });
-//                     }
+                            }
+                        });
+                    }
 
-//                }
-//                else{
-//                 res.json({ success: false, message: 'Please enter valid current Password' });
+               }
+               else{
+                res.json({ success: false, message: 'Please enter valid current Password' });
 
-//                }
-//             }
-//             else
-//             {   
-//                 res.json({ success: false, message: 'No current password provided' });
-//              }
-//         }
+               }
+            }
+            else
+            {   
+                res.json({ success: false, message: 'No current password provided' });
+             }
+        }
         
 
-//     });
+    });
 
-// });
+});
 
 //  Society reset password
 // society_router.put('/superadminsavepassword',function(req, res)
@@ -282,7 +417,7 @@ society_router.put('/updatesocietystatus/:society_id',(req, res, next)=>
     {  
         $set: 
         { 
-            status: req.body.status
+            society_status: req.body.status
         }
     },
     {

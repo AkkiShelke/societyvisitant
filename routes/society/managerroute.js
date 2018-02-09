@@ -102,171 +102,109 @@ Manager.findOne({ email: req.body.email , Society_id:  req.body.society_id}, fun
 
 });
 
-   
-// Manager Login Route
-// http://localhost:port/api/authenticate
-// manager_router.post('/authenticatesociety', (req, res, next) =>
-// {
-//     Manager.findOne({ email: req.body.email }).select('_id    email password').exec(function(err, result)
-//     {  
+// check Superadmin current password
+manager_router.post('/checkmanagercurrentpassword/:manager_id', (req, res, next) =>
+{
+    Manager.findById(req.params.manager_id).select('password').exec(function(err, result)
+    {  
        
       
-//         if(err)
-//         { 
-//             throw err;
-//         }
-//         if(!result)
-//         {
-//             res.json({ success: false, message: 'Please enter valid Email ID' });
-//         } 
-//         else if(result)
-//         {
-//             if(req.body.password)
-//             {
-//                 var validPassword = result.comparePassword(req.body.password);
-//                 if(!validPassword)
-//                 {
-//                     res.json({ success: false, message: 'Please enter valid Password' });
-//                 }
-//                 else
-//                 {   
-//                     // res.json({ success: true, message: 'authenticate'});
-//                     //Create the token for Superadmin-details
-//                     const token = jwt.sign(result.toJSON(), secret, {
-//                         expiresIn: 604800 // 1 week
-//                       });
-                      
-                      
-//                         res.json({ success: true,
-//                         token: 'JWT '+token,
-//                         recruiter:{
-//                             id: result._id,
-//                             email: result.email,
-//                             message: 'Authenticated'
-                           
-//                         },
-                                                                       
-//                     });        
-                
-//                  }
-//             }
-//             else 
-//             {
-//                 res.json({ success: false, message: 'No password provided' });
-//             }
-        
-//         }
-        
+        if(err)
+        { 
+            throw err;
+        }
+        if(!result)
+        {
+            res.json({ success: false, message: 'Please enter valid current password' });
+        } 
+        else if(result)
+        {
+            if(req.body.password)
+            {
+                var validPassword = result.comparePassword(req.body.password);
+               if(validPassword){
+                res.json({ success: true, message: 'Current password is correct'});
 
-//     });
+               }
+               else{
+                res.json({ success: false, message: 'Please enter valid current Password' });
 
-    
-// });
+               }
 
-
-// chech Superadmin current password
-// manager_router.post('/societyadmincheckcurrentpassword/:society_id', (req, res, next) =>
-// {
-//     Manager.findById(req.params.society_id).select('password').exec(function(err, result)
-//     {  
-       
-      
-//         if(err)
-//         { 
-//             throw err;
-//         }
-//         if(!result)
-//         {
-//             res.json({ success: false, message: 'Please enter valid current password' });
-//         } 
-//         else if(result)
-//         {
-//             if(req.body.password)
-//             {
-//                 var validPassword = result.comparePassword(req.body.password);
-//                if(validPassword){
-//                 res.json({ success: true, message: 'Current password is correct'});
-
-//                }
-//                else{
-//                 res.json({ success: false, message: 'Please enter valid current Password' });
-
-//                }
-
-//             }
-//             else
-//             {   
-//                 res.json({ success: false, message: 'No current password provided' });
+            }
+            else
+            {   
+                res.json({ success: false, message: 'No current password provided' });
           
-//              }
-//         }
+             }
+        }
         
 
-//     });
+    });
 
     
-// });
+});
 
 
-// change Society current password
-// manager_router.put('/societyadminchangecurrentpassword/:manager_id',(req, res, next)=>
-// { 
+// change Manager current password
+manager_router.put('/changemanagercurrentpassword/:manager_id',(req, res, next)=>
+{ 
     
-//     Manager.findById(req.params.manager_id).select('password').exec(function(err, result)
-//     {  
+    Manager.findById(req.params.manager_id).select('password').exec(function(err, result)
+    {  
        
-//         console.log(req.body.id);
-//         console.log(result);
-//         if(err)
-//         { 
-//             throw err;
-//         }
-//         if(!result)
-//         {
-//             res.json({ success: false, message: 'Please enter valid current password' });
-//         } 
-//         else if(result)
-//         {                    
+        console.log(req.body.id);
+        console.log(result);
+        if(err)
+        { 
+            throw err;
+        }
+        if(!result)
+        {
+            res.json({ success: false, message: 'Please enter valid current password' });
+        } 
+        else if(result)
+        {                    
 
-//             if(req.body.password)
-//             {
-//                 var validPassword = result.comparePassword(req.body.password);
-//                if(validPassword){
-//                     if(err) throw err;
-//                     if(req.body.newpassword == null || req.body.newpassword == '')
-//                     {
-//                         res.json({ success: false, message: 'Password not provided'});
+            if(req.body.password)
+            {
+                var validPassword = result.comparePassword(req.body.password);
+               if(validPassword){
+                    if(err) throw err;
+                    if(req.body.newpassword == null || req.body.newpassword == '')
+                    {
+                        res.json({ success: false, message: 'Password not provided'});
             
-//                     } else
-//                         {
-//                         result.password = req.body.newpassword;
+                    } else
+                        {
+                        result.password = req.body.newpassword;
                 
-//                         result.save(function(err){
-//                             if(err){
-//                                 res.json({ success: false, message: err });
-//                             }else{
-//                                 res.json({ success: true, message: 'Password has been reset!' });
+                        result.save(function(err){
+                            if(err){
+                                res.json({ success: false, message: err });
+                            }else{
+                                res.json({ success: true, message: 'Password has been reset!' });
                 
-//                             }
-//                         });
-//                     }
+                            }
+                        });
+                    }
 
-//                }
-//                else{
-//                 res.json({ success: false, message: 'Please enter valid current Password' });
+               }
+               else{
+                res.json({ success: false, message: 'Please enter valid current Password' });
 
-//                }
-//             }
-//             else
-//             {   
-//                 res.json({ success: false, message: 'No current password provided' });
-//              }
-//         }
+               }
+            }
+            else
+            {   
+                res.json({ success: false, message: 'No current password provided' });
+             }
+        }
         
 
-//     });
+    });
 
-// });
+});
 
 //  Society reset password
 // manager_router.put('/superadminsavepassword',function(req, res)
@@ -326,30 +264,42 @@ manager_router.put('/updatemanager/:manager_id',(req, res, next)=>
 
 
 //Update Status
-manager_router.put('/updatesocietystatus/:manager_id',(req, res, next)=>
+manager_router.put('/updatemanagerstatus/:manager_id',(req, res, next)=>
 {      
     Manager.findByIdAndUpdate(req.params.manager_id,
-    {  
-        $set: 
-        { 
-            status: req.body.status
-        }
-    },
-    {
-        new: true
-    },
-    function(err, result)
-    {
-        if(err)
-        {
-            res.send("Error updating status in Manager list");
-        }
-        else
-        {
-            res.json(result);
-        }
-    });
+        {  
+                    $set: 
+                    { 
+                        manager_status: req.body.status
+                    }
+                },
+                {
+                    new: true
+                },
+                function(err, result)
+                {
+                    if(err)
+                    {
+                        res.json({success: false, message:"Error updating status in  Manager list"});
+                    }
+                    else
+                    {
+                        if(req.body.status == false){
+                            res.json({success: true, message:"Manager Status is Inactive"});
+
+                        }
+                        else{
+                            res.json({success: true, message:"Manager Status is Active"});
+
+                        }
+                    }
+                });
+  
+ 
 });
+
+
+
 
 
 //delete Manager Details

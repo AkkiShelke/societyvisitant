@@ -43,7 +43,7 @@ flatowner_router.get('/flatowner/:flat_id', (req, res, next)=>
 flatowner_router.get('/flatownerlistdetails/:society_id', (req, res, next)=>
 {
 
-    Flatowner.find({Society_id: req.params.society_id, flatowner_status: true}).sort({_id: -1}).exec(function(err, result)
+    Flatowner.find({Society_id: req.params.society_id}).sort({_id: -1}).exec(function(err, result)
 {
     Flatowner.populate( result, {path:'Flat_id', populate:[
         { path: 'Chairman_id' , populate:[{ path: 'Manager_id' ,  populate:[{path:'Block_id'}]}] }

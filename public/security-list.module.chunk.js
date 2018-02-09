@@ -42,7 +42,7 @@ var SecurityListRoutingModule = (function () {
 /***/ "../../../../../src/app/layout/security-list/security-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<toaster-container></toaster-container>\n<div [@routerTransition] class=\"container-fluid\">\n\n    <div class=\"row\">\n        <div class=\"col-xl-12\">\n            <ol class=\"breadcrumb\">\n                <li class=\"breadcrumb-item active\"><i class=\"fa fa-shield\"></i> Society List</li>\n            </ol>\n        </div>\n    </div>\n    \n<div class=\"example-header\">\n  <mat-form-field>\n    <input  matTooltip=\"Search Security Details!\" matTooltipPosition=\"above\" style=\"width: 50%;\" matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Search\">\n  </mat-form-field>\n  <div class=\"pull-right\">\n      <button class=\" btn btn-danger\" matTooltip=\"Send Message!\" matTooltipPosition=\"above\"><i class=\"fa fa-paper-plane\"></i></button>\n</div>\n</div>\n\n<div class=\"example-container mat-elevation-z8\">\n\n  <mat-table [dataSource]=\"dataSource\" matSort>\n\n    <!-- Checkbox Column -->\n    <ng-container matColumnDef=\"select\">\n        <mat-header-cell *matHeaderCellDef>\n          <mat-checkbox matTooltip=\"Select All Rows!\" matTooltipPosition=\"above\"  (change)=\"$event ? masterToggle() : null\"\n                        [checked]=\"selection.hasValue() && isAllSelected()\"\n                        [indeterminate]=\"selection.hasValue() && !isAllSelected()\">\n          </mat-checkbox>\n        </mat-header-cell>\n        <mat-cell *matCellDef=\"let row\">\n          <mat-checkbox matTooltip=\"Select This Row!\" matTooltipPosition=\"above\"  (click)=\"$event.stopPropagation()\"\n                        (change)=\"$event ? selection.toggle(row) : null\"\n                        [checked]=\"selection.isSelected(row)\">\n          </mat-checkbox>\n        </mat-cell>\n      </ng-container>\n\n    <!-- ID Column -->\n    <!-- <ng-container matColumnDef=\"id\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> ID </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.id}} </mat-cell>\n    </ng-container> -->\n\n    <!-- Block Column -->\n    <ng-container matColumnDef=\"block\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Manager </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.Manager_id.manager_name}} </mat-cell>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.security_name}} </mat-cell>\n    </ng-container>\n\n    <!-- Email Column -->\n    <ng-container matColumnDef=\"email\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.email\"> {{row.email}} </mat-cell>\n    </ng-container>\n\n\n\n      <!-- Contact Column -->\n    <ng-container matColumnDef=\"contact\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Contact </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.contact\"> {{row.contact}} </mat-cell>\n    </ng-container>\n\n      <!-- Details Column -->\n      <!-- <ng-container matColumnDef=\"details\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Details </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.details\"><button routerLink=\"/society_details\" class=\"btn btn-primary buttoncolor\" style=\"color:white;\"><i  class=\"fa fa-eye\"></i> View</button>\n      </mat-cell>\n      </ng-container> -->\n\n    <mat-header-row class=\"headertext\" *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\n    <mat-row *matRowDef=\"let row; columns: displayedColumns;\">\n    </mat-row>\n  </mat-table>\n\n  <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator>\n</div>\n</div>"
+module.exports = "<toaster-container></toaster-container>\n<div [@routerTransition] class=\"container-fluid\">\n\n    <div class=\"row\">\n        <div class=\"col-xl-12\">\n            <ol class=\"breadcrumb\">\n                <li class=\"breadcrumb-item active\"><i class=\"fa fa-shield\"></i> Society List</li>\n            </ol>\n        </div>\n    </div>\n    \n<div class=\"example-header\">\n  <mat-form-field>\n    <input  matTooltip=\"Search Security Details!\" matTooltipPosition=\"above\" style=\"width: 50%;\" matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Search\">\n  </mat-form-field>\n  <div class=\"pull-right\">\n      <button class=\" btn btn-danger\" matTooltip=\"Send Message!\" matTooltipPosition=\"above\"><i class=\"fa fa-paper-plane\"></i></button>\n      <button class=\" btn btn-warning buttoncolor\" style=\"color:white;\" routerLink=\"/addsecurity\" matTooltip=\"Edit Security list!\" matTooltipPosition=\"above\"><i class=\"fa fa-edit\"></i> Edit list</button>\n\n    </div>\n</div>\n\n<div class=\"example-container mat-elevation-z8\">\n\n  <mat-table [dataSource]=\"dataSource\" matSort>\n\n    <!-- Checkbox Column -->\n    <ng-container matColumnDef=\"select\">\n        <mat-header-cell *matHeaderCellDef>\n          <mat-checkbox color=\"primary\"  matTooltip=\"Select All Rows!\" matTooltipPosition=\"above\"  (change)=\"$event ? masterToggle() : null\"\n                        [checked]=\"selection.hasValue() && isAllSelected()\"\n                        [indeterminate]=\"selection.hasValue() && !isAllSelected()\">\n          </mat-checkbox>\n        </mat-header-cell>\n        <mat-cell *matCellDef=\"let row\">\n          <mat-checkbox color=\"primary\"  matTooltip=\"Select This Row!\" matTooltipPosition=\"above\"  (click)=\"$event.stopPropagation()\"\n                        (change)=\"$event ? selection.toggle(row) : null\"\n                        [checked]=\"selection.isSelected(row)\">\n          </mat-checkbox>\n        </mat-cell>\n      </ng-container>\n\n    <!-- ID Column -->\n    <!-- <ng-container matColumnDef=\"id\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> ID </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.id}} </mat-cell>\n    </ng-container> -->\n\n    <!-- Block Column -->\n    <ng-container matColumnDef=\"block\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Manager </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.Manager_id.manager_name}} </mat-cell>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.security_name}} </mat-cell>\n    </ng-container>\n\n    <!-- Email Column -->\n    <ng-container matColumnDef=\"email\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.email\"> {{row.email}} </mat-cell>\n    </ng-container>\n\n\n\n      <!-- Contact Column -->\n    <ng-container matColumnDef=\"contact\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Contact </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.contact\"> {{row.contact}} </mat-cell>\n    </ng-container>\n\n          <!-- Status Column -->\n    <ng-container matColumnDef=\"security_status\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Status </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" >\n\n          <mat-slide-toggle checked={{row.security_status}}   [disabled]=\"chairmanexists\"   (change)=\"changeStatus(row.security_status,row._id)\" color=\"primary\" matTooltip=\"change the status!\" matTooltipPosition=\"above\">Active</mat-slide-toggle>\n      \n      </mat-cell>\n      </ng-container>  \n\n    <mat-header-row class=\"headertext\" *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\n    <mat-row *matRowDef=\"let row; columns: displayedColumns;\">\n    </mat-row>\n  </mat-table>\n\n  <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator>\n</div>\n</div>"
 
 /***/ }),
 
@@ -98,9 +98,15 @@ var SecurityListComponent = (function () {
         this.http = http;
         this._formBuilder = _formBuilder;
         this.societyadmin = JSON.parse(localStorage['societyadmin']);
-        this.displayedColumns = ['select', 'block', 'name', 'email', 'contact'];
+        this.chairmanexists = false;
+        this.displayedColumns = ['select', 'block', 'name', 'email', 'contact', 'security_status'];
         this.selection = new __WEBPACK_IMPORTED_MODULE_4__angular_cdk_collections__["a" /* SelectionModel */](true, []);
         this.toasterService = toasterService;
+        if (localStorage.getItem('chairman')) {
+            this.chairman = JSON.parse(localStorage['chairman']);
+            this.chairmanexists = true;
+        }
+        console.log('ChairmanExists:' + this.chairmanexists);
         this.getSecurityData();
     }
     SecurityListComponent.prototype.getSecurityData = function () {
@@ -112,6 +118,17 @@ var SecurityListComponent = (function () {
             _this.dataSource.paginator = _this.paginator;
             _this.dataSource.sort = _this.sort;
         });
+    };
+    SecurityListComponent.prototype.changeStatus = function (security, id) {
+        security = !security;
+        var security_details = {
+            status: security
+        };
+        console.log(security_details);
+        this.http.put('api/updatesecuritystatus/' + id, security_details).subscribe(function (data) {
+            console.log(data);
+        });
+        this.getSecurityData();
     };
     SecurityListComponent.prototype.ngOnInit = function () {
     };
@@ -210,7 +227,8 @@ var SecurityListModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["s" /* MatTableModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["p" /* MatSortModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["t" /* MatTooltipModule */],
-                __WEBPACK_IMPORTED_MODULE_7_angular5_toaster__["ToasterModule"]
+                __WEBPACK_IMPORTED_MODULE_7_angular5_toaster__["ToasterModule"],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["n" /* MatSlideToggleModule */]
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__security_list_component__["a" /* SecurityListComponent */]]
         })

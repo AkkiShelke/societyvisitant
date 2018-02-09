@@ -27,6 +27,9 @@ const ManagerSchema = Schema({
      password:{
         type:String,
         required: true 
+     },
+     manager_status:{
+        type: Boolean, default: true 
      }
     });
 
@@ -50,6 +53,9 @@ const ManagerSchema = Schema({
             });
          });
         
+
+
+    
         
         
         //For authentication we compare the password using bcrypt.compareSync
@@ -58,6 +64,9 @@ const ManagerSchema = Schema({
              return bcrypt.compareSync(password, this.password);
          };
         
+
+
+
  
 const Manager = module.exports = mongoose.model('manager', ManagerSchema);
 

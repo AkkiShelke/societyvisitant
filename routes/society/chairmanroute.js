@@ -106,170 +106,109 @@ else{
 });
 
    
-// Chairman Login Route
-// http://localhost:port/api/authenticate
-// chairman_router.post('/authenticatesociety', (req, res, next) =>
-// {
-//     Chairman.findOne({ email: req.body.email }).select('_id    email password').exec(function(err, result)
-//     {  
-       
-      
-//         if(err)
-//         { 
-//             throw err;
-//         }
-//         if(!result)
-//         {
-//             res.json({ success: false, message: 'Please enter valid Email ID' });
-//         } 
-//         else if(result)
-//         {
-//             if(req.body.password)
-//             {
-//                 var validPassword = result.comparePassword(req.body.password);
-//                 if(!validPassword)
-//                 {
-//                     res.json({ success: false, message: 'Please enter valid Password' });
-//                 }
-//                 else
-//                 {   
-//                     // res.json({ success: true, message: 'authenticate'});
-//                     //Create the token for Superadmin-details
-//                     const token = jwt.sign(result.toJSON(), secret, {
-//                         expiresIn: 604800 // 1 week
-//                       });
-                      
-                      
-//                         res.json({ success: true,
-//                         token: 'JWT '+token,
-//                         recruiter:{
-//                             id: result._id,
-//                             email: result.email,
-//                             message: 'Authenticated'
-                           
-//                         },
-                                                                       
-//                     });        
-                
-//                  }
-//             }
-//             else 
-//             {
-//                 res.json({ success: false, message: 'No password provided' });
-//             }
-        
-//         }
-        
-
-//     });
-
-    
-// });
-
-
 // check Chairman current password
-// chairman_router.post('/societyadmincheckcurrentpassword/:society_id', (req, res, next) =>
-// {
-//     Chairman.findById(req.params.society_id).select('password').exec(function(err, result)
-//     {  
+chairman_router.post('/checkchairmancurrentpassword/:chairman_id', (req, res, next) =>
+{
+    Chairman.findById(req.params.chairman_id).select('password').exec(function(err, result)
+    {  
        
       
-//         if(err)
-//         { 
-//             throw err;
-//         }
-//         if(!result)
-//         {
-//             res.json({ success: false, message: 'Please enter valid current password' });
-//         } 
-//         else if(result)
-//         {
-//             if(req.body.password)
-//             {
-//                 var validPassword = result.comparePassword(req.body.password);
-//                if(validPassword){
-//                 res.json({ success: true, message: 'Current password is correct'});
+        if(err)
+        { 
+            throw err;
+        }
+        if(!result)
+        {
+            res.json({ success: false, message: 'Please enter valid current password' });
+        } 
+        else if(result)
+        {
+            if(req.body.password)
+            {
+                var validPassword = result.comparePassword(req.body.password);
+               if(validPassword){
+                res.json({ success: true, message: 'Current password is correct'});
 
-//                }
-//                else{
-//                 res.json({ success: false, message: 'Please enter valid current Password' });
+               }
+               else{
+                res.json({ success: false, message: 'Please enter valid current Password' });
 
-//                }
+               }
 
-//             }
-//             else
-//             {   
-//                 res.json({ success: false, message: 'No current password provided' });
+            }
+            else
+            {   
+                res.json({ success: false, message: 'No current password provided' });
           
-//              }
-//         }
+             }
+        }
         
 
-//     });
+    });
 
     
-// });
+});
 
 
 // change Chairman current password
-// chairman_router.put('/societyadminchangecurrentpassword/:manager_id',(req, res, next)=>
-// { 
+chairman_router.put('/changechairmancurrentpassword/:chairman_id',(req, res, next)=>
+{ 
     
-//     Chairman.findById(req.params.manager_id).select('password').exec(function(err, result)
-//     {  
+    Chairman.findById(req.params.chairman_id).select('password').exec(function(err, result)
+    {  
        
-//         console.log(req.body.id);
-//         console.log(result);
-//         if(err)
-//         { 
-//             throw err;
-//         }
-//         if(!result)
-//         {
-//             res.json({ success: false, message: 'Please enter valid current password' });
-//         } 
-//         else if(result)
-//         {                    
+        console.log(req.body.id);
+        console.log(result);
+        if(err)
+        { 
+            throw err;
+        }
+        if(!result)
+        {
+            res.json({ success: false, message: 'Please enter valid current password' });
+        } 
+        else if(result)
+        {                    
 
-//             if(req.body.password)
-//             {
-//                 var validPassword = result.comparePassword(req.body.password);
-//                if(validPassword){
-//                     if(err) throw err;
-//                     if(req.body.newpassword == null || req.body.newpassword == '')
-//                     {
-//                         res.json({ success: false, message: 'Password not provided'});
+            if(req.body.password)
+            {
+                var validPassword = result.comparePassword(req.body.password);
+               if(validPassword){
+                    if(err) throw err;
+                    if(req.body.newpassword == null || req.body.newpassword == '')
+                    {
+                        res.json({ success: false, message: 'Password not provided'});
             
-//                     } else
-//                         {
-//                         result.password = req.body.newpassword;
+                    } else
+                        {
+                        result.password = req.body.newpassword;
                 
-//                         result.save(function(err){
-//                             if(err){
-//                                 res.json({ success: false, message: err });
-//                             }else{
-//                                 res.json({ success: true, message: 'Password has been reset!' });
+                        result.save(function(err){
+                            if(err){
+                                res.json({ success: false, message: err });
+                            }else{
+                                res.json({ success: true, message: 'Password has been reset!' });
                 
-//                             }
-//                         });
-//                     }
+                            }
+                        });
+                    }
 
-//                }
-//                else{
-//                 res.json({ success: false, message: 'Please enter valid current Password' });
+               }
+               else{
+                res.json({ success: false, message: 'Please enter valid current Password' });
 
-//                }
-//             }
-//             else
-//             {   
-//                 res.json({ success: false, message: 'No current password provided' });
-//              }
-//         }
+               }
+            }
+            else
+            {   
+                res.json({ success: false, message: 'No current password provided' });
+             }
+        }
         
 
-//     });
+    });
 
-// });
+});
 
 //  Chairman reset password
 // chairman_router.put('/superadminsavepassword',function(req, res)
@@ -328,31 +267,37 @@ chairman_router.put('/updatechairman/:chairman_id',(req, res, next)=>
 
 
 //Update Status
-chairman_router.put('/updatesocietystatus/:manager_id',(req, res, next)=>
+chairman_router.put('/updatesocietystatus/:chairman_id',(req, res, next)=>
 {      
-    Chairman.findByIdAndUpdate(req.params.manager_id,
-    {  
-        $set: 
-        { 
-            status: req.body.status
-        }
-    },
-    {
-        new: true
-    },
-    function(err, result)
-    {
-        if(err)
-        {
-            res.send("Error updating status in Manager list");
-        }
-        else
-        {
-            res.json(result);
-        }
-    });
-});
+    Chairman.findByIdAndUpdate(req.params.chairman_id,
+        {  
+                    $set: 
+                    { 
+                        chairman_status: req.body.status
+                    }
+                },
+                {
+                    new: true
+                },
+                function(err, result)
+                {
+                    if(err)
+                    {
+                        res.json({success: false, message:"Error updating status in  Chairman list"});
+                    }
+                    else
+                    {
+                        if(req.body.status == false){
+                            res.json({success: true, message:"Chairman Status is Inactive"});
 
+                        }
+                        else{
+                            res.json({success: true, message:"Chairman Status is Active"});
+
+                        }
+                    }
+                });
+});
 
 //delete Chairman Details
 chairman_router.delete('/deletemanager/:manager_id',(req, res, next)=>

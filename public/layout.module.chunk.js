@@ -3,7 +3,7 @@ webpackJsonp(["layout.module"],{
 /***/ "../../../../../src/app/layout/components/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top\">\n    <a class=\"navbar-brand\" href=\"#\">Society Admin</a>\n    <button class=\"navbar-toggler\" type=\"button\" (click)=\"toggleSidebar()\">\n        <span class=\"navbar-toggler-icon\"></span>\n        <i class=\"fa fa-bars text-muted\" aria-hidden=\"true\"></i>\n    </button>\n    <div class=\"collapse navbar-collapse\" >\n        \n        <ul class=\"navbar-nav ml-auto\" >\n            <!-- <li class=\"nav-item d-none d-xl-block\">\n                <a\n                    class=\"nav-link btn mt-1\" role=\"button\"\n                    style=\"padding: .375rem 1rem !important;border-color: #999;\"\n                >\n                    Download Now\n                </a>\n            </li> &nbsp; -->\n         \n                 \n               \n            \n         \n        \n            <li class=\"nav-item dropdown\" ngbDropdown > \n                <a href=\"javascript:void(0)\" class=\"nav-link\" ngbDropdownToggle>\n                    <i class=\"fa fa-user\"></i> &nbsp; &nbsp; Society Admin &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class=\"caret\"></b>\n                </a>\n                <div class=\"dropdown-menu-right\" ngbDropdownMenu >\n                    <a class=\"dropdown-item\" href=\"javascript:void(0)\">\n                        <i class=\"fa fa-fw fa-user\"></i> Profile\n                    </a>\n           \n                    <a class=\"dropdown-item\"  routerLink=\"/change-password\">\n                        <i  class=\"fa fa-fw fa-gear\"></i> Change Password &nbsp;\n                    </a>\n                    <a class=\"dropdown-item\" [routerLink]=\"['/login']\" (click)=\"onLoggedout()\">\n                        <i class=\"fa fa-fw fa-power-off\"></i> Log Out\n                    </a>\n                </div>\n            </li>\n        </ul>\n    </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg fixed-top\">\n    <a class=\"navbar-brand\" href=\"#\">{{name}} ({{subname}})</a>\n    <button class=\"navbar-toggler\" type=\"button\" (click)=\"toggleSidebar()\">\n        <span class=\"navbar-toggler-icon\"></span>\n        <i class=\"fa fa-bars text-muted\" aria-hidden=\"true\"></i>\n    </button>\n    <div class=\"collapse navbar-collapse\" >\n        \n        <ul class=\"navbar-nav ml-auto\" >\n            <!-- <li class=\"nav-item d-none d-xl-block\">\n                <a\n                    class=\"nav-link btn mt-1\" role=\"button\"\n                    style=\"padding: .375rem 1rem !important;border-color: #999;\"\n                >\n                    Download Now\n                </a>\n            </li> &nbsp; -->\n         \n                 \n               \n            \n         \n        \n            <li class=\"nav-item dropdown\" ngbDropdown > \n                <a href=\"javascript:void(0)\" class=\"nav-link\" ngbDropdownToggle>\n                    <i class=\"fa fa-user\"></i> &nbsp; {{name}} ({{subname}})&nbsp;&nbsp;<b class=\"caret\"></b>\n                </a>\n                <div class=\"dropdown-menu-right\" ngbDropdownMenu >\n                    <a class=\"dropdown-item\" href=\"javascript:void(0)\">\n                        <i class=\"fa fa-fw fa-user\"></i> Profile\n                    </a>\n           \n                    <a class=\"dropdown-item\"  routerLink=\"/change-password\">\n                        <i  class=\"fa fa-fw fa-gear\"></i> Change Password &nbsp;\n                    </a>\n                    <a class=\"dropdown-item\" [routerLink]=\"['/login']\" (click)=\"onLoggedout()\">\n                        <i class=\"fa fa-fw fa-power-off\"></i> Log Out\n                    </a>\n                </div>\n            </li>\n        </ul>\n    </div>\n</nav>\n"
 
 /***/ }),
 
@@ -48,6 +48,25 @@ var HeaderComponent = (function () {
         var _this = this;
         this.router = router;
         this.pushRightClass = 'push-right';
+        this.societyadmin = JSON.parse(localStorage['societyadmin']);
+        this.name = this.societyadmin.society_name;
+        this.subname = this.societyadmin.message;
+        this.managerexists = false;
+        this.chairmanexists = false;
+        if (localStorage.getItem('manager')) {
+            this.manager = JSON.parse(localStorage['manager']);
+            this.managerexists = true;
+            this.name = this.manager.manager_name;
+            this.subname = this.manager.message;
+            console.log('ManagerExists:' + this.managerexists);
+        }
+        if (localStorage.getItem('chairman')) {
+            this.chairman = JSON.parse(localStorage['chairman']);
+            this.chairmanexists = true;
+            this.name = this.chairman.chairman_name;
+            this.subname = this.chairman.message;
+            console.log('ChairmanExists:' + this.chairmanexists);
+        }
         this.router.events.subscribe(function (val) {
             if (val instanceof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* NavigationEnd */] &&
                 window.innerWidth <= 992 &&
@@ -91,7 +110,7 @@ var HeaderComponent = (function () {
 /***/ "../../../../../src/app/layout/components/sidebar/sidebar.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"sidebar\" [ngClass]=\"{sidebarPushRight: isActive}\">\n    <div class=\"list-group\">\n        <a routerLink=\"/dashboard\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-dashboard\"></i>&nbsp;Dashboard\n        </a>\n\n\n                <a routerLink=\"/blocklist\" matTooltip=\"Select Society to See Block List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n                    <i class=\"fa fa-fw fa-th-large\"></i>&nbsp;Block List\n                </a>\n      \n   \n        <a routerLink=\"/managerlist\" matTooltip=\"Select Society to See Manager List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-black-tie\"></i>&nbsp;Manager List\n        </a>\n        <a routerLink=\"/chairmanlist\" matTooltip=\"Select Society to See Chairman List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-user-circle-o\"></i>&nbsp;Chairman List\n        </a>\n        <a routerLink=\"/flatlist\" matTooltip=\"Select Society to See FLat List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-home\"></i>&nbsp;FLat List\n        </a>\n        <a routerLink=\"/securitylist\" matTooltip=\"Select Society to See Security List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-shield\"></i>&nbsp;Security List\n        </a>\n        <a routerLink=\"/visitorlist\" matTooltip=\"Select Society to See Visitor List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-street-view\"></i>&nbsp;Visitor List\n        </a>\n    </div>\n</nav>\n"
+module.exports = "<nav class=\"sidebar\" [ngClass]=\"{sidebarPushRight: isActive}\">\n    <div class=\"list-group\" *ngIf=\"!managerexists\">\n        <a routerLink=\"/dashboard\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-dashboard\"></i>&nbsp;Dashboard\n        </a>\n\n\n                <a *ngIf=\"!chairmanexists\" routerLink=\"/blocklist\" matTooltip=\"Select Society to See Block List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n                    <i class=\"fa fa-fw fa-th-large\"></i>&nbsp;Block List\n                </a>\n      \n   \n        <a   *ngIf=\"!chairmanexists\"   routerLink=\"/managerlist\" matTooltip=\"Select Society to See Manager List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-black-tie\"></i>&nbsp;Manager List\n        </a>\n        <a *ngIf=\"!chairmanexists\" routerLink=\"/chairmanlist\" matTooltip=\"Select Society to See Chairman List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-user-circle-o\"></i>&nbsp;Chairman List\n        </a>\n        <a routerLink=\"/flatlist\" matTooltip=\"Select Society to See FLat List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-home\"></i>&nbsp;FLat List\n        </a>\n        <a routerLink=\"/securitylist\" matTooltip=\"Select Society to See Security List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-shield\"></i>&nbsp;Security List\n        </a>\n        <a routerLink=\"/visitorlist\" matTooltip=\"Select Society to See Visitor List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-street-view\"></i>&nbsp;Visitor List\n        </a>\n    </div>\n    <div class=\"list-group\" *ngIf=\"managerexists\">\n        <a routerLink=\"/dashboard\" [routerLinkActive]=\"['router-link-active']\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-dashboard\"></i>&nbsp;Dashboard\n        </a>\n        <a  routerLink=\"/chairmanlist\" matTooltip=\"Select Society to See Chairman List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-user-circle-o\"></i>&nbsp;Chairman List\n        </a>\n        <a routerLink=\"/flatlist\" matTooltip=\"Select Society to See FLat List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-home\"></i>&nbsp;FLat List\n        </a>\n        <a routerLink=\"/securitylist\" matTooltip=\"Select Society to See Security List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-shield\"></i>&nbsp;Security List\n        </a>\n        <a routerLink=\"/visitorlist\" matTooltip=\"Select Society to See Visitor List!\" matTooltipPosition=\"above\" class=\"list-group-item\">\n            <i class=\"fa fa-fw fa-street-view\"></i>&nbsp;Visitor List\n        </a>\n    </div>\n</nav>\n"
 
 /***/ }),
 
@@ -135,9 +154,22 @@ var SidebarComponent = (function () {
     function SidebarComponent(router) {
         var _this = this;
         this.router = router;
+        this.societyadmin = JSON.parse(localStorage['societyadmin']);
+        this.managerexists = false;
+        this.chairmanexists = false;
         this.isActive = false;
         this.showMenu = '';
         this.pushRightClass = 'push-right';
+        if (localStorage.getItem('manager')) {
+            this.manager = JSON.parse(localStorage['manager']);
+            this.managerexists = true;
+            console.log('ManagerExists:' + this.managerexists);
+        }
+        if (localStorage.getItem('chairman')) {
+            this.chairman = JSON.parse(localStorage['chairman']);
+            this.chairmanexists = true;
+            console.log('ChairmanExists:' + this.chairmanexists);
+        }
         this.router.events.subscribe(function (val) {
             if (val instanceof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* NavigationEnd */] &&
                 window.innerWidth <= 992 &&
