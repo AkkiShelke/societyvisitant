@@ -13,7 +13,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 
 
-//////////////////////////////////  SOCIETY TABLE OPERATIONS  //////////////////////////////////////////
+//////////////////////////////////  Security TABLE OPERATIONS  //////////////////////////////////////////
 
 
 //rerieving  Security Details
@@ -68,7 +68,7 @@ security_router.post('/addsecurity',(req, res, next)=>
     });
     if(req.body.security_name == null || req.body.security_name == ''  || req.body.email == null || req.body.email == '' || req.body.contact == null || req.body.contact == '' || req.body.password == null || req.body.password == '')
     {
-        res.json({success: false, message: 'Ensure Manager, Chairman name, email, contact, password were provided'});
+        res.json({success: false, message: 'Ensure Manager, Security name, email, contact, password were provided'});
     }
     else
     {
@@ -76,11 +76,11 @@ security_router.post('/addsecurity',(req, res, next)=>
         {
             if(err)
             {
-                res.json({success: false, message: 'Chairman admin is exist' + err});
+                res.json({success: false, message: 'Security admin is exist' + err});
             }
             else
             { 
-                res.json({success: true, message: 'Chairman is registered! '});
+                res.json({success: true, message: 'Security is registered! '});
             }
         });
     }
@@ -94,64 +94,74 @@ else{
 
    
 // Security Login Route
-// http://localhost:port/api/authenticate
-// security_router.post('/authenticatesociety', (req, res, next) =>
-// {
-//     Security.findOne({ email: req.body.email }).select('_id    email password').exec(function(err, result)
-//     {  
-       
-      
-//         if(err)
-//         { 
-//             throw err;
-//         }
-//         if(!result)
-//         {
-//             res.json({ success: false, message: 'Please enter valid Email ID' });
-//         } 
-//         else if(result)
-//         {
-//             if(req.body.password)
-//             {
-//                 var validPassword = result.comparePassword(req.body.password);
-//                 if(!validPassword)
-//                 {
-//                     res.json({ success: false, message: 'Please enter valid Password' });
-//                 }
-//                 else
-//                 {   
-//                     // res.json({ success: true, message: 'authenticate'});
-//                     //Create the token for Superadmin-details
-//                     const token = jwt.sign(result.toJSON(), secret, {
-//                         expiresIn: 604800 // 1 week
-//                       });
-                      
-                      
-//                         res.json({ success: true,
-//                         token: 'JWT '+token,
-//                         recruiter:{
-//                             id: result._id,
-//                             email: result.email,
-//                             message: 'Authenticated'
-                           
-//                         },
-                                                                       
-//                     });        
-                
-//                  }
-//             }
-//             else 
-//             {
-//                 res.json({ success: false, message: 'No password provided' });
-//             }
-        
-//         }
-        
 
-//     });
+security_router.post('/authenticatesecurity', (req, res, next) =>
+{
+    console.log(req.body);
+    Security.findOne({ email: req.body.email }).select('_id  security_name security_status  email password').exec(function(err, result)
+    {  
+       
+
+        if(err)
+        { 
+            throw err;
+        }
+
+       if(result){
+
+        if(result.security_status == true)
+        {       
+
+        if(!result)
+        {
+            res.json({ success: false, message: 'Please enter valid Email ID' });
+        } 
+        else if(result)
+        {
+            if(req.body.password)
+            {
+                var validPassword = result.comparePassword(req.body.password);
+                if(!validPassword)
+                {
+                    res.json({ success: false, message: 'Please enter valid Password' });
+                }
+                else
+                {   
+                    // res.json({ success: true, message: 'authenticate'});
+                    //Create the token for Superadmin-details
+                    const token = jwt.sign(result.toJSON(), secret, {
+                        expiresIn: 604800 // 1 week
+                      });
+                      
+ 
+                            res.json({ success: true, message: 'Security Admin Login successfully  ',
+
+                        token: 'JWT '+token,
+                        security:{
+                            id: result._id,
+                            email: result.email,
+                            security_name: result.security_name,
+                            message: 'Authenticated'
+                           
+                        },
+                                                                       
+                    });        
+                
+                 }
+            }
+            else 
+            {
+                res.json({ success: false, message: 'No password provided' });
+            }
+        
+        }
+    }
+} 
+
+    });
 
     
-// });
+});
 
 
 // check Security current password
@@ -315,31 +325,6 @@ security_router.put('/updatesecurity/:security_id',(req, res, next)=>
     });
 });
 
-//Update Status
-security_router.put('/updatesecuritystatus/:manager_id',(req, res, next)=>
-{      
-    Security.findByIdAndUpdate(req.params.manager_id,
-    {  
-        $set: 
-        { 
-            status: req.body.status
-        }
-    },
-    {
-        new: true
-    },
-    function(err, result)
-    {
-        if(err)
-        {
-            res.send("Error updating status in Manager list");
-        }
-        else
-        {
-            res.json(result);
-        }
-    });
-});
 
 //Update Status
 security_router.put('/updatesecuritystatus/:security_id',(req, res, next)=>
@@ -392,7 +377,7 @@ security_router.delete('/deletesecurity/:security_id',(req, res, next)=>
     });
 });
 
-///////////////////////////////////////////// END OF SOCIETY TABLE OPERATION ///////////////////////////////////////////////////////
+///////////////////////////////////////////// END OF Security TABLE OPERATION ///////////////////////////////////////////////////////
 
 
 // exporting the method to get access outside of Router

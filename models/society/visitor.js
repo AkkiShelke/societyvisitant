@@ -2,6 +2,8 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var Schema = mongoose.Schema;
+var multer = require('multer');
 //design database schema of vclinix
 
 const VisitorSchema = Schema({
@@ -19,10 +21,22 @@ const VisitorSchema = Schema({
         required: true ,
         unique:true
      },
+     img: { 
+         data: Buffer, contentType: String
+         },
      contact:{
         type:Number,
         unique: true
      },
+     In_time:{
+        type: String,
+        required
+     },
+     Out_time:{
+        type: String,
+        required
+     },
+     whom_to_meet: {type: mongoose.Schema.Types.ObjectId, ref: 'flat' },
      visitor_status:{
         type: Boolean, default: true 
      }

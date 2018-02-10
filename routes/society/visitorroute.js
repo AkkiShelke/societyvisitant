@@ -48,6 +48,14 @@ visitor_router.get('/visitorlistdetails/:society_id', (req, res, next)=>
     });
 });
 
+visitor_router.post('/photo',(req,res , next)=>
+{
+    let newVisitor = new Visitor();
+    newVisitor.img.data = fs.readFileSync(req.files.userPhoto.path)
+    newVisitor.img.contentType = 'image/png';
+    newVisitor.save();
+   });
+
 //add Security Registration
 visitor_router.post('/addvisitor',(req, res, next)=>
 {
@@ -60,15 +68,18 @@ visitor_router.post('/addvisitor',(req, res, next)=>
         Superadmin_id:  req.body.superadmin_id,
         Society_id: req.body.society_id,
         Manager_id: req.body.manager_id,
-        security_name: req.body.security_name,
-         email: req.body.email,
-         contact: req.body.contact,
-        password: req.body.password
+      visitor_name: req.body.visitor_name,
+     email: req.body.email,
+     img: req.body.img,
+     contact: req.body.contact,
+     In_time: req.body.in_time,
+     Out_time: req.body.out_time,
+     whom_to_meet: req.body.flat_id
       
     });
-    if(req.body.security_name == null || req.body.security_name == ''  || req.body.email == null || req.body.email == '' || req.body.contact == null || req.body.contact == '' || req.body.password == null || req.body.password == '')
+    if(req.body.visitor_name == null || req.body.visitor_name == ''  || req.body.email == null || req.body.email == '' || req.body.contact == null || req.body.contact == '')
     {
-        res.json({success: false, message: 'Ensure Manager, Chairman name, email, contact, password were provided'});
+        res.json({success: false, message: 'Ensure  Visitor name, email, contact, password were provided'});
     }
     else
     {
