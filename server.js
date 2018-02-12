@@ -16,6 +16,7 @@ const flatroute = require('./routes/society/flatroute');
 const flatownerroute = require('./routes/society/flatownerroute');
 const tenantroute = require('./routes/society/tenantroute');
 const flatmemberroute = require('./routes/society/flatmemberroute');
+const visitorroute = require('./routes/society/visitorroute');
 
 //connect to mongodb
 mongoose.connect('mongodb://cybercode:cybercode@ds119028.mlab.com:19028/visitant');
@@ -56,6 +57,7 @@ app.use('/api', flatroute);
 app.use('/api', flatownerroute);
 app.use('/api', tenantroute);
 app.use('/api', flatmemberroute);
+app.use('/api', visitorroute);
 
 
 
