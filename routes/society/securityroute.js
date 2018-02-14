@@ -39,7 +39,7 @@ security_router.get('/security/:security_id', (req, res, next)=>
 security_router.get('/securitylistdetails/:society_id', (req, res, next)=>
 {
 
-    Security.find({Society_id: req.params.society_id}).select('_id Manager_id security_name  email contact').sort({_id: -1}).exec(function(err, result)
+    Security.find({Society_id: req.params.society_id}).select('_id Manager_id security_name security_status email contact').sort({_id: -1}).exec(function(err, result)
 {
     Security.populate( result, {path:'Manager_id'},function(err, result){
     res.json(result);

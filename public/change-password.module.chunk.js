@@ -164,9 +164,11 @@ var ChangePasswordComponent = (function () {
                 response = data;
                 if (response.success == true) {
                     _this.toasterService.pop('success', response.message);
+                    _this.validpassword = true;
                 }
                 else {
                     _this.toasterService.pop('error', response.message);
+                    _this.validpassword = false;
                 }
             });
         }

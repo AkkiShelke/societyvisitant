@@ -39,7 +39,7 @@ chairman_router.get('/chairman/:chairman_id', (req, res, next)=>
 chairman_router.get('/chairmanlistdetails/:society_id', (req, res, next)=>
 {
 
-    Chairman.find({Society_id: req.params.society_id}).select('_id Manager_id chairman_name  email contact').sort({_id: -1}).exec(function(err, result)
+    Chairman.find({Society_id: req.params.society_id}).select('_id Manager_id chairman_name chairman_status  email contact').sort({_id: -1}).exec(function(err, result)
 {
     Chairman.populate( result, {path:'Manager_id'},function(err, result){
     res.json(result);
@@ -52,7 +52,7 @@ chairman_router.get('/chairmanlistdetails/:society_id', (req, res, next)=>
 chairman_router.get('/chairmanlistbymanager/:manager_id', (req, res, next)=>
 {
 
-    Chairman.find({Manager_id: req.params.manager_id}).select('_id Manager_id chairman_name  email contact').sort({_id: -1}).exec(function(err, result)
+    Chairman.find({Manager_id: req.params.manager_id}).select('_id Manager_id chairman_name chairman_status email contact').sort({_id: -1}).exec(function(err, result)
 {
     
     res.json(result);
@@ -267,7 +267,7 @@ chairman_router.put('/updatechairman/:chairman_id',(req, res, next)=>
 
 
 //Update Status
-chairman_router.put('/updatesocietystatus/:chairman_id',(req, res, next)=>
+chairman_router.put('/updatechairmanstatus/:chairman_id',(req, res, next)=>
 {      
     Chairman.findByIdAndUpdate(req.params.chairman_id,
         {  

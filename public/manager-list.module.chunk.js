@@ -117,6 +117,7 @@ var ManagerListComponent = (function () {
         });
     };
     ManagerListComponent.prototype.changeStatus = function (manager, id) {
+        var _this = this;
         manager = !manager;
         var manager_details = {
             status: manager
@@ -124,8 +125,15 @@ var ManagerListComponent = (function () {
         console.log(manager_details);
         this.http.put('api/updatemanagerstatus/' + id, manager_details).subscribe(function (data) {
             console.log(data);
+            var response = data;
+            if (response.success == true) {
+                _this.toasterService.pop('success', response.message);
+            }
+            else {
+                _this.toasterService.pop('error', response.message);
+            }
+            _this.getManagerData();
         });
-        this.getManagerData();
     };
     ManagerListComponent.prototype.ngOnInit = function () {
     };
