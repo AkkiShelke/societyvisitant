@@ -21,10 +21,12 @@ const VisitorSchema = Schema({
      },
      image_path: {
         type: String,
+        required: true,
         trim: true
     },
     image_originalname: {
         type: String,
+        required: true
     },
      contact:{
         type:Number,
