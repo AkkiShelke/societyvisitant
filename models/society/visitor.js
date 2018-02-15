@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 const VisitorSchema = Schema({
 
-    Superadmin_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'superadmin' },
+
     Society_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'society' },
     Security_id: {type: mongoose.Schema.Types.ObjectId, ref: 'security' },
     
