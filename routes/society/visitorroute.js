@@ -53,7 +53,7 @@ visitor_router.post('/addvisitor',  function(req, res, next) {
 
 
 
-    res.json({success: true, message: 'web service work' + newVisitor});
+    res.json({success: true, message: 'web service work'});
 
 
 });
