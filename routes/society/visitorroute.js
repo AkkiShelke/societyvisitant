@@ -89,6 +89,7 @@ console.log(req.body);
       
     
      });
+     
      newVisitor.save(function(err, result)
      {
          if(err)
