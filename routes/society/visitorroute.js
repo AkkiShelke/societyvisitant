@@ -49,55 +49,6 @@ visitor_router.get('/visitorlistdetails/:society_id', (req, res, next)=>
     });
 });
 
-
-// //add Security Registration
-// visitor_router.post('/addvisitor',(req, res, next)=>
-// {
-//     Visitor.findOne({ email: req.body.email , Society_id:  req.body.society_id}, function(err, result){
-
-//         if(!result){
-//     //logic for add Security Details
-//     let newVisitor= new Visitor(
-//     {   
-//         Superadmin_id:  req.body.superadmin_id,
-//         Society_id: req.body.society_id,
-//         Manager_id: req.body.manager_id,
-//       visitor_name: req.body.visitor_name,
-//      email: req.body.email,
-//      img: req.body.img,
-//      contact: req.body.contact,
-//      In_time: req.body.in_time,
-//      Out_time: req.body.out_time,
-//      whom_to_meet: req.body.flat_id
-      
-//     });
-//     if(req.body.security_name == null || req.body.security_name == ''  || req.body.email == null || req.body.email == '' || req.body.contact == null || req.body.contact == '' || req.body.password == null || req.body.password == '')
-//     {
-//         res.json({success: false, message: 'Ensure Manager, Visitor name, email, contact, password were provided'});
-//     }
-//     else
-//     {
-//         newVisitor.save(function(err, result)
-//         {
-//             if(err)
-//             {
-//                 res.json({success: false, message: 'Visitor is exist' + err});
-//             }
-//             else
-//             { 
-//                 res.json({success: true, message: 'Visitor is registered! '});
-//             }
-//         });
-//     }
-// }
-// else{
-//     res.json({success: false, message: 'Visitor is exist'});
-// }
-// });
-
-// });
-
-
 // To get more info about 'multer'.. you can go through https://www.npmjs.com/package/multer..
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
