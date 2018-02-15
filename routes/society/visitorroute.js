@@ -63,7 +63,7 @@ var storage = multer.diskStorage({
     storage: storage
    });
 
-visitor_router.post('/addvisitor', upload.single('file'), function(req, res, next) {
+visitor_router.post('/addvisitor', function(req, res, next) {
     console.log(req.file);
 console.log(req.body);
 
