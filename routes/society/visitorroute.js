@@ -68,7 +68,7 @@ visitor_router.post('/addvisitor', upload.single('file'), function(req, res, nex
 console.log(req.body);
 
  if(req.body.visitor_name == null || req.body.visitor_name == ''  || req.body.email == null || req.body.email == '' || req.body.contact == null || req.body.contact == '' || req.file.path == null || req.file.path == '' ||
- req.body.flat_id == null || req.body.flat_id == '' )
+ req.body.flat_id == null || req.body.flat_id == '' || req.file.path == null || req.file.path == '' || req.file.originalname == null || req.file.originalname == '')
  {
      res.json({success: false, message: 'Ensure  Visitor name, email, contact, whom_to_meet were provided'});
  }
@@ -80,8 +80,8 @@ console.log(req.body);
         Manager_id: req.body.manager_id,
       visitor_name: req.body.visitor_name,
      email: req.body.email,
-    //  image_path: req.file.path,
-    //  image_originalname: req.file.originalname,
+     image_path: req.file.path,
+     image_originalname: req.file.originalname,
       contact: req.body.contact,
      In_time: req.body.in_time,
      Out_time: req.body.out_time,
