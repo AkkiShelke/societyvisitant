@@ -52,19 +52,17 @@ visitor_router.get('/visitorlistdetails/:society_id', (req, res, next)=>
 
 // To get more info about 'multer'.. you can go through https://www.npmjs.com/package/multer..
 var storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, './uploads')
+    destination: function(req, file, cb) {
+    cb(null, 'uploads/')
     },
-
-
-    filename: function (req, file, callback) {
-        callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    filename: function(req, file, cb) {
+    cb(null, file.originalname);
     }
-})
-
-var upload = multer({
+   });
+    
+   var upload = multer({
     storage: storage
-})
+   });
 
 visitor_router.post('/addvisitor', upload.single('file'), function(req, res, next) {
     console.log(req.file);
