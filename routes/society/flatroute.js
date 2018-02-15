@@ -28,12 +28,13 @@ flat_router.get('/flatlist', (req, res, next)=>
 flat_router.get('/flatlistdetails/:society_id', (req, res, next)=>
 {
 
-    Flat.find({Society_id: req.params.society_id}).sort({_id: -1}).exec(function(err, result)
+Flat.find({Society_id: req.params.society_id}).sort({_id: -1}).exec(function(err, result)
 {
-   
+    Flat.populate( result, {path:'Block_id Manager_id Chairman_id'},function(err, result){
     res.json(result);
 
-});
+        });
+    });
 });
 
 //Check Flat 
@@ -61,6 +62,8 @@ flat_router.post('/addflat',(req, res, next)=>
     let newFlat = new Flat(
         {   Superadmin_id: req.body.superadmin_id,
             Society_id: req.body.society_id,
+	    Block_id: req.body.block_id,
+	    Manager_id: req.body.manager_id,
             Chairman_id: req.body.chairman_id,
              flat_no: req.body.flat_no,
              floor_no: req.body.floor_no,
