@@ -50,7 +50,22 @@ visitor_router.get('/visitorlistdetails/:society_id', (req, res, next)=>
 });
 
 visitor_router.post('/addvisitor',  function(req, res, next) {
-    res.json({success: true, message: 'web service work'});
+
+
+    var newVisitor = new Visitor ({
+
+            Society_id: req.body.society_id,
+            Manager_id: req.body.manager_id,
+          visitor_name: req.body.visitor_name,
+         email: req.body.email,
+         image_path: req.file.path,
+         image_originalname: req.file.originalname,
+          contact: req.body.contact,
+         In_time: req.body.in_time,
+         Out_time: req.body.out_time,
+         whom_to_meet: req.body.flat_id
+    });
+    res.json({success: true, message: 'web service work' + newVisitor});
 
 
 });
