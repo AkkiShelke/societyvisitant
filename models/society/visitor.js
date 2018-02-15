@@ -25,7 +25,6 @@ const VisitorSchema = Schema({
     },
     image_originalname: {
         type: String,
-        required: true
     },
      contact:{
         type:Number,
