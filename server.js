@@ -41,7 +41,7 @@ app.use(cors());
 
 //static files
 
-app.use(express.static(__dirname + '/uploads')) 
+app.use(express.static(__dirname + '/')) 
 app.use(bodyparser.urlencoded({ extended: false }))
  
 // parse application/json
