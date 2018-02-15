@@ -84,7 +84,7 @@ console.log(req.body);
  if(req.body.visitor_name == null || req.body.visitor_name == ''  || req.body.email == null || req.body.email == '' || req.body.contact == null || req.body.contact == '' ||
  req.body.flat_id == null || req.body.flat_id == '' )
  {
-     res.json({success: false, message: 'Ensure  Visitor name, email, contact, whom_to_meet were provided' + newVisitor});
+     res.json({success: false, message: 'Ensure  Visitor name, email, contact, whom_to_meet were provided' + req.body});
  }
  else
  {
