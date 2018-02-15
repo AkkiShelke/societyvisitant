@@ -80,8 +80,8 @@ console.log(req.body);
         Manager_id: req.body.manager_id,
       visitor_name: req.body.visitor_name,
      email: req.body.email,
-     image_path: req.file.path,
-     image_originalname: req.file.originalname,
+    //  image_path: req.file.path,
+    //  image_originalname: req.file.originalname,
       contact: req.body.contact,
      In_time: req.body.in_time,
      Out_time: req.body.out_time,
@@ -89,7 +89,7 @@ console.log(req.body);
       
     
      });
-     
+
      newVisitor.save(function(err, result)
      {
          if(err)
