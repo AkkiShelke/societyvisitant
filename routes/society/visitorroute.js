@@ -52,9 +52,9 @@ visitor_router.get('/visitorlistdetails/:society_id', (req, res, next)=>
 
 // To get more info about 'multer'.. you can go through https://www.npmjs.com/package/multer..
 var storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, './uploads')
-    },
+    // destination: function (req, file, callback) {
+    //     callback(null, './uploads')
+    // },
     filename: function (req, file, callback) {
         callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
