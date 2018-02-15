@@ -21,7 +21,6 @@ const VisitorSchema = Schema({
      },
      image_path: {
         type: String,
-        required: true,
         trim: true
     },
     image_originalname: {
