@@ -44,7 +44,7 @@ const VisitorSchema = Schema({
      },
      Out_time:{
         type: String,
-        required: true
+
      },
      whom_to_meet: {type: mongoose.Schema.Types.ObjectId, ref: 'flat' },
      visitor_status:{
