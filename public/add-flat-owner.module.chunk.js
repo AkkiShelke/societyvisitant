@@ -290,6 +290,8 @@ var AddFlatOwnerComponent = (function () {
         var _this = this;
         var flat_details = {
             society_id: this.societyadmin.id,
+            block_id: this.block_id,
+            manager_id: this.manager_id,
             chairman_id: this.chairman_id,
             flat_no: this.flatno,
             floor_no: this.floorno,
