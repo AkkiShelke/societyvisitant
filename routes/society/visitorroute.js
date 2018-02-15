@@ -75,6 +75,8 @@ console.log(req.body);
  email: req.body.email,
  image_path: req.file.path,
  image_originalname: req.file.originalname,
+	vehicle_type:req.body.vehicle_type,
+	vehicle_no: req.body.vehicle_no,
   contact: req.body.contact,
  In_time: req.body.in_time,
  Out_time: req.body.out_time,

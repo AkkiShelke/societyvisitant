@@ -32,6 +32,12 @@ const VisitorSchema = Schema({
         type:Number,
         unique: true
      },
+	vehicle_type:{
+	type: String,	
+	},
+	vehicle_no:{
+	type: String,	
+	},
      In_time:{
         type: String,
         required:true
