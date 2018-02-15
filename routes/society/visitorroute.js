@@ -59,6 +59,8 @@ visitor_router.post('/addvisitor',  function(req, res, next) {
           visitor_name: req.body.visitor_name,
          email: req.body.email,
          image_path: req.file.path,
+
+         
          image_originalname: req.file.originalname,
           contact: req.body.contact,
          In_time: req.body.in_time,
