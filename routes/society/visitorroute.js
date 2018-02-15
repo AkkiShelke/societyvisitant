@@ -50,7 +50,7 @@ visitor_router.get('/visitorlistdetails/:society_id', (req, res, next)=>
 });
 
 visitor_router.post('/addvisitor', upload.single('file'),  function(req, res, next) {
-    res.json({success: true, message: 'web service work' + req.file});
+    res.json({success: true, message: 'web service work'});
 
 
 });
