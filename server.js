@@ -40,8 +40,8 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 
 //static files
-app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.static(__dirname + '/uploads')) 
 app.use(bodyparser.urlencoded({ extended: false }))
  
 // parse application/json
