@@ -170,10 +170,18 @@ flatowner_router.put('/updateflatownerstatus/:flatowner_id',(req, res, next)=>
         }
         else
         {
-            res.json(result);
+            if(req.body.status == false){
+                res.json({success: true, message:"FlatOwner Status is Inactive"});
+
+            }
+            else{
+                res.json({success: true, message:"FlatOwner Status is Active"});
+
+            }
         }
     });
 });
+
 
 
 //delete Flatowner Details

@@ -1,10 +1,12 @@
-//importing modules
+  //importing modules
 var express = require('express');
 var path = require('path');
 var bodyparser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
 var app =express();
+var ejs = require('ejs')
+var fs = require('fs')
 
 const superadminroute = require('./routes/superadminroute');
 const societyroute = require('./routes/society/societyroute');
@@ -18,9 +20,11 @@ const tenantroute = require('./routes/society/tenantroute');
 const flatmemberroute = require('./routes/society/flatmemberroute');
 const visitorroute = require('./routes/society/visitorroute');
 
+
+
 //connect to mongodb
 mongoose.connect('mongodb://cybercode:cybercode@ds119028.mlab.com:19028/visitant');
-
+mongoose.Promise = global.Promise
 //on connection 
 mongoose.connection.on('connected', ()=>{
     console.log('Connected to database mongodb @27017');
@@ -42,11 +46,12 @@ app.use(cors());
 //static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.static(__dirname + '/uploads'))
+
 app.use(bodyparser.urlencoded({ extended: false }))
- 
+app.set('view engine', 'ejs')
 // parse application/json
 app.use(bodyparser.json())
-
 //routes
 
 app.use('/api', superadminroute);
@@ -63,9 +68,7 @@ app.use('/api', visitorroute);
 
 
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/index.html'));
-  });
+
   app.listen(port,()=>{
   
       console.log('Server started at port:',+port);

@@ -75,6 +75,7 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular5_toaster__ = __webpack_require__("../../../../angular5-toaster/dist/bundles/angular5-toaster.umd.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular5_toaster___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angular5_toaster__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -89,10 +90,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AddFlatOwnerComponent = (function () {
-    function AddFlatOwnerComponent(http, toasterService, _formBuilder, _cfr) {
+    function AddFlatOwnerComponent(http, toasterService, _formBuilder, router, _cfr) {
         this.http = http;
         this._formBuilder = _formBuilder;
+        this.router = router;
         this._cfr = _cfr;
         // Initializtion
         this.row = [{}];
@@ -318,8 +321,7 @@ var AddFlatOwnerComponent = (function () {
                     if (_this.flatownerresponse.success == true) {
                         _this.toasterService.pop('success', _this.flatownerresponse.message);
                         console.log(_this.tenant_status);
-                        console.log(_this.tenant_status);
-                        if (_this.tenant_status = true) {
+                        if (_this.tenant_status == true) {
                             var tenant_details = {
                                 society_id: _this.societyadmin.id,
                                 flatowner_id: _this.flatownerresponse.result._id,
@@ -376,6 +378,9 @@ var AddFlatOwnerComponent = (function () {
                                     _this.memberresponse = data;
                                     if (_this.memberresponse.success == true) {
                                         _this.toasterService.pop('success', "Flat Details enter Successfully");
+                                        setTimeout(function () {
+                                            _this.router.navigate(['/dashboard']);
+                                        }, 3000);
                                     }
                                     else {
                                         _this.toasterService.pop('error', _this.memberresponse.message);
@@ -428,6 +433,7 @@ var AddFlatOwnerComponent = (function () {
             animations: [Object(__WEBPACK_IMPORTED_MODULE_1__router_animations__["a" /* routerTransition */])()]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_common_http__["a" /* HttpClient */], typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular5_toaster__["ToasterService"]) === "function" && _a || Object, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* Router */],
             __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"]])
     ], AddFlatOwnerComponent);
     return AddFlatOwnerComponent;

@@ -19,12 +19,21 @@ const VisitorSchema = Schema({
         required: true ,
         unique:true
      },
-     image_path: {
+     profile_path: {
         type: String,
         required: true,
         trim: true
     },
-    image_originalname: {
+    profile_originalname: {
+        type: String,
+        required: true
+    },
+    document_path: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    document_originalname: {
         type: String,
         required: true
     },
@@ -44,7 +53,6 @@ const VisitorSchema = Schema({
      },
      Out_time:{
         type: String,
-
      },
      whom_to_meet: {type: mongoose.Schema.Types.ObjectId, ref: 'flat' },
      visitor_status:{
