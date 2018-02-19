@@ -10,7 +10,7 @@ var secret = 'Akshay';
 var bcrypt = require('bcrypt-nodejs');
 var multer = require('multer');
 var path = require('path')
-
+var fs = require('fs')
 
 
 
@@ -24,7 +24,11 @@ visitor_router.get('/visitorlist', (req, res, next) => {
         res.json(result);
     });
 });
-
+visitor_router.get('/visitorbyflatid/:flat_id', (req, res, next) => {
+    Visitor.find({ whom_to_meet: req.params.flat_id }).sort({ _id: -1 }).exec(function (err, result) {
+        res.json(result);
+    });
+});
 
 
 visitor_router.get('/visitorbysecurity/:security_id', (req, res, next) => {
@@ -33,15 +37,32 @@ visitor_router.get('/visitorbysecurity/:security_id', (req, res, next) => {
     });
 });
 
+// Get the Visitor relational data
+visitor_router.get('/visitor/:visitor_id', (req, res, next) => {
+
+    Visitor.find({_id: req.params.visitor_id }).sort({ _id: -1 }).exec(function (err, result) {
+        Visitor.populate( result, {path:'Flat_id', populate:[
+            { path: 'Chairman_id' , populate:[{ path: 'Manager_id' ,  populate:[{path:'Block_id'}]}] }
+        
+        ]},function(err, result){
+        res.json(result);
+    
+            });
+    });
+});
 
 // Get the Visitor relational data
 visitor_router.get('/visitorlistdetails/:society_id', (req, res, next) => {
 
-    Visitor.find({ Society_id: req.params.society_id }).select('_id Security_id security_name  email contact').sort({ _id: -1 }).exec(function (err, result) {
-        Visitor.populate(result, { path: 'Security_id' }, function (err, result) {
-            res.json(result);
-
-        });
+    Visitor.find({ Society_id: req.params.society_id }).sort({ _id: -1 }).exec(function (err, result) 
+    {
+        Visitor.populate( result, {path:'Flat_id', populate:[
+            { path: 'Chairman_id' , populate:[{ path: 'Manager_id' ,  populate:[{path:'Block_id'}]}] }
+        
+        ]},function(err, result){
+        res.json(result);
+    
+            });
     });
 });
 
@@ -83,7 +104,7 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
         vehicle_no: req.body.vehicle_no,
         contact: req.body.contact,
         In_time: req.body.in_time,
-        whom_to_meet: req.body.flat_id
+        Flat_id: req.body.flat_id
 
 
     });
@@ -101,6 +122,36 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
         });
     }
 
+});
+
+
+
+//Update details
+visitor_router.put('/updatevisitor/:visitor_id',(req, res, next)=>
+{      
+    Visitor.findByIdAndUpdate(req.params.visitor_id,
+    {  
+        $set: 
+        { 
+            vehicle_type: req.body.vehicle_type,
+            vehicle_no: req.body.vehicle_no,
+            contact: req.body.contact
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating Details in Visitor list");
+        }
+        else
+        {
+            res.json({success: true,message:"Visitor Details Are updated"});
+        }
+    });
 });
 
 

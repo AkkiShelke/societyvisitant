@@ -261,6 +261,7 @@ var routes = [
             { path: 'address', loadChildren: './add-address/add-address.module#AddAddressModule' },
             { path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordModule' },
             { path: 'flatowner_details', loadChildren: './flatowner-details/flatowner-details.module#FlatownerDetailsModule' },
+            { path: 'visitor_details', loadChildren: './visitor-details/visitor-details.module#VisitorDetailsModule' },
         ]
     }
 ];

@@ -106,6 +106,11 @@ var map = {
 		"common",
 		"signup.module"
 	],
+	"./visitor-details/visitor-details.module": [
+		"../../../../../src/app/layout/visitor-details/visitor-details.module.ts",
+		"common",
+		"visitor-details.module"
+	],
 	"./visitor-list/visitor-list.module": [
 		"../../../../../src/app/layout/visitor-list/visitor-list.module.ts",
 		"common",

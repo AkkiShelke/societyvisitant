@@ -9,7 +9,7 @@ const VisitorSchema = Schema({
 
     Society_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'society' },
     Security_id: {type: mongoose.Schema.Types.ObjectId, ref: 'security' },
-    
+    Flat_id: [{type: mongoose.Schema.Types.ObjectId, ref: 'flat' }],
     visitor_name: { 
         type:String,
         required: true ,
@@ -54,7 +54,7 @@ const VisitorSchema = Schema({
      Out_time:{
         type: String,
      },
-     whom_to_meet: {type: mongoose.Schema.Types.ObjectId, ref: 'flat' },
+
      visitor_status:{
         type: Boolean, default: true 
      }

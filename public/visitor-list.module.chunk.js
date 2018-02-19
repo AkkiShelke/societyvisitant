@@ -42,7 +42,7 @@ var VisitorListRoutingModule = (function () {
 /***/ "../../../../../src/app/layout/visitor-list/visitor-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [@routerTransition] class=\"container-fluid\">\n\n  <div class=\"row\">\n    <div class=\"col-xl-12\">\n        <ol class=\"breadcrumb\">\n\n            <li class=\"breadcrumb-item active\"><i class=\"fa fa-home\"></i> Visitor List</li>\n        </ol>\n    </div>\n</div>\n<div class=\"example-header\">\n    <mat-form-field>\n      <input  matTooltip=\"Search Visitor's Details!\" matTooltipPosition=\"above\" matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Search\">\n    </mat-form-field>\n    <div class=\"pull-right\">\n      <button class=\" btn btn-danger\" matTooltip=\"Send Message!\" matTooltipPosition=\"above\"><i class=\"fa fa-paper-plane\"></i></button>\n\n    </div>\n\n\n</div>\n  \n  <div class=\"example-container mat-elevation-z8\">\n  \n    <mat-table [dataSource]=\"dataSource\" matSort>\n  \n       <!-- Checkbox Column -->\n    <ng-container matColumnDef=\"select\">\n        <mat-header-cell *matHeaderCellDef>\n          <mat-checkbox color=\"primary\" matTooltip=\"Select All Rows!\" matTooltipPosition=\"above\"  (change)=\"$event ? masterToggle() : null\"\n                        [checked]=\"selection.hasValue() && isAllSelected()\"\n                        [indeterminate]=\"selection.hasValue() && !isAllSelected()\">\n          </mat-checkbox>\n        </mat-header-cell>\n        <mat-cell *matCellDef=\"let row\">\n          <mat-checkbox color=\"primary\" matTooltip=\"Select This Row!\" matTooltipPosition=\"above\"  (click)=\"$event.stopPropagation()\"\n                        (change)=\"$event ? selection.toggle(row) : null\"\n                        [checked]=\"selection.isSelected(row)\">\n          </mat-checkbox>\n        </mat-cell>\n      </ng-container>\n\n      <!-- ID Column -->\n      <ng-container matColumnDef=\"id\">\n        <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header>ID</mat-header-cell>\n        <mat-cell *matCellDef=\"let row\"> {{row.id}} </mat-cell>\n      </ng-container>\n  \n      <!-- Block Column -->\n      <ng-container matColumnDef=\"block\">\n        <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header>Block</mat-header-cell>\n        <mat-cell *matCellDef=\"let row\"> {{row.block}} </mat-cell>\n      </ng-container>\n  \n      <!-- Flat No Column -->\n      <ng-container matColumnDef=\"flat_no\">\n        <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header>Flat No</mat-header-cell>\n        <mat-cell *matCellDef=\"let row\"> {{row.flat_no}} </mat-cell>\n      </ng-container>\n  \n      <!-- Floor Column -->\n      <ng-container matColumnDef=\"floor\">\n        <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header>Floor</mat-header-cell>\n        <mat-cell *matCellDef=\"let row\" [style.color]=\"row.floor\"> {{row.floor}} </mat-cell>\n      </ng-container>\n\n        <!-- Name Column -->\n        <ng-container matColumnDef=\"owner_name\">\n        <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header>Name</mat-header-cell>\n        <mat-cell *matCellDef=\"let row\" [style.color]=\"row.owner_name\"> {{row.owner_name}} </mat-cell>\n        </ng-container>\n        \n\n         <!-- Status Column -->\n      <ng-container matColumnDef=\"flat_status\">\n        <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header>Status</mat-header-cell>\n        <mat-cell *matCellDef=\"let row\" [style.color]=\"row.flat_status\"> {{row.flat_status}} </mat-cell>\n      </ng-container>\n\n\n        <!-- Contact Column -->\n      <ng-container matColumnDef=\"owner_contact\">\n        <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header>Contact</mat-header-cell>\n        <mat-cell *matCellDef=\"let row\" [style.color]=\"row.owner_contact\"> {{row.owner_contact}} </mat-cell>\n      </ng-container>\n\n        <!-- Details Column -->\n        <ng-container matColumnDef=\"details\">\n        <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header>Details</mat-header-cell>\n        <mat-cell *matCellDef=\"let row\" [style.color]=\"row.details\">\n          <button matTooltip=\"View Flat Owner's Details!\"  matTooltipPosition=\"above\" routerLink=\"/society_details\" class=\"btn btn-primary buttoncolor\" style=\"color:white;\"><i  class=\"fa fa-eye\"></i> View</button>\n        </mat-cell>\n        </ng-container>\n  \n      <mat-header-row class=\"headertext\" *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\n      <mat-row *matRowDef=\"let row; columns: displayedColumns;\">\n      </mat-row>\n    </mat-table>\n  \n    <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator>\n  </div>\n\n</div>\n"
+module.exports = "<toaster-container></toaster-container>\n<div [@routerTransition] class=\"container-fluid\">\n\n    <div class=\"row\">\n        <div class=\"col-xl-12\">\n            <ol class=\"breadcrumb\">\n                <li class=\"breadcrumb-item active\"><i class=\"fa fa-shield\"></i> Society List</li>\n            </ol>\n        </div>\n    </div>\n    \n<div class=\"example-header\">\n  <mat-form-field>\n    <input  matTooltip=\"Search Security Details!\" matTooltipPosition=\"above\" style=\"width: 50%;\" matInput (keyup)=\"applyFilter($event.target.value)\" placeholder=\"Search\">\n  </mat-form-field>\n  <div class=\"pull-right\">\n      <button class=\" btn btn-danger\" matTooltip=\"Send Message!\" matTooltipPosition=\"above\"><i class=\"fa fa-paper-plane\"></i></button>\n      <button class=\" btn btn-warning buttoncolor\" style=\"color:white;\" routerLink=\"/addsecurity\" matTooltip=\"Edit Security list!\" matTooltipPosition=\"above\"><i class=\"fa fa-edit\"></i> Edit list</button>\n\n    </div>\n</div>\n\n<div class=\"example-container mat-elevation-z8\">\n\n  <mat-table [dataSource]=\"dataSource\" matSort>\n\n    <!-- Checkbox Column -->\n    <ng-container matColumnDef=\"select\">\n        <mat-header-cell *matHeaderCellDef>\n          <mat-checkbox color=\"primary\"  matTooltip=\"Select All Rows!\" matTooltipPosition=\"above\"  (change)=\"$event ? masterToggle() : null\"\n                        [checked]=\"selection.hasValue() && isAllSelected()\"\n                        [indeterminate]=\"selection.hasValue() && !isAllSelected()\">\n          </mat-checkbox>\n        </mat-header-cell>\n        <mat-cell *matCellDef=\"let row\">\n          <mat-checkbox color=\"primary\"  matTooltip=\"Select This Row!\" matTooltipPosition=\"above\"  (click)=\"$event.stopPropagation()\"\n                        (change)=\"$event ? selection.toggle(row) : null\"\n                        [checked]=\"selection.isSelected(row)\">\n          </mat-checkbox>\n        </mat-cell>\n      </ng-container>\n\n    <!-- ID Column -->\n    <!-- <ng-container matColumnDef=\"id\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> ID </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.id}} </mat-cell>\n    </ng-container> -->\n\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"name\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\"> {{row.visitor_name}} </mat-cell>\n    </ng-container>\n\n    <!-- Email Column -->\n    <ng-container matColumnDef=\"email\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Email </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.email\"> {{row.email}} </mat-cell>\n    </ng-container>\n\n\n\n      <!-- Contact Column -->\n    <ng-container matColumnDef=\"contact\">\n      <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Contact </mat-header-cell>\n      <mat-cell *matCellDef=\"let row\" [style.color]=\"row.contact\"> {{row.contact}} </mat-cell>\n    </ng-container>\n\n    <!-- Actions Column -->\n    <ng-container matColumnDef=\"actions\">\n    <mat-header-cell class=\"headertext\" *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>\n    <mat-cell *matCellDef=\"let row\" [style.color]=\"row.details\"><button matTooltip=\"View Visitor Details!\"  matTooltipPosition=\"above\" class=\"btn btn-warning buttoncolor\"  style=\"color:white;\"   (click)=\"getVisitorId(row)\"><i class=\"fa fa-info-circle \" ></i> View</button>\n    </mat-cell>\n    </ng-container>\n\n    <mat-header-row class=\"headertext\" *matHeaderRowDef=\"displayedColumns\"></mat-header-row>\n    <mat-row *matRowDef=\"let row; columns: displayedColumns;\">\n    </mat-row>\n  </mat-table>\n\n  <mat-paginator [pageSizeOptions]=\"[5, 10, 25, 100]\"></mat-paginator>\n</div>\n</div>\n"
 
 /***/ }),
 
@@ -71,8 +71,13 @@ module.exports = module.exports.toString();
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VisitorListComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__router_animations__ = __webpack_require__("../../../../../src/app/router.animations.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_cdk_collections__ = __webpack_require__("../../../cdk/esm5/collections.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_cdk_collections__ = __webpack_require__("../../../cdk/esm5/collections.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__ = __webpack_require__("../../../../angular5-toaster/dist/bundles/angular5-toaster.umd.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular5_toaster___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_angular5_toaster__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_router__ = __webpack_require__("../../../router/esm5/router.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -86,25 +91,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
+
 var VisitorListComponent = (function () {
-    function VisitorListComponent() {
-        this.displayedColumns = ['select', 'id', 'block', 'flat_no', 'floor', 'owner_name', 'flat_status', 'owner_contact', 'details'];
-        this.selection = new __WEBPACK_IMPORTED_MODULE_3__angular_cdk_collections__["a" /* SelectionModel */](true, []);
-        // Create 100 users
-        var users = [];
-        for (var i = 1; i <= 100; i++) {
-            users.push(createNewUser(i));
+    function VisitorListComponent(http, toasterService, _formBuilder, router) {
+        this.http = http;
+        this._formBuilder = _formBuilder;
+        this.router = router;
+        this.societyadmin = JSON.parse(localStorage['societyadmin']);
+        this.chairmanexists = false;
+        this.displayedColumns = ['select', 'name', 'email', 'contact', 'actions'];
+        this.selection = new __WEBPACK_IMPORTED_MODULE_4__angular_cdk_collections__["a" /* SelectionModel */](true, []);
+        this.toasterService = toasterService;
+        if (localStorage.getItem('chairman')) {
+            this.chairman = JSON.parse(localStorage['chairman']);
+            this.chairmanexists = true;
         }
-        // Assign the data to the data source for the table to render
-        this.dataSource = new __WEBPACK_IMPORTED_MODULE_2__angular_material__["r" /* MatTableDataSource */](users);
+        console.log('ChairmanExists:' + this.chairmanexists);
+        this.getVisitorData();
     }
-    /**
-     * Set the paginator and sort after the view init since this component will
-     * be able to query its view for the initialized paginator and sort.
-     */
-    VisitorListComponent.prototype.ngAfterViewInit = function () {
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+    VisitorListComponent.prototype.getVisitorData = function () {
+        var _this = this;
+        this.http.get('api/visitorlistdetails/' + this.societyadmin.id).subscribe(function (data) {
+            _this.visitor = data;
+            console.log(data);
+            _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
+            _this.dataSource.paginator = _this.paginator;
+            _this.dataSource.sort = _this.sort;
+        });
+    };
+    VisitorListComponent.prototype.ngOnInit = function () {
+    };
+    VisitorListComponent.prototype.getVisitorId = function (visitor) {
+        console.log(visitor);
+        localStorage.setItem('visitor', JSON.stringify(visitor));
+        this.router.navigate(['/visitor_details']);
     };
     VisitorListComponent.prototype.applyFilter = function (filterValue) {
         filterValue = filterValue.trim(); // Remove whitespace
@@ -125,12 +148,12 @@ var VisitorListComponent = (function () {
             this.dataSource.data.forEach(function (row) { return _this.selection.select(row); });
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2__angular_material__["j" /* MatPaginator */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__angular_material__["j" /* MatPaginator */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatPaginator */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatPaginator */])
     ], VisitorListComponent.prototype, "paginator", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2__angular_material__["o" /* MatSort */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__angular_material__["o" /* MatSort */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["o" /* MatSort */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["o" /* MatSort */])
     ], VisitorListComponent.prototype, "sort", void 0);
     VisitorListComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -139,38 +162,13 @@ var VisitorListComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/layout/visitor-list/visitor-list.component.scss")],
             animations: [Object(__WEBPACK_IMPORTED_MODULE_1__router_animations__["a" /* routerTransition */])()]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */], typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_7__angular_router__["b" /* Router */]])
     ], VisitorListComponent);
     return VisitorListComponent;
+    var _a;
 }());
 
-/** Builds and returns a new User. */
-function createNewUser(id) {
-    var name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-        NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-    var status = STATUS[Math.round(Math.random() * (STATUS.length - 1))];
-    var block = BLOCK[Math.round(Math.random() * (BLOCK.length - 1))];
-    var floor = FLOOR[Math.round(Math.random() * (FLOOR.length - 1))];
-    return {
-        id: id.toString(),
-        block: block,
-        flat_no: Math.round(Math.random() * 100).toString(),
-        floor: floor,
-        owner_name: name,
-        flat_status: status,
-        owner_contact: Contact
-    };
-}
-/** Constants used to fill up our data base. */
-var LOCATION = ['Warje', 'Banner', 'Shivne', 'Kothroad', 'Hinjwadi', 'Karve nager', 'Ram nager'];
-var NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-    'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-    'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
-var STATUS = ['Owner', 'Rented'];
-var BLOCK = ['A', 'B', 'C', 'D'];
-var FLOOR = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th'];
-var Pincode = [411057];
-var Contact = [9434534344];
 
 
 /***/ }),
@@ -187,6 +185,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__visitor_list_routing_module__ = __webpack_require__("../../../../../src/app/layout/visitor-list/visitor-list-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_material__ = __webpack_require__("../../../material/esm5/material.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__ = __webpack_require__("../../../../angular5-toaster/dist/bundles/angular5-toaster.umd.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angular5_toaster___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_angular5_toaster__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -199,24 +199,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var VisitorListModule = (function () {
     function VisitorListModule() {
     }
     VisitorListModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
                 __WEBPACK_IMPORTED_MODULE_3__visitor_list_routing_module__["a" /* VisitorListRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
                 __WEBPACK_IMPORTED_MODULE_5__angular_forms__["d" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_forms__["i" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["h" /* MatFormFieldModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["c" /* MatCardModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["i" /* MatInputModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatCheckboxModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MatButtonModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["k" /* MatPaginatorModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["f" /* MatDialogModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["s" /* MatTableModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_material__["p" /* MatSortModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["t" /* MatTooltipModule */]
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["t" /* MatTooltipModule */],
+                __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterModule"],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["n" /* MatSlideToggleModule */]
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__visitor_list_component__["a" /* VisitorListComponent */]]
         })
