@@ -122,6 +122,80 @@ flatowner_router.post('/addflatowner',(req, res, next)=>
    
 });
 
+  
+// Flatowner Login Route
+
+flatowner_router.post('/authenticateflatowner', (req, res, next) =>
+{
+    Flatowner.findOne({ email: req.body.email }).select('_id  flatowner_name flatowner_status  email password').exec(function(err, result)
+    {  
+       
+
+        if(err)
+        { 
+            throw err;
+        }
+
+       if(result){
+
+        if(result.flatowner_status == true)
+        {       
+
+        if(!result)
+        {
+            res.json({ success: false, message: 'Please enter valid Email ID' });
+        } 
+        else if(result)
+        {
+            if(req.body.password)
+            {
+                var validPassword = result.comparePassword(req.body.password);
+                if(!validPassword)
+                {
+                    res.json({ success: false, message: 'Please enter valid Password' });
+                }
+                else
+                {   
+                    // res.json({ success: true, message: 'authenticate'});
+                    //Create the token for Superadmin-details
+                    const token = jwt.sign(result.toJSON(), secret, {
+                        expiresIn: 604800 // 1 week
+                      });
+                      
+ 
+                            res.json({ success: true, message: 'Flatowner Login successfully  ',
+
+                        token: 'JWT '+token,
+                        flatowner:{
+                            id: result._id,
+                            email: result.email,
+                            flatowner_name: result.flatowner_name,
+                            message: 'Authenticated'
+                           
+                        },
+                                                                       
+                    });        
+                
+                 }
+            }
+            else 
+            {
+                res.json({ success: false, message: 'No password provided' });
+            }
+        
+        }
+    }
+    else{
+        res.json({ success: false, message: 'Please Activate Account' });
+
+    }
+} 
+
+    });
+
+    
+});
+
 //Update details
 flatowner_router.put('/updateflatowner/:flatowner_id',(req, res, next)=>
 {      

@@ -125,6 +125,80 @@ tenant_router.post('/addtenant',(req, res, next)=>
 });
 
 
+ 
+// Tenant Login Route
+
+tenant_router.post('/authenticatetenant', (req, res, next) =>
+{
+    Tenant.findOne({ email: req.body.email }).select('_id  tenant_name tenant_status  email password').exec(function(err, result)
+    {  
+       
+
+        if(err)
+        { 
+            throw err;
+        }
+
+       if(result){
+
+        if(result.tenant_status == true)
+        {       
+
+        if(!result)
+        {
+            res.json({ success: false, message: 'Please enter valid Email ID' });
+        } 
+        else if(result)
+        {
+            if(req.body.password)
+            {
+                var validPassword = result.comparePassword(req.body.password);
+                if(!validPassword)
+                {
+                    res.json({ success: false, message: 'Please enter valid Password' });
+                }
+                else
+                {   
+                    // res.json({ success: true, message: 'authenticate'});
+                    //Create the token for Superadmin-details
+                    const token = jwt.sign(result.toJSON(), secret, {
+                        expiresIn: 604800 // 1 week
+                      });
+                      
+ 
+                            res.json({ success: true, message: 'Tenant Login successfully  ',
+
+                        token: 'JWT '+token,
+                        tenant:{
+                            id: result._id,
+                            email: result.email,
+                            tenant_name: result.tenant_name,
+                            message: 'Authenticated'
+                           
+                        },
+                                                                       
+                    });        
+                
+                 }
+            }
+            else 
+            {
+                res.json({ success: false, message: 'No password provided' });
+            }
+        
+        }
+    }
+    else{
+        res.json({ success: false, message: 'Please Activate Tenant Account' });
+
+    }
+} 
+
+    });
+
+    
+});
+
 //Update details
 tenant_router.put('/updatetenant/:tenant_id',(req, res, next)=>
 {      
