@@ -24,7 +24,7 @@ const visitorroute = require('./routes/society/visitorroute');
 
 //connect to mongodb
 mongoose.connect('mongodb://cybercode:cybercode@ds119028.mlab.com:19028/visitant');
-mongoose.Promise = global.Promise
+// mongoose.Promise = global.Promise
 //on connection 
 mongoose.connection.on('connected', ()=>{
     console.log('Connected to database mongodb @27017');
