@@ -1,4 +1,4 @@
-  //importing modules
+    //importing modules
 var express = require('express');
 var path = require('path');
 var bodyparser = require('body-parser');
@@ -42,6 +42,8 @@ const port = process.env.PORT || 8080;
 
 //adding middleware
 app.use(cors());
+app.set('view engine', 'ejs')
+
 
 //static files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -49,7 +51,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + '/uploads'))
 
 app.use(bodyparser.urlencoded({ extended: false }))
-app.set('view engine', 'ejs')
 // parse application/json
 app.use(bodyparser.json())
 //routes
