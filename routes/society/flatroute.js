@@ -97,6 +97,38 @@ flat_router.post('/addflat',(req, res, next)=>
 });
 
 
+//Update Status
+flat_router.put('/updateflatstatus/:flat_id',(req, res, next)=>
+{      
+    Flat.findByIdAndUpdate(req.params.flat_id,
+    {  
+        $set: 
+        { 
+            flat_status: req.body.status
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating status in Flat list");
+        }
+        else
+        {
+            if(req.body.status == false){
+                res.json({success: true, message:"Flat Status is Inactive"});
+
+            }
+            else{
+                res.json({success: true, message:"Flat Status is Active"});
+
+            }
+        }
+    });
+});
 
 //delete Flat Details
 flat_router.delete('/deleteflat/:flat_id',(req, res, next)=>
