@@ -12,6 +12,10 @@ const TenantSchema = Schema({
     Manager_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'manager' },
     
     Flatowner_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'flatowner' },
+    Created_on:{
+        type:String,
+        required: true 
+    },
     tenant_name: { 
         type:String,
         required: true ,

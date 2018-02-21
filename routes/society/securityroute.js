@@ -55,11 +55,17 @@ security_router.post('/addsecurity',(req, res, next)=>
 
         if(!result){
     //logic for add Security Details
+    var todate=new Date().getDate();
+    var tomonth=new Date().getMonth()+1;
+    var toyear=new Date().getFullYear();
+    var today_date= todate+'/'+tomonth+'/'+toyear;
+    
     let newSecurity= new Security(
     {   
         Superadmin_id:  req.body.superadmin_id,
         Society_id: req.body.society_id,
         Manager_id: req.body.manager_id,
+        Created_on: today_date,
         security_name: req.body.security_name,
          email: req.body.email,
          contact: req.body.contact,

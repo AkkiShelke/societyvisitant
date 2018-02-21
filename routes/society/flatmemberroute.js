@@ -64,11 +64,18 @@ flatmember_router.post('/addflatmember',(req, res, next)=>
     Flatmember.findOne({ email: req.body.flatmember_email , Flatowner_id:  req.body.flatowner_id, Tenant_id: req.body.tenant_id}, function(err, result){
         if(!result){
              //logic for add Flat Details
+
+             var todate=new Date().getDate();
+             var tomonth=new Date().getMonth()+1;
+             var toyear=new Date().getFullYear();
+             var today_date= todate+'/'+tomonth+'/'+toyear;
+             
     let newFlatmember = new Flatmember(
         {   Superadmin_id: req.body.superadmin_id,
             Society_id: req.body.society_id,
             Flatowner_id: req.body.flatowner_id,
             Tenant_id:req.body.tenant_id,
+            Created_on: today_date,
              flatmember_name: req.body.flatmember_name,
              email: req.body.flatmember_email,
              contact: req.body.flatmember_contact

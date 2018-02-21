@@ -13,6 +13,10 @@ const SocietySchema = Schema({
         type:String,
         required: true ,
      },
+     Created_on:{
+        type:String,
+        required: true 
+     },
      society_reg:{
         type: String,
         unique:true

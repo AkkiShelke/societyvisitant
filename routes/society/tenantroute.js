@@ -84,11 +84,17 @@ tenant_router.post('/addtenant',(req, res, next)=>
 
         if(!result){
              //logic for add Flat Details
+             var todate=new Date().getDate();
+             var tomonth=new Date().getMonth()+1;
+             var toyear=new Date().getFullYear();
+             var today_date= todate+'/'+tomonth+'/'+toyear;
+             
     let newTenant = new Tenant(
         {   Superadmin_id: req.body.superadmin_id,
             Society_id: req.body.society_id,
             Flat_id: req.body.flat_id,
             Flatowner_id: req.body.flatowner_id,
+            Created_on: today_date,
              tenant_name: req.body.tenant_name,
              email: req.body.tenant_email,
              contact: req.body.tenant_contact,            

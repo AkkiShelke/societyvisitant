@@ -59,12 +59,20 @@ flat_router.post('/addflat',(req, res, next)=>
 
         if(!result){
              //logic for add Flat Details
+
+             var todate=new Date().getDate();
+             var tomonth=new Date().getMonth()+1;
+             var toyear=new Date().getFullYear();
+             var today_date= todate+'/'+tomonth+'/'+toyear;
+             
     let newFlat = new Flat(
         {   Superadmin_id: req.body.superadmin_id,
             Society_id: req.body.society_id,
 	    Block_id: req.body.block_id,
 	    Manager_id: req.body.manager_id,
             Chairman_id: req.body.chairman_id,
+            Created_on: today_date,
+
              flat_no: req.body.flat_no,
              floor_no: req.body.floor_no,
              flat_status: req.body.flat_status

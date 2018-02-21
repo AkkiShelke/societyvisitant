@@ -12,6 +12,11 @@ const FlatownerSchema = Schema({
     Manager_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'manager' },
     
     Flat_id: { type: mongoose.Schema.Types.ObjectId, ref: 'flat' },
+    
+    Created_on:{
+        type:String,
+        required: true 
+     },
     flatowner_name: { 
         type:String,
         required: true ,

@@ -42,11 +42,15 @@ const VisitorSchema = Schema({
         unique: true
      },
 	vehicle_type:{
-	type: String,	
+	    type: String,	
 	},
 	vehicle_no:{
-	type: String,	
-	},
+	    type: String,	
+    },
+    Created_on:{
+        type:String,
+        required: true 
+    },
      In_time:{
         type: String,
         required:true

@@ -89,10 +89,17 @@ flatowner_router.post('/addflatowner',(req, res, next)=>
             });
         }
              //logic for add Flat Details
+
+             var todate=new Date().getDate();
+             var tomonth=new Date().getMonth()+1;
+             var toyear=new Date().getFullYear();
+             var today_date= todate+'/'+tomonth+'/'+toyear;
+             
     let newFlatowner = new Flatowner(
         {   Superadmin_id: req.body.superadmin_id,
             Society_id: req.body.society_id,
             Flat_id: req.body.flat_id,
+            Created_on: today_date,
              flatowner_name: req.body.flatowner_name,
              email: req.body.flatowner_email,
              contact: req.body.flatowner_contact,            

@@ -11,6 +11,11 @@ const ChairmanSchema = Schema({
     Society_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'society' },
     Manager_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'manager' },
 
+    Created_on:{
+        type:String,
+        required: true 
+     },
+
     chairman_name: { 
         type:String,
         required: true ,

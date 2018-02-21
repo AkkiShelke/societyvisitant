@@ -10,7 +10,11 @@ const ManagerSchema = Schema({
     Superadmin_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'superadmin' },
     Society_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'society' },
     Block_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'block' },
-
+    
+    Created_on:{
+        type:String,
+        required: true 
+     },
     manager_name: { 
         type:String,
         required: true ,

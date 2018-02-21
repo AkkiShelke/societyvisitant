@@ -14,6 +14,11 @@ const FlatmemberSchema = Schema({
     Flatowner_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'flatowner' },
     Tenant_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'tenant'},
     
+    Created_on:{
+        type:String,
+        required: true 
+     },
+    
     flatmember_name: { 
         type:String,
         required: true ,

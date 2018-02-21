@@ -50,11 +50,17 @@ Society.find().select('_id society_name society_reg email contact society_status
 //add Society Registration
 society_router.post('/addsociety',(req, res, next)=>
 {
+    var todate=new Date().getDate();
+    var tomonth=new Date().getMonth()+1;
+    var toyear=new Date().getFullYear();
+    var today_date= todate+'/'+tomonth+'/'+toyear;
+
     //logic for add Society Details
     let newSociety = new Society(
     {   
         Superadmin_id:  req.body.superadmin_id,
         society_name: req.body.society_name,
+        Created_on: today_date,
          society_reg: req.body.society_reg,
          email: req.body.email,
          contact: req.body.contact,

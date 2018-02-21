@@ -65,11 +65,17 @@ Manager.findOne({ email: req.body.email , Society_id:  req.body.society_id}, fun
 
     if(!result){
           //logic for add Manager Details
+          var todate=new Date().getDate();
+          var tomonth=new Date().getMonth()+1;
+          var toyear=new Date().getFullYear();
+          var today_date= todate+'/'+tomonth+'/'+toyear;
+
     let newManager= new Manager(
         {   
             Superadmin_id:  req.body.superadmin_id,
             Society_id: req.body.society_id,
             Block_id: req.body.block_id,
+            Created_on: today_date,
             manager_name: req.body.manager_name,
              email: req.body.email,
              contact: req.body.contact,

@@ -12,6 +12,7 @@ const FlatSchema = Schema({
     Manager_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'manager' },
     Chairman_id: { type: mongoose.Schema.Types.ObjectId, ref: 'chairman' },
 
+
     flat_no:{
         type: String
     },

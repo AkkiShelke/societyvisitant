@@ -21,6 +21,7 @@ var fs = require('fs')
 //rerieving  Visitor Details
 visitor_router.get('/visitorlist', (req, res, next) => {
     Visitor.find().sort({ _id: -1 }).exec(function (err, result) {
+
         res.json(result);
     });
 });
@@ -65,6 +66,20 @@ visitor_router.get('/visitorlistdetails/:society_id', (req, res, next) => {
             });
     });
 });
+// Get the Visitor relational data
+visitor_router.get('/visitorbycontact/:visitor_contact', (req, res, next) => {
+
+    Visitor.findOne({ contact: req.params.visitor_contact }).sort({ _id: -1 }).exec(function (err, result) 
+    {
+        Visitor.populate( result, {path:'Flat_id', populate:[
+            { path: 'Chairman_id' , populate:[{ path: 'Manager_id' ,  populate:[{path:'Block_id'}]}] }
+        
+        ]},function(err, result){
+        res.json(result);
+    
+            });
+    });
+});
 
 
 // To get more info about 'multer'.. you can go through https://www.npmjs.com/package/multer..
@@ -87,9 +102,16 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
 
 
     console.log(req.body);
+    var dt = new Date();
+    var h =  dt.getHours(), m = dt.getMinutes();
+    var _time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');   
 
 
-
+    var todate=new Date().getDate();
+    var tomonth=new Date().getMonth()+1;
+    var toyear=new Date().getFullYear();
+    var today_date= todate+'/'+tomonth+'/'+toyear;
+    
     var newVisitor = new Visitor({
 
         Society_id: req.body.society_id,
@@ -102,8 +124,9 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
         document_originalname: req.files[1].originalname,
         vehicle_type: req.body.vehicle_type,
         vehicle_no: req.body.vehicle_no,
+        Created_on: today_date,
         contact: req.body.contact,
-        In_time: req.body.in_time,
+        In_time: _time,
         Flat_id: req.body.flat_id
 
 
@@ -128,7 +151,7 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
 
 //Update details
 visitor_router.put('/updatevisitor/:visitor_id',(req, res, next)=>
-{      
+{     console.log(req.body);
     Visitor.findByIdAndUpdate(req.params.visitor_id,
     {  
         $set: 
