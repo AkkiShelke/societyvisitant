@@ -121,21 +121,21 @@ var DashboardComponent = (function () {
     }
     DashboardComponent.prototype.getListOfSecurity = function () {
         var _this = this;
-        this.http.get('http://localhost:8000/api/securitylistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('api/securitylistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.securitylistcount = data.length;
             console.log(_this.securitylistcount);
         });
     };
     DashboardComponent.prototype.getListOfVisitor = function () {
         var _this = this;
-        this.http.get('http://localhost:8000/api/visitorlistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('api/visitorlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.visitorlistcount = data.length;
             console.log(_this.visitorlistcount);
         });
     };
     DashboardComponent.prototype.getFlatownerData = function () {
         var _this = this;
-        this.http.get('http://localhost:8000/api/flatownerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
+        this.http.get('api/flatownerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.flatdetails = data;
             _this.flatlistcount = _this.flatdetails.length;
             console.log(_this.flatdetails);
@@ -154,7 +154,7 @@ var DashboardComponent = (function () {
         };
         console.log(flat_details);
         console.log(id);
-        this.http.put('http://localhost:8000/api/updateflatstatus/' + id, flat_details).subscribe(function (data) {
+        this.http.put('api/updateflatstatus/' + id, flat_details).subscribe(function (data) {
             var response = data;
             if (response.success == true) {
                 _this.toasterService.pop('success', response.message);
