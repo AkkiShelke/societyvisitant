@@ -148,7 +148,12 @@ var DashboardComponent = (function () {
     };
     DashboardComponent.prototype.changeStatus = function (flat, id) {
         var _this = this;
-        flat = !flat;
+        if (flat == true) {
+            flat = false;
+        }
+        else if (flat == false) {
+            flat = true;
+        }
         var flat_details = {
             status: flat
         };
