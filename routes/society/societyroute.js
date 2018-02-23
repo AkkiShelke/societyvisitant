@@ -437,8 +437,14 @@ society_router.put('/updatesocietystatus/:society_id',(req, res, next)=>
         }
         else
         {
-            res.json(result);
-        }
+            if(req.body.status == false){
+                res.json({success: false, message: result.society_name + " Society Status is Inactive"});
+
+            }
+            else{
+                res.json({success: true, message: result.society_name + " Society Status is Active"});
+
+            }             }
     });
 });
 

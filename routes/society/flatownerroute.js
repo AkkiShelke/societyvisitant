@@ -252,11 +252,11 @@ flatowner_router.put('/updateflatownerstatus/:flatowner_id',(req, res, next)=>
         else
         {
             if(req.body.status == false){
-                res.json({success: true, message:"FlatOwner Status is Inactive"});
+                res.json({success: false, message: result.flatowner_name + " FlatOwner Status is Inactive"});
 
             }
             else{
-                res.json({success: true, message:"FlatOwner Status is Active"});
+                res.json({success: true, message: result.flatowner_name + " FlatOwner Status is Active"});
 
             }
         }

@@ -354,11 +354,11 @@ security_router.put('/updatesecuritystatus/:security_id',(req, res, next)=>
                     else
                     {
                         if(req.body.status == false){
-                            res.json({success: true, message:"Security Status is Inactive"});
+                            res.json({success: false, message: result.security_name + " Security Status is Inactive"});
 
                         }
                         else{
-                            res.json({success: true, message:"Security Status is Active"});
+                            res.json({success: true, message: result.security_name + " Security Status is Active"});
 
                         }
                     }

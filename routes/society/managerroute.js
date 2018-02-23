@@ -291,11 +291,11 @@ manager_router.put('/updatemanagerstatus/:manager_id',(req, res, next)=>
                     else
                     {
                         if(req.body.status == false){
-                            res.json({success: true, message:"Manager Status is Inactive"});
+                            res.json({success: false, message: result.manager_name + " Manager Status is Inactive"});
 
                         }
                         else{
-                            res.json({success: true, message:"Manager Status is Active"});
+                            res.json({success: true, message: result.manager_name + " Manager Status is Active"});
 
                         }
                     }

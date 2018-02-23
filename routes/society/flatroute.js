@@ -127,11 +127,11 @@ flat_router.put('/updateflatstatus/:flat_id',(req, res, next)=>
         else
         {
             if(req.body.status == false){
-                res.json({success: true, message:"Flat Status is Inactive"});
+                res.json({success: false, message: result.flat_no + " Flat Status is Inactive"});
 
             }
             else{
-                res.json({success: true, message:"Flat Status is Active"});
+                res.json({success: true, message: result.flat_no + " Flat Status is Active"});
 
             }
         }

@@ -256,8 +256,7 @@ tenant_router.put('/updatetenantstatus/:flatowner_id',(req, res, next)=>
                     }
                     else
                     {
-                        res.json({success: true, message:"Tenant Status is Active"});
-                    }
+                        res.json({success: true, message: result.tenant_name + " Tenant Status is Active"});                    }
                 });
         }
         
@@ -281,7 +280,7 @@ tenant_router.put('/updatetenantstatus/:flatowner_id',(req, res, next)=>
                         }
                         else
                         {
-                            res.json({success: true, message:"Tenant Status is Inactive"});
+                            res.json({success: false, message: result.tenant_name + " Tenant Status is Inactive"});
                         }
                     });
 

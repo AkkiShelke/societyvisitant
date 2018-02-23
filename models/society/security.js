@@ -10,6 +10,7 @@ const SecuritySchema = Schema({
     Superadmin_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'superadmin' },
     Society_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'society' },
     Block_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'block' },
+    Manager_id:{ type: mongoose.Schema.Types.ObjectId, ref: 'manager' },
     
     Created_on:{
         type:String,

@@ -295,11 +295,11 @@ chairman_router.put('/updatechairmanstatus/:chairman_id',(req, res, next)=>
                     else
                     {
                         if(req.body.status == false){
-                            res.json({success: true, message:"Chairman Status is Inactive"});
+                            res.json({success: false, message: result.chairman_name + " Chairman Status is Inactive"});
 
                         }
                         else{
-                            res.json({success: true, message:"Chairman Status is Active"});
+                            res.json({success: true, message: result.chairman_name + " Chairman Status is Active"});
 
                         }
                     }

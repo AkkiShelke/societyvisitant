@@ -157,11 +157,11 @@ flatmember_router.put('/updateflatmemberstatus/:flatmember_id',(req, res, next)=
                     else
                     {
                         if(req.body.status == false){
-                            res.json({success: true, message:"Flat Member Status is Inactive"});
+                            res.json({success: false, message: result.flatmember_name + " Flat Member Status is Inactive"});
 
                         }
                         else{
-                            res.json({success: true, message:"Flat Member Status is Active"});
+                            res.json({success: true, message: result.flatmember_name + " Flat Member Status is Active"});
 
                         }
                     }

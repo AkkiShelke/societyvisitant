@@ -131,8 +131,8 @@ var ChairmanListComponent = (function () {
             if (response.success == true) {
                 _this.toasterService.pop('success', response.message);
             }
-            else {
-                _this.toasterService.pop('error', response.message);
+            else if (response.success == false) {
+                _this.toasterService.pop('warning', response.message);
             }
             _this.getChairmanData();
         });
