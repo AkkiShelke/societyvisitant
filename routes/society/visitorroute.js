@@ -171,13 +171,13 @@ visitor_router.put('/updatevisitorointime/:visitor_id',(req, res, next)=>
     var localDate = new Date(utc + (3600000*offset));
     
     var h = localDate.getHours(), m = localDate.getMinutes();
-    var out_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');  
+    var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');  
     
     Visitor.findByIdAndUpdate(req.params.visitor_id,
         {  
             $set: 
             { 
-                In_time: oin_time
+                In_time: in_time
             }
         },
         {
