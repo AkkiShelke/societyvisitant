@@ -180,6 +180,22 @@ visitor_router.put('/updatevisitorouttime/:visitor_id',(req, res, next)=>
     var h =  dt.getHours(), m = dt.getMinutes();
     var out_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');  
 
+
+
+  var d = new Date();
+
+    // convert to msec
+    // subtract local time zone offset
+    // get UTC time in msec
+    var utc = d.getTime() - (d.getTimezoneOffset() * 60000);
+
+    // create new Date object for different city
+    // using supplied offset
+    var nd = new Date(utc + (3600000*offset));
+
+	var indian_time = nd.toLocaleString();
+
+
     Visitor.findByIdAndUpdate(req.params.visitor_id,
     {  
         $set: 
@@ -198,7 +214,7 @@ visitor_router.put('/updatevisitorouttime/:visitor_id',(req, res, next)=>
         }
         else
         {
-            res.json({success: true, message: result.visitor_name + " is Out Now : " + out_time});
+            res.json({success: true, message: result.visitor_name + " is Out Now : " + out_time + "india :- " + indian_time});
         }
     });
 });
