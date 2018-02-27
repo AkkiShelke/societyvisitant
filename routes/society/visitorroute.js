@@ -97,14 +97,11 @@ var upload = multer({
 });
 
 visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, res, next) {
-    console.log(req.files);
+  
 
-
-
-    console.log(req.body);
     var dt = new Date();
     var h =  dt.getHours(), m = dt.getMinutes();
-    var _time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');   
+    var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');   
 
 
     var todate=new Date().getDate();
@@ -126,7 +123,7 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
         vehicle_no: req.body.vehicle_no,
         Created_on: today_date,
         contact: req.body.contact,
-        In_time: _time,
+        In_time: in_time,
         Flat_id: req.body.flat_id
 
 
@@ -140,14 +137,71 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
                 res.json({ success: false, message: 'Visitor is exist' + err });
             }
             else {
-                res.json({ success: true, message: 'Visitor is registered! ' });
+                res.json({ success: true, message: 'Visitor is registered! ', result });
             }
         });
     }
 
 });
+//Update In Time
+visitor_router.put('/updatevisitorointime/:visitor_id',(req, res, next)=>
+{       
+    var dt = new Date();
+    var h =  dt.getHours(), m = dt.getMinutes();
+    var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');  
 
+    Visitor.findByIdAndUpdate(req.params.visitor_id,
+    {  
+        $set: 
+        { 
+            In_time: oin_time
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating In_time");
+        }
+        else
+        {
+            res.json({success: true,message: result.visitor_name + " is In Now"});
+        }
+    });
+});
 
+//Update Out Time
+visitor_router.put('/updatevisitorouttime/:visitor_id',(req, res, next)=>
+{       
+    var dt = new Date();
+    var h =  dt.getHours(), m = dt.getMinutes();
+    var out_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');  
+
+    Visitor.findByIdAndUpdate(req.params.visitor_id,
+    {  
+        $set: 
+        { 
+            Out_time: out_time
+        }
+    },
+    {
+        new: true
+    },
+    function(err, result)
+    {
+        if(err)
+        {
+            res.send("Error updating Out_time");
+        }
+        else
+        {
+            res.json({success: true,message: result.visitor_name + " is Out Now"});
+        }
+    });
+});
 
 //Update details
 visitor_router.put('/updatevisitor/:visitor_id',(req, res, next)=>

@@ -46,7 +46,7 @@ flat_router.post('/checkflat',(req, res, next)=>
 
         }
         else{
-            res.json({success: false, message: 'Flat no is exist'});
+            res.json({success: false, message: 'Flat no is exist', result});
 
         }
 });

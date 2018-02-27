@@ -57,6 +57,7 @@ const VisitorSchema = Schema({
      },
      Out_time:{
         type: String,
+        default: "-:-"
      },
 
      visitor_status:{
