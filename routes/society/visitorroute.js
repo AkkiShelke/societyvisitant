@@ -176,7 +176,8 @@ visitor_router.put('/updatevisitorointime/:visitor_id',(req, res, next)=>
 //Update Out Time
 visitor_router.put('/updatevisitorouttime/:visitor_id',(req, res, next)=>
 {       
-    var dt = new Date();
+    var dt = new Date('2012-11-29 17:00:34 UTC');   
+
     var h =  dt.getHours(), m = dt.getMinutes();
     var out_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');  
 
