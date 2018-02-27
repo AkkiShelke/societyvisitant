@@ -21,7 +21,7 @@ var fs = require('fs')
 //rerieving  Visitor Details
 visitor_router.get('/visitorlist', (req, res, next) => {
     Visitor.find().sort({ _id: -1 }).exec(function (err, result) {
-
+        
         res.json(result);
     });
 });
@@ -40,44 +40,44 @@ visitor_router.get('/visitorbysecurity/:security_id', (req, res, next) => {
 
 // Get the Visitor relational data
 visitor_router.get('/visitor/:visitor_id', (req, res, next) => {
-
+    
     Visitor.find({_id: req.params.visitor_id }).sort({ _id: -1 }).exec(function (err, result) {
         Visitor.populate( result, {path:'Flat_id', populate:[
             { path: 'Chairman_id' , populate:[{ path: 'Manager_id' ,  populate:[{path:'Block_id'}]}] }
-        
+            
         ]},function(err, result){
-        res.json(result);
-    
-            });
+            res.json(result);
+            
+        });
     });
 });
 
 // Get the Visitor relational data
 visitor_router.get('/visitorlistdetails/:society_id', (req, res, next) => {
-
+    
     Visitor.find({ Society_id: req.params.society_id }).sort({ _id: -1 }).exec(function (err, result) 
     {
         Visitor.populate( result, {path:'Flat_id', populate:[
             { path: 'Chairman_id' , populate:[{ path: 'Manager_id' ,  populate:[{path:'Block_id'}]}] }
-        
+            
         ]},function(err, result){
-        res.json(result);
-    
-            });
+            res.json(result);
+            
+        });
     });
 });
 // Get the Visitor relational data
 visitor_router.get('/visitorbycontact/:visitor_contact', (req, res, next) => {
-
+    
     Visitor.findOne({ contact: req.params.visitor_contact }).sort({ _id: -1 }).exec(function (err, result) 
     {
         Visitor.populate( result, {path:'Flat_id', populate:[
             { path: 'Chairman_id' , populate:[{ path: 'Manager_id' ,  populate:[{path:'Block_id'}]}] }
-        
+            
         ]},function(err, result){
-        res.json(result);
-    
-            });
+            res.json(result);
+            
+        });
     });
 });
 
@@ -97,20 +97,31 @@ var upload = multer({
 });
 
 visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, res, next) {
-  
-
-    var dt = new Date();
-    var h =  dt.getHours(), m = dt.getMinutes();
+    
+    
+    // create Date object for current location
+    var d = new Date();
+    
+    // convert to msec
+    // add local time zone offset
+    // get UTC time in msec
+    var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+    
+    offset = +5.5;
+    // create new Date object for different city
+    // using supplied offset
+    var localDate = new Date(utc + (3600000*offset));
+    var h =  localDate.getHours(), m = localDate.getMinutes();
     var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');   
-
-
-    var todate=new Date().getDate();
-    var tomonth=new Date().getMonth()+1;
-    var toyear=new Date().getFullYear();
+    
+    
+    var todate= localDate.getDate();
+    var tomonth= localDate.getMonth()+1;
+    var toyear= localDate.getFullYear();
     var today_date= todate+'/'+tomonth+'/'+toyear;
     
     var newVisitor = new Visitor({
-
+        
         Society_id: req.body.society_id,
         Security_id: req.body.security_id,
         visitor_name: req.body.visitor_name,
@@ -125,8 +136,8 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
         contact: req.body.contact,
         In_time: in_time,
         Flat_id: req.body.flat_id
-
-
+        
+        
     });
     if (req.body.visitor_name == null || req.body.visitor_name == '' || req.body.email == null || req.body.email == '' || req.body.contact == null || req.body.contact == '' || req.body.flat_id == null || req.body.flat_id == '') {
         res.json({ success: false, message: 'Ensure  Visitor name, email, contact, whom_to_meet were provided' });
@@ -141,114 +152,137 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
             }
         });
     }
-
+    
 });
 //Update In Time
 visitor_router.put('/updatevisitorointime/:visitor_id',(req, res, next)=>
 {       
-    var dt = new Date();
-    var h =  dt.getHours(), m = dt.getMinutes();
-    var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');  
-
-    Visitor.findByIdAndUpdate(req.params.visitor_id,
-    {  
-        $set: 
-        { 
-            In_time: oin_time
-        }
-    },
-    {
-        new: true
-    },
-    function(err, result)
-    {
-        if(err)
-        {
-            res.send("Error updating In_time");
-        }
-        else
-        {
-            res.json({success: true,message: result.visitor_name + " is In Now"});
-        }
-    });
-});
-
-//Update Out Time
-visitor_router.put('/updatevisitorouttime/:visitor_id',(req, res, next)=>
-{       
-    var dt = new Date();
-    var h =  dt.getHours(), m = dt.getMinutes();
+    // create Date object for current location
+    var d = new Date();
+    
+    // convert to msec
+    // add local time zone offset
+    // get UTC time in msec
+    var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+    
+    offset = +5.5;
+    // create new Date object for different city
+    // using supplied offset
+    var localDate = new Date(utc + (3600000*offset));
+    
+    var h = localDate.getHours(), m = localDate.getMinutes();
     var out_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');  
-
-
+    
     Visitor.findByIdAndUpdate(req.params.visitor_id,
-    {  
-        $set: 
-        { 
-            Out_time: out_time
-        }
-    },
-    {
-        new: true
-    },
-    function(err, result)
-    {
-        if(err)
+        {  
+            $set: 
+            { 
+                In_time: oin_time
+            }
+        },
         {
-            res.send("Error updating Out_time");
-        }
-        else
+            new: true
+        },
+        function(err, result)
         {
-            res.json({success: true, message: result.visitor_name + " is Out Now : " + out_time});
-        }
+            if(err)
+            {
+                res.send("Error updating In_time");
+            }
+            else
+            {
+                res.json({success: true,message: result.visitor_name + " is In Now"});
+            }
+        });
     });
-});
-
-//Update details
-visitor_router.put('/updatevisitor/:visitor_id',(req, res, next)=>
-{     console.log(req.body);
-    Visitor.findByIdAndUpdate(req.params.visitor_id,
-    {  
-        $set: 
-        { 
-            vehicle_type: req.body.vehicle_type,
-            vehicle_no: req.body.vehicle_no,
-            contact: req.body.contact
-        }
-    },
-    {
-        new: true
-    },
-    function(err, result)
-    {
-        if(err)
-        {
-            res.send("Error updating Details in Visitor list");
-        }
-        else
-        {
-            res.json({success: true,message:"Visitor Details Are updated"});
-        }
-    });
-});
-
-
-//delete Visitor Details
-visitor_router.delete('/deletevisitor/:visitor_id', (req, res, next) => {
-    //logic to delete Visitor Details
-    Visitor.remove({ _id: req.params.visitor_id }, function (err, result) {
-        if (err) {
-            res.json(err);
-        }
-        else {
-            res.json(result);
-        }
-    });
-});
-
-///////////////////////////////////////////// END OF Visitor TABLE OPERATION ///////////////////////////////////////////////////////
-
-
-// exporting the method to get access outside of Router
-
-module.exports = visitor_router;
+    
+    //Update Outmon Time
+    visitor_router.put('/updatevisitorouttime/:visitor_id',(req, res, next)=>
+    {   
+        // create Date object for current location
+        var d = new Date();
+        
+        // convert to msec
+        // add local time zone offset
+        // get UTC time in msec
+        var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+        
+        offset = +5.5;
+        // create new Date object for different city
+        // using supplied offset
+        var localDate = new Date(utc + (3600000*offset));
+        
+        var h = localDate.getHours(), m = localDate.getMinutes();
+        var out_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');  
+        Visitor.findByIdAndUpdate(req.params.visitor_id,
+            {  
+                $set: 
+                { 
+                    Out_time: out_time
+                }
+            },
+            {
+                new: true
+            },
+            function(err, result)
+            {
+                if(err)
+                {
+                    res.send("Error updating Out_time");
+                }
+                else
+                {
+                    res.json({success: true,message: result.visitor_name + " is Out Now : " + out_time});
+                }
+            });
+        });
+        
+        //Update details
+        visitor_router.put('/updatevisitor/:visitor_id',(req, res, next)=>
+        {     console.log(req.body);
+            Visitor.findByIdAndUpdate(req.params.visitor_id,
+                {  
+                    $set: 
+                    { 
+                        vehicle_type: req.body.vehicle_type,
+                        vehicle_no: req.body.vehicle_no,
+                        contact: req.body.contact
+                    }
+                },
+                {
+                    new: true
+                },
+                function(err, result)
+                {
+                    if(err)
+                    {
+                        res.send("Error updating Details in Visitor list");
+                    }
+                    else
+                    {
+                        res.json({success: true,message:"Visitor Details Are updated"});
+                    }
+                });
+            });
+            
+            
+            //delete Visitor Details
+            visitor_router.delete('/deletevisitor/:visitor_id', (req, res, next) => {
+                //logic to delete Visitor Details
+                Visitor.remove({ _id: req.params.visitor_id }, function (err, result) {
+                    if (err) {
+                        res.json(err);
+                    }
+                    else {
+                        res.json(result);
+                    }
+                });
+            });
+            
+            ///////////////////////////////////////////// END OF Visitor TABLE OPERATION ///////////////////////////////////////////////////////
+            
+            
+            // exporting the method to get access outside of Router
+            
+            module.exports = visitor_router;
+            

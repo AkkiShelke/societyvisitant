@@ -66,7 +66,7 @@ superadmin_router.post('/addsuperadmin',(req, res, next)=>
 
    
 // Superadmin Login Route
-// http://localhost:port/api/authenticate
+// http://localhost:port/http://localhost:8000/api/authenticate
 
 superadmin_router.post('/authenticatesuperadmin', (req, res, next) =>
 {
