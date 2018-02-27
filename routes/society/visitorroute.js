@@ -198,7 +198,7 @@ visitor_router.put('/updatevisitorouttime/:visitor_id',(req, res, next)=>
         }
         else
         {
-            res.json({success: true,message: result.visitor_name + " is Out Now"});
+            res.json({success: true, message: result.visitor_name + " is Out Now : " + out_time});
         }
     });
 });
