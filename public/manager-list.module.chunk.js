@@ -111,7 +111,7 @@ var ManagerListComponent = (function () {
         this.http.get('api/managerlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.manager = data;
             console.log(_this.manager);
-            _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
+            _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["u" /* MatTableDataSource */](data);
             _this.dataSource.paginator = _this.paginator;
             _this.dataSource.sort = _this.sort;
         });
@@ -177,12 +177,12 @@ var ManagerListComponent = (function () {
         }
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatPaginator */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatPaginator */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["m" /* MatPaginator */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["m" /* MatPaginator */])
     ], ManagerListComponent.prototype, "paginator", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["o" /* MatSort */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["o" /* MatSort */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatSort */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatSort */])
     ], ManagerListComponent.prototype, "sort", void 0);
     ManagerListComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -246,18 +246,18 @@ var ManagerListModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_6__angular_forms__["i" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_4__shared__["b" /* PageHeaderModule */],
                 __WEBPACK_IMPORTED_MODULE_7__angular_material_stepper__["a" /* MatStepperModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["h" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["c" /* MatCardModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["d" /* MatCheckboxModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["i" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["m" /* MatSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["b" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["k" /* MatPaginatorModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["s" /* MatTableModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["p" /* MatSortModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["t" /* MatTooltipModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["j" /* MatFormFieldModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["e" /* MatCardModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["f" /* MatCheckboxModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["k" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["p" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["d" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["n" /* MatPaginatorModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["v" /* MatTableModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["s" /* MatSortModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["w" /* MatTooltipModule */],
                 __WEBPACK_IMPORTED_MODULE_8_angular5_toaster__["ToasterModule"],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["n" /* MatSlideToggleModule */]
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["q" /* MatSlideToggleModule */]
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__manager_list_component__["a" /* ManagerListComponent */]]
         })

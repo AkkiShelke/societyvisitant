@@ -305,11 +305,11 @@ var ChangePasswordModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4__change_password_routing_module__["a" /* ChangePasswordRoutingModule */], __WEBPACK_IMPORTED_MODULE_2__shared__["b" /* PageHeaderModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_forms__["d" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_forms__["i" /* ReactiveFormsModule */],
-                __WEBPACK_IMPORTED_MODULE_6__angular_material__["q" /* MatStepperModule */],
-                __WEBPACK_IMPORTED_MODULE_6__angular_material__["c" /* MatCardModule */],
-                __WEBPACK_IMPORTED_MODULE_6__angular_material__["h" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_6__angular_material__["i" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_6__angular_material__["b" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_6__angular_material__["t" /* MatStepperModule */],
+                __WEBPACK_IMPORTED_MODULE_6__angular_material__["e" /* MatCardModule */],
+                __WEBPACK_IMPORTED_MODULE_6__angular_material__["j" /* MatFormFieldModule */],
+                __WEBPACK_IMPORTED_MODULE_6__angular_material__["k" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_6__angular_material__["d" /* MatButtonModule */],
                 __WEBPACK_IMPORTED_MODULE_7_angular5_toaster__["ToasterModule"]
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_3__change_password_component__["a" /* ChangePasswordComponent */]]

@@ -98,7 +98,7 @@ flatowner_router.post('/addflatowner',(req, res, next)=>
         // get UTC time in msec
         var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
         
-        offset = +5.5;
+        var offset = +5.5;
         // create new Date object for different city
         // using supplied offset
         var localDate = new Date(utc + (3600000*offset));
@@ -106,16 +106,13 @@ flatowner_router.post('/addflatowner',(req, res, next)=>
         var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');   
         
         
-        var todate= localDate.getDate();
-        var tomonth= localDate.getMonth()+1;
-        var toyear= localDate.getFullYear();
-        var today_date= todate+'/'+tomonth+'/'+toyear;
+     
         
         let newFlatowner = new Flatowner(
             {   Superadmin_id: req.body.superadmin_id,
                 Society_id: req.body.society_id,
                 Flat_id: req.body.flat_id,
-                Created_on: today_date,
+                Created_on: localDate,
                 flatowner_name: req.body.flatowner_name,
                 email: req.body.flatowner_email,
                 contact: req.body.flatowner_contact,            

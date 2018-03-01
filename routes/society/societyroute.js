@@ -58,7 +58,7 @@ society_router.post('/addsociety',(req, res, next)=>
     // get UTC time in msec
     var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
     
-    offset = +5.5;
+    var offset = +5.5;
     // create new Date object for different city
     // using supplied offset
     var localDate = new Date(utc + (3600000*offset));
@@ -66,17 +66,13 @@ society_router.post('/addsociety',(req, res, next)=>
     var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');   
     
     
-    var todate= localDate.getDate();
-    var tomonth= localDate.getMonth()+1;
-    var toyear= localDate.getFullYear();
-    var today_date= todate+'/'+tomonth+'/'+toyear;
     
     //logic for add Society Details
     let newSociety = new Society(
         {   
             Superadmin_id:  req.body.superadmin_id,
             society_name: req.body.society_name,
-            Created_on: today_date,
+            Created_on: localDate,
             society_reg: req.body.society_reg,
             email: req.body.email,
             contact: req.body.contact,

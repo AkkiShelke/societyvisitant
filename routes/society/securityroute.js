@@ -63,7 +63,7 @@ security_router.post('/addsecurity',(req, res, next)=>
             // get UTC time in msec
             var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
             
-            offset = +5.5;
+            var offset = +5.5;
             // create new Date object for different city
             // using supplied offset
             var localDate = new Date(utc + (3600000*offset));
@@ -71,17 +71,14 @@ security_router.post('/addsecurity',(req, res, next)=>
             var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');   
             
             
-            var todate= localDate.getDate();
-            var tomonth= localDate.getMonth()+1;
-            var toyear= localDate.getFullYear();
-            var today_date= todate+'/'+tomonth+'/'+toyear;
+
             
             let newSecurity= new Security(
                 {   
                     Superadmin_id:  req.body.superadmin_id,
                     Society_id: req.body.society_id,
                     Manager_id: req.body.manager_id,
-                    Created_on: today_date,
+                    Created_on: localDate,
                     security_name: req.body.security_name,
                     email: req.body.email,
                     contact: req.body.contact,

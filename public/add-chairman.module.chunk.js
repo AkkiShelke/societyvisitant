@@ -114,7 +114,7 @@ var AddChairmanComponent = (function () {
         this.http.get('api/chairmanlistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.chairman = data;
             console.log(_this.chairman);
-            _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
+            _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["u" /* MatTableDataSource */](data);
             _this.dataSource.paginator = _this.paginator;
             _this.dataSource.sort = _this.sort;
         });
@@ -212,12 +212,12 @@ var AddChairmanComponent = (function () {
             this.dataSource.data.forEach(function (row) { return _this.selection.select(row); });
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatPaginator */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatPaginator */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["m" /* MatPaginator */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["m" /* MatPaginator */])
     ], AddChairmanComponent.prototype, "paginator", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["o" /* MatSort */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["o" /* MatSort */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatSort */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatSort */])
     ], AddChairmanComponent.prototype, "sort", void 0);
     AddChairmanComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -227,7 +227,7 @@ var AddChairmanComponent = (function () {
             animations: [Object(__WEBPACK_IMPORTED_MODULE_1__router_animations__["a" /* routerTransition */])()]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatDialog */], typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */]])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialog */], typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */]])
     ], AddChairmanComponent);
     return AddChairmanComponent;
     var _a;
@@ -319,10 +319,10 @@ var TestDialogComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: "\n  <div matDialogTitle>Chairman Registration</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n        <mat-form-field>\n        <mat-select [(value)]=\"manager_id\" placeholder=\"Select Manager\" formControlName=\"managerCtrl\" required>\n        <mat-option *ngFor=\"let list of manager\" [value]=\"list._id\">{{list.manager_name}}</mat-option>\n    </mat-select>\n    <div *ngIf=\"managerCtrl.invalid && (managerCtrl.dirty || managerCtrl.touched)\" class=\"text-danger\">\n    <div *ngIf=\"managerCtrl.errors.required\"><small>Required</small></div>\n  </div>\n    </mat-form-field>\n    <mat-form-field>\n    <input matInput [(ngModel)]=\"chairman_name\" placeholder=\"Chairman Name\" (keypress)=\"StringPress($event)\"  formControlName=\"chairman_nameCtrl\" required>\n    <div *ngIf=\"chairman_nameCtrl.invalid && (chairman_nameCtrl.dirty || chairman_nameCtrl.touched)\" class=\"text-danger\">\n    <div *ngIf=\"chairman_nameCtrl.errors.required\"><small>Required</small></div>\n  </div>\n  </mat-form-field>\n  \n  <mat-form-field>\n  <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"chairman_contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n  <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n  <div *ngIf=\"chairman_contactCtrl.invalid && (chairman_contactCtrl.dirty || chairman_contactCtrl.touched)\" class=\"text-danger\">\n  <div *ngIf=\"chairman_contactCtrl.errors.required\"><small>Required</small></div>    \n  <div *ngIf=\"chairman_contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n  <div *ngIf=\"chairman_contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n</div>\n</mat-form-field>\n\n  <mat-form-field>\n      <input matInput [(ngModel)]=\"email\" placeholder=\"Email\" formControlName=\"chairman_emailCtrl\" required>\n      <div *ngIf=\"chairman_emailCtrl.invalid && (chairman_emailCtrl.dirty || chairman_emailCtrl.touched)\" class=\"text-danger\">\n      <div *ngIf=\"chairman_emailCtrl.errors.required\"><small>Required</small></div>\n<div *ngIf=\"chairman_emailCtrl.dirty\" class=\"text-danger\">        \n      <div *ngIf=\"chairman_emailCtrl.errors.email\"><small>Invalid</small></div>\n    </div>\n    </div>\n\n      </mat-form-field>\n       \n<mat-form-field>\n  <input matInput type=\"password\" [(ngModel)]=\"password\"  #passwordinput placeholder=\"Password\" formControlName=\"chairman_passwordCtrl\" minlength=\"6\" maxlength=\"12\" required>\n  <mat-hint align=\"end\">{{passwordinput.value?.length || 0}}/[Min 6 -Max 12]</mat-hint>\n  <div *ngIf=\"chairman_passwordCtrl.invalid && (chairman_passwordCtrl.dirty || chairman_passwordCtrl.touched)\" class=\"text-danger\">\n  <div *ngIf=\"chairman_passwordCtrl.errors.required\"><small>Required</small></div>\n  <div *ngIf=\"chairman_passwordCtrl.errors.minlength\"><small>At least 6 characters long</small></div>\n  <div *ngIf=\"chairman_passwordCtrl.errors.maxlength\"><small>Must not exceed 12 characters</small></div>\n</div>  \n</mat-form-field>\n\n<mat-form-field>\n  <input matInput type=\"password\" name=\"confirm_password\" [(ngModel)]=\"confirm_password\" pattern={{this.password}} #confirmpasswrdinput placeholder=\"Confirm Password\" formControlName=\"chairman_confirmpasswordCtrl\" minlength=\"6\" maxlength=\"12\" required>\n  <mat-hint align=\"end\">{{confirmpasswrdinput.value?.length || 0}}</mat-hint>\n  <div *ngIf=\"chairman_confirmpasswordCtrl.invalid && (chairman_confirmpasswordCtrl.dirty || chairman_confirmpasswordCtrl.touched)\" class=\"text-danger\">\n  <div *ngIf=\"chairman_confirmpasswordCtrl.errors.required\"><small>Re-Enter the Password</small></div>\n  <div *ngIf=\"chairman_confirmpasswordCtrl.errors.pattern\"><small>Password is not match</small></div>\n</div>  \n  </mat-form-field>\n\n    </form>\n    <br>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" (click)=\"onSubmitClick()\" style=\"color:white;\"mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Submit</button>\n\n  </mat-dialog-actions>",
         }),
-        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MAT_DIALOG_DATA */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatDialogRef */], Object])
     ], TestDialogComponent);
     return TestDialogComponent;
 }());
@@ -399,10 +399,10 @@ var EditDialogComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: "\n  <div matDialogTitle>Edit Chairman Details</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n        <mat-form-field>\n          <input matInput [(ngModel)]=\"chairman_name\" placeholder=\"Chairman Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>    \n    </form>\n    <br>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Update</button>\n\n  </mat-dialog-actions>",
         }),
-        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MAT_DIALOG_DATA */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatDialogRef */], Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
     ], EditDialogComponent);
     return EditDialogComponent;
     var _a;
@@ -456,19 +456,19 @@ var AddChairmanModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_6__angular_forms__["i" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_4__shared__["b" /* PageHeaderModule */],
                 __WEBPACK_IMPORTED_MODULE_7__angular_material_stepper__["a" /* MatStepperModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["h" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["c" /* MatCardModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["i" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["d" /* MatCheckboxModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["m" /* MatSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["f" /* MatDialogModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["b" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["t" /* MatTooltipModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["k" /* MatPaginatorModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["s" /* MatTableModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["p" /* MatSortModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["j" /* MatFormFieldModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["e" /* MatCardModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["k" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["f" /* MatCheckboxModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["p" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["h" /* MatDialogModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["d" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["w" /* MatTooltipModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["n" /* MatPaginatorModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["v" /* MatTableModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["s" /* MatSortModule */],
                 __WEBPACK_IMPORTED_MODULE_8_angular5_toaster__["ToasterModule"],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["n" /* MatSlideToggleModule */]
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["q" /* MatSlideToggleModule */]
             ],
             entryComponents: [__WEBPACK_IMPORTED_MODULE_2__add_chairman_component__["c" /* TestDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__add_chairman_component__["b" /* EditDialogComponent */]],
             declarations: [__WEBPACK_IMPORTED_MODULE_2__add_chairman_component__["a" /* AddChairmanComponent */], __WEBPACK_IMPORTED_MODULE_2__add_chairman_component__["c" /* TestDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__add_chairman_component__["b" /* EditDialogComponent */]]

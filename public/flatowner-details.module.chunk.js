@@ -156,7 +156,7 @@ var FlatownerDetailsComponent = (function () {
             console.log(_this.tenant);
             if (_this.tenant.length > 0) {
                 _this.tenantexists = true;
-                _this.tenant_dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
+                _this.tenant_dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["u" /* MatTableDataSource */](data);
                 _this.tenant_dataSource.paginator = _this.paginator;
                 _this.tenant_dataSource.sort = _this.sort;
             }
@@ -264,7 +264,7 @@ var FlatownerDetailsComponent = (function () {
                     _this.member = data;
                     if (_this.member.length > 0) {
                         _this.memberexists = true;
-                        _this.member_dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
+                        _this.member_dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["u" /* MatTableDataSource */](data);
                         _this.member_dataSource.paginator = _this.paginator;
                         _this.member_dataSource.sort = _this.sort;
                     }
@@ -278,7 +278,7 @@ var FlatownerDetailsComponent = (function () {
                     _this.member = data;
                     if (_this.member.length > 0) {
                         _this.memberexists = true;
-                        _this.member_dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
+                        _this.member_dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["u" /* MatTableDataSource */](data);
                         _this.member_dataSource.paginator = _this.paginator;
                         _this.member_dataSource.sort = _this.sort;
                     }
@@ -474,12 +474,12 @@ var FlatownerDetailsComponent = (function () {
         });
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatPaginator */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatPaginator */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["m" /* MatPaginator */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["m" /* MatPaginator */])
     ], FlatownerDetailsComponent.prototype, "paginator", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["o" /* MatSort */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["o" /* MatSort */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatSort */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatSort */])
     ], FlatownerDetailsComponent.prototype, "sort", void 0);
     FlatownerDetailsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -489,7 +489,7 @@ var FlatownerDetailsComponent = (function () {
             animations: [Object(__WEBPACK_IMPORTED_MODULE_1__router_animations__["a" /* routerTransition */])()]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatDialog */], typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialog */], typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
     ], FlatownerDetailsComponent);
     return FlatownerDetailsComponent;
     var _a;
@@ -566,10 +566,10 @@ var FlatownerEditDialogComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: "\n  <div matDialogTitle>Edit Flat Owner Details</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n        <mat-form-field>\n          <input matInput [(ngModel)]=\"flatowner_name\" placeholder=\"Flat Owner's Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>    \n    </form>\n    <br>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Update</button>\n\n  </mat-dialog-actions>",
         }),
-        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MAT_DIALOG_DATA */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatDialogRef */], Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
     ], FlatownerEditDialogComponent);
     return FlatownerEditDialogComponent;
     var _a;
@@ -641,10 +641,10 @@ var TenantEditDialogComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: "\n  <div matDialogTitle>Edit Tenant Details</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n        <mat-form-field>\n          <input matInput [(ngModel)]=\"tenant_name\" placeholder=\"Tenant's Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>    \n    </form>\n    <br>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Update</button>\n\n  </mat-dialog-actions>",
         }),
-        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MAT_DIALOG_DATA */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatDialogRef */], Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
     ], TenantEditDialogComponent);
     return TenantEditDialogComponent;
     var _a;
@@ -716,10 +716,10 @@ var MemberEditDialogComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: "\n  <div matDialogTitle>Edit Tenant Details</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n        <mat-form-field>\n          <input matInput [(ngModel)]=\"flatmember_name\" placeholder=\"Flat Member's Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>    \n    </form>\n    <br>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Update</button>\n\n  </mat-dialog-actions>",
         }),
-        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MAT_DIALOG_DATA */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatDialogRef */], Object, typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object])
     ], MemberEditDialogComponent);
     return MemberEditDialogComponent;
     var _a;
@@ -800,10 +800,10 @@ var NewFlatOwnerDialogComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: "\n  <div matDialogTitle>Flat Owner Registration</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n       \n        <mat-form-field>\n          <input matInput [(ngModel)]=\"flatowner_name\" placeholder=\"Flat Owner Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>\n\n        <mat-form-field>\n            <input matInput [(ngModel)]=\"email\" placeholder=\"Email\" formControlName=\"emailCtrl\" required>\n            <div *ngIf=\"emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)\" class=\"text-danger\">\n            <div *ngIf=\"emailCtrl.errors.required\"><small>Required</small></div>\n    <div *ngIf=\"(emailCtrl.dirty)\" class=\"text-danger\">        \n    <div *ngIf=\"emailCtrl.errors.email\"><small>Invalid</small></div>\n    </div>\n    </div>\n\n            </mat-form-field>\n             \n    <mat-form-field>\n        <input matInput type=\"password\" [(ngModel)]=\"password\"  #passwordinput placeholder=\"Password\" formControlName=\"passwordCtrl\" required>\n        <mat-hint align=\"end\">{{passwordinput.value?.length || 0}}/[Min 6 -Max 12]</mat-hint>\n        <div *ngIf=\"passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"passwordCtrl.errors.required\"><small>Required</small></div>\n        <div *ngIf=\"passwordCtrl.errors.minlength\"><small>At least 6 characters long</small></div>\n        <div *ngIf=\"passwordCtrl.errors.maxlength\"><small>Must not exceed 12 characters</small></div>\n      </div>   \n    </mat-form-field>\n\n    <mat-form-field>\n        <input matInput type=\"password\" name=\"confirm_password\" [(ngModel)]=\"confirm_password\" pattern={{this.password}} #confirmpasswrdinput placeholder=\"Confirm Password\" formControlName=\"confirmpasswordCtrl\" minlength=\"6\" maxlength=\"12\" required>\n        <mat-hint align=\"end\">{{confirmpasswrdinput.value?.length || 0}}</mat-hint>\n        <div *ngIf=\"confirmpasswordCtrl.invalid && (confirmpasswordCtrl.dirty || confirmpasswordCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"confirmpasswordCtrl.errors.required\"><small>Re-Enter the Password</small></div>\n        <div *ngIf=\"confirmpasswordCtrl.errors.pattern\"><small>Password is not match</small></div>\n      </div>  \n        </mat-form-field>\n\n    </form>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Submit</button>\n\n  </mat-dialog-actions>",
         }),
-        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MAT_DIALOG_DATA */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatDialogRef */], Object])
     ], NewFlatOwnerDialogComponent);
     return NewFlatOwnerDialogComponent;
 }());
@@ -883,10 +883,10 @@ var NewTenantDialogComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: "\n  <div matDialogTitle>Tenant Registration</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n       \n        <mat-form-field>\n          <input matInput [(ngModel)]=\"tenant_name\" placeholder=\"Tenant Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>\n\n        <mat-form-field>\n            <input matInput [(ngModel)]=\"email\" placeholder=\"Email\" formControlName=\"emailCtrl\" required>\n            <div *ngIf=\"emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)\" class=\"text-danger\">\n            <div *ngIf=\"emailCtrl.errors.required\"><small>Required</small></div>\n    <div *ngIf=\"(emailCtrl.dirty)\" class=\"text-danger\">        \n    <div *ngIf=\"emailCtrl.errors.email\"><small>Invalid</small></div>\n    </div>\n    </div>\n\n            </mat-form-field>\n             \n    <mat-form-field>\n        <input matInput type=\"password\" [(ngModel)]=\"password\"  #passwordinput placeholder=\"Password\" formControlName=\"passwordCtrl\" required>\n        <mat-hint align=\"end\">{{passwordinput.value?.length || 0}}/[Min 6 -Max 12]</mat-hint>\n        <div *ngIf=\"passwordCtrl.invalid && (passwordCtrl.dirty || passwordCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"passwordCtrl.errors.required\"><small>Required</small></div>\n        <div *ngIf=\"passwordCtrl.errors.minlength\"><small>At least 6 characters long</small></div>\n        <div *ngIf=\"passwordCtrl.errors.maxlength\"><small>Must not exceed 12 characters</small></div>\n      </div>   \n    </mat-form-field>\n\n    <mat-form-field>\n        <input matInput type=\"password\" name=\"confirm_password\" [(ngModel)]=\"confirm_password\" pattern={{this.password}} #confirmpasswrdinput placeholder=\"Confirm Password\" formControlName=\"confirmpasswordCtrl\" minlength=\"6\" maxlength=\"12\" required>\n        <mat-hint align=\"end\">{{confirmpasswrdinput.value?.length || 0}}</mat-hint>\n        <div *ngIf=\"confirmpasswordCtrl.invalid && (confirmpasswordCtrl.dirty || confirmpasswordCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"confirmpasswordCtrl.errors.required\"><small>Re-Enter the Password</small></div>\n        <div *ngIf=\"confirmpasswordCtrl.errors.pattern\"><small>Password is not match</small></div>\n      </div>  \n        </mat-form-field>\n\n    </form>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Submit</button>\n\n  </mat-dialog-actions>",
         }),
-        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MAT_DIALOG_DATA */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatDialogRef */], Object])
     ], NewTenantDialogComponent);
     return NewTenantDialogComponent;
 }());
@@ -964,10 +964,10 @@ var NewMemberDialogComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: "\n  <div matDialogTitle>Flat Member Registration</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n       \n        <mat-form-field>\n          <input matInput [(ngModel)]=\"flatmember_name\" placeholder=\"Flat Member Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n        </div>\n        </mat-form-field>\n        \n        <mat-form-field>\n        <input matInput [(ngModel)]=\"contact\" #contactinput placeholder=\"Contact\" (keypress)=\"NumPress($event)\" formControlName=\"contactCtrl\" minlength=\"10\" maxlength=\"10\" required>\n        <mat-hint align=\"end\">{{contactinput.value?.length || 0}}/10</mat-hint>\n        <div *ngIf=\"contactCtrl.invalid && (contactCtrl.dirty || contactCtrl.touched)\" class=\"text-danger\">\n        <div *ngIf=\"contactCtrl.errors.required\"><small>Required</small></div>    \n        <div *ngIf=\"contactCtrl.errors.minlength\"><small>Should be 10 Digit</small></div>\n        <div *ngIf=\"contactCtrl.errors.maxlength\"><small>Should be 10 Digit</small></div>\n    </div>\n\n    </mat-form-field>\n\n        <mat-form-field>\n            <input matInput [(ngModel)]=\"email\" placeholder=\"Email\" formControlName=\"emailCtrl\" required>\n            <div *ngIf=\"emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)\" class=\"text-danger\">\n            <div *ngIf=\"emailCtrl.errors.required\"><small>Required</small></div>\n    <div *ngIf=\"(emailCtrl.dirty)\" class=\"text-danger\">        \n    <div *ngIf=\"emailCtrl.errors.email\"><small>Invalid</small></div>\n    </div>\n    </div>\n\n            </mat-form-field>\n             \n\n    </form>\n  </mat-dialog-content>\n  <mat-dialog-actions class=\"pull-right\">\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancle</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" style=\"color:white;\" (click)=\"onSubmitClick()\" mat-button [disabled]=\"!firstFormGroup.valid\" matDialogClose>Submit</button>\n\n  </mat-dialog-actions>",
         }),
-        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __param(3, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MAT_DIALOG_DATA */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
             __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatDialogRef */], Object])
     ], NewMemberDialogComponent);
     return NewMemberDialogComponent;
 }());
@@ -1013,20 +1013,20 @@ var FlatownerDetailsModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_6__angular_forms__["d" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_6__angular_forms__["i" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__flatowner_details_routing_module__["a" /* FlatownerDetailsRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["c" /* MatCardModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["b" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["h" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["c" /* MatCardModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatCheckboxModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["i" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["m" /* MatSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["k" /* MatPaginatorModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["f" /* MatDialogModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["s" /* MatTableModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["p" /* MatSortModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["t" /* MatTooltipModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["e" /* MatCardModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["d" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["j" /* MatFormFieldModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["e" /* MatCardModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["f" /* MatCheckboxModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["k" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["p" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["n" /* MatPaginatorModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["h" /* MatDialogModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["v" /* MatTableModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["s" /* MatSortModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["w" /* MatTooltipModule */],
                 __WEBPACK_IMPORTED_MODULE_5_angular5_toaster__["ToasterModule"],
-                __WEBPACK_IMPORTED_MODULE_4__angular_material__["n" /* MatSlideToggleModule */]
+                __WEBPACK_IMPORTED_MODULE_4__angular_material__["q" /* MatSlideToggleModule */]
             ],
             entryComponents: [__WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["b" /* FlatownerEditDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["g" /* TenantEditDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["c" /* MemberEditDialogComponent */],
                 __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["d" /* NewFlatOwnerDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["f" /* NewTenantDialogComponent */], __WEBPACK_IMPORTED_MODULE_2__flatowner_details_component__["e" /* NewMemberDialogComponent */]],

@@ -33,7 +33,14 @@ visitor_router.get('/visitorbyflatid/:flat_id', (req, res, next) => {
 
 
 visitor_router.get('/visitorbysecurity/:security_id', (req, res, next) => {
-    Visitor.findById({ _id: req.params.security_id }).sort({ _id: -1 }).exec(function (err, result) {
+    Visitor.findById({ Security_id: req.params.security_id }).sort({ _id: -1 }).exec(function (err, result) {
+        res.json(result);
+    });
+});
+
+visitor_router.post('/visitorbysociety/:society_id', (req, res, next) => {
+    // , Created_on: req.body.date
+    Visitor.find({ Society_id: req.params.society_id}).sort({ _id: -1 }).exec(function (err, result) {
         res.json(result);
     });
 });
@@ -107,7 +114,7 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
     // get UTC time in msec
     var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
     
-    offset = +5.5;
+     var offset = +5.5;
     // create new Date object for different city
     // using supplied offset
     var localDate = new Date(utc + (3600000*offset));
@@ -115,10 +122,7 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
     var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');   
     
     
-    var todate= localDate.getDate();
-    var tomonth= localDate.getMonth()+1;
-    var toyear= localDate.getFullYear();
-    var today_date= todate+'/'+tomonth+'/'+toyear;
+   
     
     var newVisitor = new Visitor({
         
@@ -132,7 +136,7 @@ visitor_router.post('/addvisitor', upload.any('photo', 'doc'), function (req, re
         document_originalname: req.files[1].originalname,
         vehicle_type: req.body.vehicle_type,
         vehicle_no: req.body.vehicle_no,
-        Created_on: today_date,
+        Created_on: localDate,
         contact: req.body.contact,
         In_time: in_time,
         Flat_id: req.body.flat_id
@@ -165,7 +169,7 @@ visitor_router.put('/updatevisitorointime/:visitor_id',(req, res, next)=>
     // get UTC time in msec
     var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
     
-    offset = +5.5;
+    var offset = +5.5;
     // create new Date object for different city
     // using supplied offset
     var localDate = new Date(utc + (3600000*offset));
@@ -207,7 +211,7 @@ visitor_router.put('/updatevisitorointime/:visitor_id',(req, res, next)=>
         // get UTC time in msec
         var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
         
-        offset = +5.5;
+        var offset = +5.5;
         // create new Date object for different city
         // using supplied offset
         var localDate = new Date(utc + (3600000*offset));

@@ -104,7 +104,7 @@ var AddBlockComponent = (function () {
         this._formBuilder = _formBuilder;
         this.societyadmin = JSON.parse(localStorage['societyadmin']);
         //Dialogbox
-        this.version = __WEBPACK_IMPORTED_MODULE_3__angular_material__["u" /* VERSION */];
+        this.version = __WEBPACK_IMPORTED_MODULE_3__angular_material__["y" /* VERSION */];
         this.displayedColumns = ['select', 'block_name', 'no_of_flats'];
         this.selection = new __WEBPACK_IMPORTED_MODULE_4__angular_cdk_collections__["a" /* SelectionModel */](true, []);
         this.toasterService = toasterService;
@@ -115,7 +115,7 @@ var AddBlockComponent = (function () {
         this.http.get('api/blocklistdetails/' + this.societyadmin.id).subscribe(function (data) {
             _this.block = data;
             console.log(_this.block);
-            _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatTableDataSource */](data);
+            _this.dataSource = new __WEBPACK_IMPORTED_MODULE_3__angular_material__["u" /* MatTableDataSource */](data);
             _this.dataSource.paginator = _this.paginator;
             _this.dataSource.sort = _this.sort;
         });
@@ -181,12 +181,12 @@ var AddBlockComponent = (function () {
             this.dataSource.data.forEach(function (row) { return _this.selection.select(row); });
     };
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatPaginator */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["j" /* MatPaginator */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["m" /* MatPaginator */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["m" /* MatPaginator */])
     ], AddBlockComponent.prototype, "paginator", void 0);
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["o" /* MatSort */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["o" /* MatSort */])
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatSort */]),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__angular_material__["r" /* MatSort */])
     ], AddBlockComponent.prototype, "sort", void 0);
     AddBlockComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -196,7 +196,7 @@ var AddBlockComponent = (function () {
             animations: [Object(__WEBPACK_IMPORTED_MODULE_1__router_animations__["a" /* routerTransition */])()]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["e" /* MatDialog */], typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */]])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialog */], typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angular5_toaster__["ToasterService"]) === "function" && _a || Object, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */]])
     ], AddBlockComponent);
     return AddBlockComponent;
     var _a;
@@ -255,9 +255,9 @@ var TestDialogComponent = (function () {
             template: "\n  \n  <div matDialogTitle [@routerTransition] class=\"container-fluid\">Block Registration</div>\n  <mat-dialog-content>\n        <form [formGroup]=\"firstFormGroup\" >\n        <ng-template matStepLabel>Fill out your Details</ng-template>\n        <mat-form-field class=\"input-full-width\" fxFlex=\"49\">\n          <input matInput [(ngModel)]=\"block_name\" placeholder=\"Block Name\" (keypress)=\"StringPress($event)\"  formControlName=\"nameCtrl\" required>\n          <div *ngIf=\"nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)\" class=\"text-danger\">\n          <div *ngIf=\"nameCtrl.errors.required\"><small>Required</small></div>\n          <div *ngIf=\"nameCtrl.errors.minlength\"><small>At least 4 characters long.</small></div>\n          <div *ngIf=\"nameCtrl.errors.maxlength\"><small>Must not exceed 12 characters.</small></div>\n        </div>     \n        </mat-form-field>\n\n        <mat-form-field class=\"input-full-width\" fxFlex=\"49\">\n            <input matInput [(ngModel)]=\"no_of_flats\" (keypress)=\"NumPress($event)\" placeholder=\"Total No Of Flats\"  formControlName=\"flatCtrl\" required>\n            <div *ngIf=\"flatCtrl.invalid && (flatCtrl.dirty || flatCtrl.touched)\" class=\"text-danger\">\n            <div *ngIf=\"flatCtrl.errors.required\"><small>Required</small></div>\n          </div>             \n            </mat-form-field>\n\n    </form>\n  </mat-dialog-content>\n  <mat-dialog-actions >\n    <button class=\"btn btn-danger buttoncolor\" style=\"color:white;\" mat-button matDialogClose>Cancel</button>\n        <button type=\"button\" class=\"btn btn-success buttoncolor\" (click)=\"onSubmitClick()\" style=\"color:white;\"mat-button  [disabled]=\"!firstFormGroup.valid\" >Submit</button>\n\n  </mat-dialog-actions>",
             animations: [Object(__WEBPACK_IMPORTED_MODULE_1__router_animations__["a" /* routerTransition */])()]
         }),
-        __param(2, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["a" /* MAT_DIALOG_DATA */])),
+        __param(2, Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])(__WEBPACK_IMPORTED_MODULE_3__angular_material__["c" /* MAT_DIALOG_DATA */])),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* FormBuilder */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_material__["g" /* MatDialogRef */], Object])
+            __WEBPACK_IMPORTED_MODULE_3__angular_material__["i" /* MatDialogRef */], Object])
     ], TestDialogComponent);
     return TestDialogComponent;
 }());
@@ -310,17 +310,17 @@ var AddBlockModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_6__angular_forms__["i" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_4__shared__["b" /* PageHeaderModule */],
                 __WEBPACK_IMPORTED_MODULE_7__angular_material_stepper__["a" /* MatStepperModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["h" /* MatFormFieldModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["c" /* MatCardModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["i" /* MatInputModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["d" /* MatCheckboxModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["m" /* MatSelectModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["b" /* MatButtonModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["f" /* MatDialogModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["t" /* MatTooltipModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["k" /* MatPaginatorModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["s" /* MatTableModule */],
-                __WEBPACK_IMPORTED_MODULE_5__angular_material__["p" /* MatSortModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["j" /* MatFormFieldModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["e" /* MatCardModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["k" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["f" /* MatCheckboxModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["p" /* MatSelectModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["d" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["h" /* MatDialogModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["w" /* MatTooltipModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["n" /* MatPaginatorModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["v" /* MatTableModule */],
+                __WEBPACK_IMPORTED_MODULE_5__angular_material__["s" /* MatSortModule */],
                 __WEBPACK_IMPORTED_MODULE_8_angular5_toaster__["ToasterModule"]
             ],
             entryComponents: [__WEBPACK_IMPORTED_MODULE_2__add_block_component__["b" /* TestDialogComponent */]],

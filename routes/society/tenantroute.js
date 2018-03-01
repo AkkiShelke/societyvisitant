@@ -95,18 +95,14 @@ tenant_router.post('/addtenant',(req, res, next)=>
             // get UTC time in msec
             var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
             
-            offset = +5.5;
+            var offset = +5.5;
             // create new Date object for different city
             // using supplied offset
             var localDate = new Date(utc + (3600000*offset));
             var h =  localDate.getHours(), m = localDate.getMinutes();
             var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');   
             
-            
-            var todate= localDate.getDate();
-            var tomonth= localDate.getMonth()+1;
-            var toyear= localDate.getFullYear();
-            var today_date= todate+'/'+tomonth+'/'+toyear;
+
             
             
             let newTenant = new Tenant(
@@ -114,7 +110,7 @@ tenant_router.post('/addtenant',(req, res, next)=>
                     Society_id: req.body.society_id,
                     Flat_id: req.body.flat_id,
                     Flatowner_id: req.body.flatowner_id,
-                    Created_on: today_date,
+                    Created_on: localDate,
                     tenant_name: req.body.tenant_name,
                     email: req.body.tenant_email,
                     contact: req.body.tenant_contact,            

@@ -60,8 +60,8 @@ var map = {
 	],
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/layout/dashboard/dashboard.module.ts",
-		"common",
-		"dashboard.module"
+		"dashboard.module",
+		"common"
 	],
 	"./flat-list/flat-list.module": [
 		"../../../../../src/app/layout/flat-list/flat-list.module.ts",
@@ -290,7 +290,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_common_http__["b" /* HttpClientModule */],
                 __WEBPACK_IMPORTED_MODULE_10__angular_forms__["d" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_6__angular_material__["i" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_6__angular_material__["b" /* MatButtonModule */],
+                __WEBPACK_IMPORTED_MODULE_6__angular_material__["k" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_6__angular_material__["d" /* MatButtonModule */],
                 __WEBPACK_IMPORTED_MODULE_11_angular5_toaster__["ToasterModule"],
                 __WEBPACK_IMPORTED_MODULE_7__app_routing_module__["a" /* AppRoutingModule */]
             ],

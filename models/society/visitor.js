@@ -48,7 +48,7 @@ const VisitorSchema = Schema({
 	    type: String,	
     },
     Created_on:{
-        type:String,
+        type: Date,
         required: true 
     },
      In_time:{

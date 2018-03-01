@@ -74,7 +74,7 @@ manager_router.post('/addmanager',(req, res, next)=>
             // get UTC time in msec
             var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
             
-            offset = +5.5;
+            var offset = +5.5;
             // create new Date object for different city
             // using supplied offset
             var localDate = new Date(utc + (3600000*offset));
@@ -82,17 +82,13 @@ manager_router.post('/addmanager',(req, res, next)=>
             var in_time = (h > 12) ? (h-12 + ':' + m +' PM') : (h + ':' + m +' AM');   
             
             
-            var todate= localDate.getDate();
-            var tomonth= localDate.getMonth()+1;
-            var toyear= localDate.getFullYear();
-            var today_date= todate+'/'+tomonth+'/'+toyear;
             
             let newManager= new Manager(
                 {   
                     Superadmin_id:  req.body.superadmin_id,
                     Society_id: req.body.society_id,
                     Block_id: req.body.block_id,
-                    Created_on: today_date,
+                    Created_on: localDate,
                     manager_name: req.body.manager_name,
                     email: req.body.email,
                     contact: req.body.contact,
