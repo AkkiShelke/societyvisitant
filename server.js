@@ -55,7 +55,9 @@ app.use(express.static(__dirname + '/uploads'))
 app.use(bodyparser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyparser.json())
-//routes
+//routes  
+
+
 
 app.use('/api', superadminroute);
 app.use('/api', societyroute);
